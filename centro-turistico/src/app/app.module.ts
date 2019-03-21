@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     FooterComponent,
     HomeComponent,
     NavbarComponent,
-    NewsListComponent
+    NewsListComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

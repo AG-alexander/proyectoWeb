@@ -1,6 +1,6 @@
 <carousel>
   <slide>
-    <a [routerLink]="['about-us']">
+    <a  [routerLink]="['/dashboard/about-us']">
       <img src="../../../assets/images/carousel-images/beach.jpg" alt="first slide"
         style="display: block; width: 100%;">
       <div class="carousel-caption d-none d-md-block">
@@ -10,17 +10,21 @@
     </a>
   </slide>
   <slide>
-    <img src="../../../assets/images/carousel-images/beach.jpg" alt="second slide" style="display: block; width: 100%;">
+    <a  [routerLink]="['/dashboard/about-us']">
+      <img src="../../../assets/images/carousel-images/beach.jpg" alt="second slide" style="display: block; width: 100%;">
     <div class="carousel-caption d-none d-md-block">
       <h3>Second slide label</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </div>
+    </a>
   </slide>
   <slide>
-    <img src="../../../assets/images/carousel-images/beach.jpg" alt="third slide" style="display: block; width: 100%;">
+    <a  [routerLink]="['/dashboard/about-us']">
+      <img src="../../../assets/images/carousel-images/beach.jpg" alt="third slide" style="display: block; width: 100%;">
     <div class="carousel-caption d-none d-md-block">
       <h3>Third slide label</h3>
       <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
     </div>
+    </a>
   </slide>
 </carousel>
