@@ -1,4 +1,8 @@
 export interface News {
-    idNews: number;
+    idNews: number; // identificacion
+    title: string;// titulo
+    content: string; // contenido
+    date: Date; // fecha
+    image: string; // imagen
     
 }
