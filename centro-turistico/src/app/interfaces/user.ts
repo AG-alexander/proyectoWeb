@@ -9,12 +9,9 @@ export interface User {
     tipo: string; // tipo
 }
 
-export interface User {
+export interface EditorxSitio {
+    id: number;
+    idUser: number;
+    siteId: number;
 
-    
 }
-
--> Editor x Sitio		
-		-> id
-		-> siteId
-		-> userId
