@@ -1,9 +1,17 @@
 export interface User {
+    idUser: number; // identificador
+    userName: string; // nombre
+    password: string; // contraseña
+    email: string; // correo
+    Descripacion: string; // descripcion
+    iconno: string; // icono
+    date: Date; // fecha nacimineto
+    tipo: string; // tipo
+}
+
+export interface EditorxSitio {
+    id: number;
     idUser: number;
-    name: string;
-    password: string;
-    email: string;
-    birthDay: Date;
-    type: string;
-    description: string;
+    siteId: number;
+
 }
