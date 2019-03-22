@@ -1,7 +1,16 @@
 footer {
     width: 100%;
     height: 0%;
-    background-color: #202020;
+    background-color: #0f0e0e;
     color: white;
-    bottom: 0px;
+}
+
+.footer-body {
+    background-color: #202020;
+    display: flex;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
 }

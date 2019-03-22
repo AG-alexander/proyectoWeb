@@ -11,6 +11,7 @@ import { NewsListComponent } from './components/news-list/news-list.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { TouristicCentresComponent } from './components/touristic-centres/touristic-centres.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
     NavbarComponent,
     NewsListComponent,
     AboutUsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    TouristicCentresComponent
   ],
   imports: [
     BrowserModule,
