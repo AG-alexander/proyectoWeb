@@ -12,6 +12,9 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { TouristicCentresComponent } from './components/touristic-centres/touristic-centres.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +30,8 @@ import { TouristicCentresComponent } from './components/touristic-centres/touris
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    AngularFontAwesomeModule,
     CarouselModule.forRoot()
   ],
   providers: [],
