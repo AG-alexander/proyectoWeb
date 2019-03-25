@@ -16,6 +16,7 @@ import { TouristicCentresComponent } from './components/touristic-centres/touris
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { SiteInformationComponent } from './components/site-information/site-information.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     NewsListComponent,
     AboutUsComponent,
     ContactUsComponent,
-    TouristicCentresComponent
+    TouristicCentresComponent,
+    SiteInformationComponent
   ],
   imports: [
     BrowserModule,
