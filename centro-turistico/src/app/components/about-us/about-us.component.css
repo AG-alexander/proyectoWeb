@@ -1,0 +1,14 @@
+.bottom-border {
+    border-bottom: 2px solid gold;
+    padding-top: 5%;
+}
+
+.content-style {
+    font-size: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: justify;
+}
+
+h1 {
+    text-align: center;
+}
