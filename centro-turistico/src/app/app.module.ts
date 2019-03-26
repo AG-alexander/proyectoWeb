@@ -17,6 +17,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { SiteInformationComponent } from './components/site-information/site-information.component';
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
+import { DomSecurityPipe } from './pipes/dom-security.pipe';
+import { EmbedVideo } from 'ngx-embed-video';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,9 @@ import { SiteInformationComponent } from './components/site-information/site-inf
     AboutUsComponent,
     ContactUsComponent,
     TouristicCentresComponent,
-    SiteInformationComponent
+    SiteInformationComponent,
+    VideoPlayerComponent,
+    DomSecurityPipe
   ],
   imports: [
     BrowserModule,
@@ -36,6 +42,8 @@ import { SiteInformationComponent } from './components/site-information/site-inf
     ReactiveFormsModule,
     FormsModule,
     AngularFontAwesomeModule,
+    HttpClientModule,
+    EmbedVideo.forRoot(),
     PaginationModule.forRoot(),
     CarouselModule.forRoot()
   ],
