@@ -10,7 +10,7 @@ export class SiteService {
 
   sites: TouristicCentre[] = sites;
   showedSites: TouristicCentre[];
-  constructor(private _dataStorage: DataStorageService) {
+  constructor(public _dataStorage: DataStorageService) {
     this.showedSites = [];
    }
 
@@ -29,5 +29,14 @@ export class SiteService {
     }
   }
 
-  
+  getSiteById(id: number): TouristicCentre {
+    if (id) {
+      let list: TouristicCentre[];
+      let aux: TouristicCentre;
+      list = this._dataStorage.getObjectValue('sites');
+      aux = list.find(item => item.idTouristicCentre == id);
+      return aux;
+    }
+    return null;
+  }
 }

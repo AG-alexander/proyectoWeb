@@ -31,7 +31,7 @@ export class TouristicCentresComponent implements OnInit {
   ngOnInit() {
     this._site.getSite(this.value);
     this.showedList = this._site.showedSites.slice(0,3);
-    //this._site.setObjectValue('sites',this._site.sites);
+    //this._site._dataStorage.setObjectValue('sites',this._site.sites);
     //console.log(this._site.getObjectValue('sites'));
   }
 

@@ -3,7 +3,7 @@ export interface TouristicCentre {
     idTouristicCentre: number; // identificador
     name: string; // nombre
     description: string; // descripcion
-    schedules: string; // horarios
+    schedules: string[]; // horarios
     photos: string[]; // potos
     video: string; // video
     followersList: number[]; // lista de segidores 
