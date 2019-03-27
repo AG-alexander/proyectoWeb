@@ -11,10 +11,8 @@ export class SiteService {
 
   sites: TouristicCentre[] = sites;
   showedSites: TouristicCentre[];
-  constant: constant;
   constructor(public _dataStorage: DataStorageService) {
     this.showedSites = [];
-    this.constant = new constant();
    }
 
   getSite(name: string) {
@@ -36,7 +34,7 @@ export class SiteService {
     if (id) {
       let list: TouristicCentre[];
       let aux: TouristicCentre;
-      list = this._dataStorage.getObjectValue(this.constant.SITES);
+      list = this._dataStorage.getObjectValue(constant.SITES);
       aux = list.find(item => item.idTouristicCentre == id);
       return aux;
     }

@@ -1,7 +1,8 @@
 export class constant {
-    readonly SITES = 'SITES';
-    readonly USERS = 'USERS';
-    readonly NEWS = 'NEWS';
-    readonly REVIEWS = 'REVIEWS';
-    readonly RATINGS = 'RATINGS';
+    public static SITES = 'SITES';
+    public static USERS = 'USERS';
+    public static NEWS = 'NEWS';
+    public static REVIEWS = 'REVIEWS';
+    public static RATINGS = 'RATINGS';
+    public static FOLLOWERS = 'FOLLOWERS';
 }

@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { SiteRatingComponent } from './components/site-rating/site-rating.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
+import { FollowersComponent } from './components/followers/followers.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
     VideoPlayerComponent,
     DomSecurityPipe,
     SiteRatingComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    FollowersComponent
   ],
   imports: [
     BrowserModule,

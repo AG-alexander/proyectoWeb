@@ -39,3 +39,8 @@ export interface reviews extends followerXSite{
 export interface reviewsModel extends reviews {
     user: string;
 }
+
+export interface followerModel extends followerXSite
+{
+    user: string;
+}

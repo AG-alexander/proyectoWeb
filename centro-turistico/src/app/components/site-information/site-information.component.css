@@ -21,7 +21,6 @@
 .item {
     position: relative;
     border: 1px solid #333;
-    margin: 1%;
     overflow: hidden;
     width: 100%;
 }

@@ -6,6 +6,7 @@ import RATINGS from 'src/assets/data/rating.json';
 import REVIEWS from 'src/assets/data/reviews.json';
 import SITES from 'src/assets/data/touristic-centres.json';
 import USERS from 'src/assets/data/users.json';
+import FOLLOWERS from 'src/assets/data/followers.json';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -13,7 +14,6 @@ import USERS from 'src/assets/data/users.json';
 })
 export class DashboardComponent implements OnInit {
 
-  constant = new constant();
   constructor(private _dataStorage: DataStorageService) { }
 
   ngOnInit() {
@@ -21,9 +21,10 @@ export class DashboardComponent implements OnInit {
 
   click(){
     //this._dataStorage.setObjectValue(this.constant.NEWS, NEWS);
-    this._dataStorage.setObjectValue(this.constant.RATINGS, RATINGS);
-    this._dataStorage.setObjectValue(this.constant.REVIEWS, REVIEWS);
-    this._dataStorage.setObjectValue(this.constant.SITES, SITES);
-    this._dataStorage.setObjectValue(this.constant.USERS, USERS);
+    this._dataStorage.setObjectValue(constant.RATINGS, RATINGS);
+    this._dataStorage.setObjectValue(constant.REVIEWS, REVIEWS);
+    this._dataStorage.setObjectValue(constant.SITES, SITES);
+    this._dataStorage.setObjectValue(constant.USERS, USERS);
+    this._dataStorage.setObjectValue(constant.FOLLOWERS, FOLLOWERS);
   }
 }

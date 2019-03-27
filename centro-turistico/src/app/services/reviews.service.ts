@@ -7,18 +7,16 @@ import { reviewsModel, User } from '../interfaces/index';
   providedIn: 'root'
 })
 export class ReviewsService {
-  constant: constant;
 
   constructor(private _dataStorage: DataStorageService) {
-    this.constant = new constant();
    }
 
   getReviewsBySite(idSite: number){
-    let reviews: reviewsModel[] = this._dataStorage.getObjectValue(this.constant.REVIEWS);
-    let users: User[] = this._dataStorage.getObjectValue(this.constant.USERS);
+    let reviews: reviewsModel[] = this._dataStorage.getObjectValue(constant.REVIEWS);
+    let users: User[] = this._dataStorage.getObjectValue(constant.USERS);
     reviews.forEach( (item)=> {
       item.user = users.find(us => us.idUser == item.userId).userName;
     });
-    return reviews;
+    return reviews.filter(item => item.siteId == idSite);
   }
 }
