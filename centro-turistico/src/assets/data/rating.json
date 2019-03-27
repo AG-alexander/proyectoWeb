@@ -1,0 +1,14 @@
+[
+    {
+        "id":1,
+        "siteId": 1,
+        "userId": 1,
+        "value": 4
+    },
+    {
+        "id":2,
+        "siteId": 1,
+        "userId": 2,
+        "value": 3
+    }
+]

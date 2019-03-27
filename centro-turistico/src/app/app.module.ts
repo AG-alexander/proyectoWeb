@@ -21,6 +21,9 @@ import { VideoPlayerComponent } from './components/video-player/video-player.com
 import { DomSecurityPipe } from './pipes/dom-security.pipe';
 import { EmbedVideo } from 'ngx-embed-video';
 import { HttpClientModule } from '@angular/common/http';
+import { RatingModule } from 'ngx-bootstrap/rating';
+import { SiteRatingComponent } from './components/site-rating/site-rating.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +37,9 @@ import { HttpClientModule } from '@angular/common/http';
     TouristicCentresComponent,
     SiteInformationComponent,
     VideoPlayerComponent,
-    DomSecurityPipe
+    DomSecurityPipe,
+    SiteRatingComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     EmbedVideo.forRoot(),
     PaginationModule.forRoot(),
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    RatingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

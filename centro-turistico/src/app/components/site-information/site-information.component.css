@@ -1,3 +1,7 @@
+.site-container {
+    padding-left: 15%;
+    padding-right: 15%;
+}
 .wrapper {
     width: 100%;
     max-height: 400px;
@@ -39,5 +43,4 @@
 img {
     height: 200px;
     width: 100%;
-  }
- 
+}

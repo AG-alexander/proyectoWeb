@@ -1,12 +1,15 @@
 <p>
   site-information works!
 </p>
-<div class="container-fluid">
+<div class="container-fluid site-container">
+    <h1>{{touristicCentre.name}}</h1>
   <div class="row">
-    <div class="col-md-12">
-      <h1>{{touristicCentre.name}}</h1>
+    <div class="col-md-8">
       <p>{{touristicCentre.description}}</p>
     </div>
+    <div class="col-md-4">
+        rating
+      </div>
   </div>
   <div class="row">
     <div class="col-md-4">
@@ -37,4 +40,5 @@
     <div class="col-md-4">seguidores</div>
     <div class="col-md-8"><app-video-player [urlYoutube]="touristicCentre.video"></app-video-player></div>
   </div>
+  <app-reviews [reviews]="reviews"></app-reviews>
 </div>

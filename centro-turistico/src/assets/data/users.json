@@ -1,0 +1,22 @@
+[
+    {
+        "idUser": 1,
+        "userName": "Escanor",
+        "password": "ritha",
+        "email": "ritha095@gmail.com",
+        "descripcion": "me gusta beber",
+        "iconno": "",
+        "date": "1968-11-16T00:00:00",
+        "tipo": "admin"
+    },
+    {
+        "idUser": 2,
+        "userName": "cubeMario",
+        "password": "kly587",
+        "email": "poppush@gmail.com",
+        "descripcion": "Correr, escalar, nadar",
+        "iconno": "",
+        "date": "1968-11-16T00:00:00",
+        "tipo": "normal"
+    }
+]
