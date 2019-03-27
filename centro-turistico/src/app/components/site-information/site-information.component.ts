@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SiteService, FollowerService, ReviewsService } from '../../services/index';
+import { SiteService, FollowerService, ReviewsService, RatingService } from '../../services/index';
 import { TouristicCentre, reviewsModel, followerModel } from '../../interfaces/index';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -13,10 +13,12 @@ export class SiteInformationComponent implements OnInit {
   private touristicCentre: TouristicCentre;
   private reviews: reviewsModel[];
   private followers: followerModel[];
+  private maxStars = 0;
   constructor(
     private _siteService: SiteService,
     private _reviewsService: ReviewsService,
     private _followersService: FollowerService,
+    private _ratingService: RatingService,
     private _activatedRoute: ActivatedRoute
     ) { }
 
@@ -25,6 +27,7 @@ export class SiteInformationComponent implements OnInit {
       this.touristicCentre = this._siteService.getSiteById(id);
       this.reviews = this._reviewsService.getReviewsBySite(id);
       this.followers = this._followersService.getFollowersBySite(id);
+      this.maxStars = this._ratingService.getRatingBySite(id);
     }
 
   ngOnInit() {

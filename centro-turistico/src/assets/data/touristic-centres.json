@@ -9,6 +9,8 @@
         ],
         "photos": [
             "../../../assets/images/sites/img1.jpg",
+            "../../../assets/images/sites/img2.jpg",
+            "../../../assets/images/sites/img2.jpg",
             "../../../assets/images/sites/img2.jpg"
         ],
         "video": "https://www.youtube.com/embed/0I9LaeqDfcI", 
@@ -31,6 +33,7 @@
         ],
         "photos": [
             "../../../assets/images/sites/img1.jpg",
+            "../../../assets/images/sites/img2.jpg",
             "../../../assets/images/sites/img2.jpg"
         ],
         "video": "https://www.youtube.com/embed/0I9LaeqDfcI", 
