@@ -6,26 +6,20 @@
 .img-container {
     height: 250px;
     align-content: center;
+    padding-left: 200px;
 }
 
 .card-container {
     height: 250px;
 }
 
-.img-zise {
-    width: 100%;
-    max-height: 100%;
-}
-
-h2 {
-    text-align: center;
+h5 {
     font-family: tahoma;
     font-size: 25;
     color: aliceblue;
 }
 p {
     font-family: tahoma;
-    text-align: center;
     color: aliceblue;
 }
 
