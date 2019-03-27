@@ -23,6 +23,10 @@ p {
     color: aliceblue;
 }
 
+.pag {
+    align-content: center;
+}
+
 @media (max-width: 600px) {
     .img-container {
         border-right: solid 1px red;

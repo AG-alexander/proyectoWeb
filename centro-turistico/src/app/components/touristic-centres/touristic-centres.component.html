@@ -17,10 +17,12 @@
       <a [routerLink]="['/dashboard/site', site.idTouristicCentre]" class="stretched-link"></a>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12 col-12">
+ 
+</div> 
+
+<div class="row">
+    <div class="col-md-4 offset-md-5">
       <pagination [totalItems]="_site.showedSites.length" [itemsPerPage]="3" [(ngModel)]="currentPage"
-        (pageChanged)="pageChanged($event)" [pageBtnClass]="tt"></pagination>
+        (pageChanged)="pageChanged($event)" [pageBtnClass]=""></pagination>
     </div>
   </div>
-</div>
