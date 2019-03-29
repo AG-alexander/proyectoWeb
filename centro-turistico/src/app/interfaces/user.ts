@@ -3,7 +3,7 @@ export interface User {
     userName: string; // nombre
     password: string; // contraseña
     email: string; // correo
-    Descripacion: string; // descripcion
+    descripcion: string; // descripcion
     iconno: string; // icono
     date: Date; // fecha nacimineto
     tipo: string; // tipo

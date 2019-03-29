@@ -1,6 +1,50 @@
 [
     {
-        "name": "Flowers Forest",
-        "image": ""
+        "idTouristicCentre": 1,
+        "name": "Los montañosos",
+        "description": "Zona montañosa neblinada",
+        "schedules": [
+            "lunes a viernes de 9:00 am a 7:00 pm",
+            "sabados y domingos de 10:00 am a 5:00 pm"
+        ],
+        "photos": [
+            "../../../assets/images/sites/img1.jpg",
+            "../../../assets/images/sites/img2.jpg",
+            "../../../assets/images/sites/img2.jpg",
+            "../../../assets/images/sites/img2.jpg"
+        ],
+        "video": "https://www.youtube.com/embed/0I9LaeqDfcI", 
+        "followersList": [], 
+        "reviews": [],  
+        "ratings": 0, 
+        "country": "Costa Rica", 
+        "city": "Buenos Aires", 
+        "region": "Región Brunca", 
+        "direccion": "2 kilometros norte del parque central de Buenos Aires",
+        "phone": "000000000"
+    },
+    {
+        "idTouristicCentre": 2,
+        "name": "Turirulis",
+        "description": "Bosque tropical cuyas mayores atracciones son un grupo de cascadas de agua azul",
+        "schedules": [
+            "lunes a viernes de 7:00 am a 5:00 pm",
+            "sabados y domingos de 9:00 am a 5:00 pm"
+        ],
+        "photos": [
+            "../../../assets/images/carousel-images/beach.jpg",
+            "../../../assets/images/sites/img1.jpg",
+            "../../../assets/images/sites/img2.jpg",
+            "../../../assets/images/sites/img2.jpg"
+        ],
+        "video": "https://www.youtube.com/embed/0I9LaeqDfcI", 
+        "followersList": [], 
+        "reviews": [],  
+        "ratings": 0, 
+        "country": "Costa Rica", 
+        "city": "La Palma", 
+        "region": "Región Brunca", 
+        "direccion": "10 kilometros antes de llegar a platanillo, en direcion a la zona costera",
+        "phone": "000000000"
     }
 ]

@@ -3,7 +3,7 @@ export interface TouristicCentre {
     idTouristicCentre: number; // identificador
     name: string; // nombre
     description: string; // descripcion
-    schedules: string; // horarios
+    schedules: string[]; // horarios
     photos: string[]; // potos
     video: string; // video
     followersList: number[]; // lista de segidores 
@@ -34,6 +34,13 @@ export interface reviews extends followerXSite{
     title: string;
     description: string;
     date: Date;
+}
 
+export interface reviewsModel extends reviews {
+    user: string;
+}
 
+export interface followerModel extends followerXSite
+{
+    user: string;
 }

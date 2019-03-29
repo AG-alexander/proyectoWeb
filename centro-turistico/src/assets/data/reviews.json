@@ -1,0 +1,18 @@
+[
+    {
+        "id":1,
+        "siteId": 1,
+        "userId": 1,
+        "title": "",
+        "description": "prueba de rating",
+        "date": "1968-11-16T00:00:00"
+    },
+    {
+        "id":2,
+        "siteId": 1,
+        "userId": 2,
+        "title": "",
+        "description": "prueba de rating",
+        "date": "1968-11-16T00:00:00"
+    }
+]

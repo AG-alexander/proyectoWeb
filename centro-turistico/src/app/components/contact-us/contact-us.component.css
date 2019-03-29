@@ -1,0 +1,23 @@
+.contact-us-container {
+    margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+li {
+    list-style: none;
+}
+
+.form-control{
+    max-width: 350px;
+}
+
+.btn{
+    max-width: 120px;
+}
+
+.form-control-feedback{
+    font-size: 12px;
+}
+

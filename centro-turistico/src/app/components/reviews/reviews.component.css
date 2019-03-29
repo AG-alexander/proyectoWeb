@@ -1,0 +1,10 @@
+.reviews-small-container {
+    padding-left: 5%;
+    padding-right: 5%;
+    overflow-y: auto;
+    max-height: 500px;
+}
+.row {
+    border-bottom: solid black 1px;
+    margin-bottom: 5px;
+}
