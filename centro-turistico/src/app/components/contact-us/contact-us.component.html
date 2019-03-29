@@ -1,46 +1,49 @@
 <p>
   contact-us works!
 </p>
-<div class="container-fluid contact-us-container">
-  <div class="row">
-    <div class="col-sm-2 col-md-2 col-lg-2"></div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+<div class="container-fluid contact-us-container ">
+  <!-- <div class="row"> -->
+    <!-- <div class="col-sm-2 col-md-2 col-lg-2"></div> -->
+    <div class="col-sm-3 ">
       <form [formGroup]="formGroup">
         <div class="form-group">
-          <label for="titulo">Título</label>
-          <input type="text" class="form-control" formControlName="titulo" id="titulo" placeholder="Escriba el título">
-          <div *ngIf="formGroup.controls['titulo'].dirty">
-            <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['titulo'].errors?.required">
-              El título es requerido
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control form-control-sm" formControlName="nombre" id="nombre"
+            placeholder="Escriba su nombre" [ngClass]="{'is-invalid': FG.nombre.errors && FG.nombre.touched}">
+            <div *ngIf="FG.nombre.errors.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="FG.correo.errors?.required">
+              * El nombre es requerido
+            </div>
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          <label for="correo">Correo</label>
+          <input type="text" class="form-control form-control-sm" formControlName="correo" id="correo"
+            placeholder="ejemplo: algo@algomas.com" [ngClass]="{'is-invalid': FG.correo.errors && FG.correo.touched}">
+            <div *ngIf="FG.correo.errors.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="FG.correo.errors?.required">
+              * El correo es requerido
             </div>
           </div>
         </div>
         <div class="form-group">
-          <label for="titulo">Título</label>
-          <input type="text" class="form-control" formControlName="titulo" id="titulo" placeholder="Escriba el título">
-          <div *ngIf="formGroup.controls['titulo'].dirty">
-            <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['titulo'].errors?.required">
-              El título es requerido
+          <label for="asunto">Asunto</label>
+          <input type="text" class="form-control form-control-sm" formControlName="asunto" id="asunto"
+            placeholder="Escriba el asunto" [ngClass]="{'is-invalid': FG.asunto.errors && FG.asunto.touched}">
+          <div *ngIf="FG.asunto.errors.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="FG.asunto.errors?.required">
+              * El asunto es requerido
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="form-group">
-          <label for="titulo">Título</label>
-          <input type="text" class="form-control" formControlName="titulo" id="titulo" placeholder="Escriba el título">
-          <div *ngIf="formGroup.controls['titulo'].dirty">
-            <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['titulo'].errors?.required">
-              El título es requerido
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-lg btn-block btn-primary">
+          <button class="btn btn-lg btn-block btn-primary" [disabled]="formGroup.invalid">
             <i class="fa fa-paper-plane"><span> Enviar</span></i>
           </button>
         </div>
       </form>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-2 ">
       <h2>Contactenos</h2>
       <ul>
         <li>
@@ -54,6 +57,6 @@
         </li>
       </ul>
     </div>
-    <div class="col-sm-2 col-md-2 col-lg-2"></div>
-  </div>
+    <!-- <div class="col-sm-2 col-md-2 col-lg-2"></div> -->
+  <!-- </div> -->
 </div>

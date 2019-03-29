@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DataStorageService } from '.';
+import { DataStorageService } from './data-storage.service';
 import { constant } from '../constant-data/constant';
 import { reviewsModel, User } from '../interfaces/index';
 
