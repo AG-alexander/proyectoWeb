@@ -17,6 +17,7 @@ export class ContactUsComponent implements OnInit {
       correo: ['',[Validators.required]],
       asunto: ['',[Validators.required]] 
     });
+    console.log(this.formGroup);
   }
 
   get FG() {
