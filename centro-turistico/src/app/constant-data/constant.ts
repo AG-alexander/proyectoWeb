@@ -1,6 +1,7 @@
 export class constant {
     public static SITES = 'SITES';
     public static USERS = 'USERS';
+    public static USER = 'USER';
     public static NEWS = 'NEWS';
     public static REVIEWS = 'REVIEWS';
     public static RATINGS = 'RATINGS';

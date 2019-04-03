@@ -1,30 +1,9 @@
 <carousel>
-  <slide>
-    <a  [routerLink]="['/dashboard/about-us']">
-      <img src="../../../assets/images/carousel-images/beach.jpg" alt="first slide"
-        style="display: block; width: 100%;">
-      <div class="carousel-caption d-none d-md-block">
-        <h3>First slide label</h3>
-        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </div>
-    </a>
-  </slide>
-  <slide>
-    <a  [routerLink]="['/dashboard/about-us']">
-      <img src="../../../assets/images/carousel-images/beach.jpg" alt="second slide" style="display: block; width: 100%;">
+  <slide *ngFor="let new of news">
+    <img [src]="new.image" alt="first slide" style="display: block; width: 100%;">
     <div class="carousel-caption d-none d-md-block">
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <h3>{{new.title}}</h3>
+      <p>{{new.content}}</p>
     </div>
-    </a>
-  </slide>
-  <slide>
-    <a  [routerLink]="['/dashboard/about-us']">
-      <img src="../../../assets/images/carousel-images/beach.jpg" alt="third slide" style="display: block; width: 100%;">
-    <div class="carousel-caption d-none d-md-block">
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    </div>
-    </a>
   </slide>
 </carousel>
