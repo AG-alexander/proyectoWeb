@@ -6,6 +6,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { SiteInformationComponent } from './components/site-information/site-information.component';
 import { LoginComponent } from './components/login/login.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, children: [
@@ -13,6 +14,7 @@ const routes: Routes = [
     {path: 'about-us', component: AboutUsComponent},
     {path: 'contact-us', component: ContactUsComponent},
     {path: 'site/:id', component: SiteInformationComponent},
+    {path: 'user-profile/:id', component: UserProfileComponent},
     {path: '', pathMatch: 'full', redirectTo: 'home'}
 
   ]},

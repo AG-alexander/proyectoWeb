@@ -5,3 +5,4 @@ export { ReviewsService } from '../services/reviews.service';
 export { RatingService } from '../services/rating.service';
 export { LoginService } from '../services/LoginService';
 export { NewsService } from '../services/news.service';
+export { UserService } from '../services/user.service';

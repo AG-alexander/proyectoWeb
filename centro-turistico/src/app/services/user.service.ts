@@ -8,19 +8,11 @@ import { constant } from '../constant-data/constant.js';
 })
 export class UserService {
 
-  users: User[] = user;
+  users: User[] = user as User[];
   constructor(private _dataStorage: DataStorageService) { }
 
-  getUser(userName: string, password: string): boolean {
-    if (this.users) {
-      for (let user of this.users) {
-        if (user.password === password && user.userName === userName) {
-          this._dataStorage.setObjectValue(constant.USERS, user);
-          return true;
-        }
-      }
-    }
-    return false;
+  getUser(): User {
+    return this._dataStorage.getObjectValue(constant.USER);
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services';
+import { LoginService } from 'src/app/services/index';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   fgLogin: FormGroup;
   flagInvalidUser: boolean;
   flagMessage: boolean;
-  constructor(private Fb: FormBuilder, private _route: Router, private _userService: UserService) { }
+  constructor(private Fb: FormBuilder, private _route: Router, private _loginService: LoginService) { }
 
   initForm(){
     this.fgLogin = this.Fb.group({
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.fgLogin.valid) {
       this.flagMessage = true;
-      if (this._userService.getUser(this.fgLogin.controls['usuario'].value,
+      if (this._loginService.getUser(this.fgLogin.controls['usuario'].value,
        this.fgLogin.controls['password'].value)) {
         this._route.navigate(['dashboard/']);
       }else {

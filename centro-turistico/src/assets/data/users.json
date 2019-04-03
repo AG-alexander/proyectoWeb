@@ -5,7 +5,7 @@
         "password": "ritha",
         "email": "ritha095@gmail.com",
         "descripcion": "me gusta beber",
-        "iconno": "",
+        "iconno": "../../../assets/images/user-icon/1803065.png",
         "date": "1968-11-16T00:00:00",
         "tipo": "admin"
     },
@@ -15,7 +15,7 @@
         "password": "kly587",
         "email": "poppush@gmail.com",
         "descripcion": "Correr, escalar, nadar",
-        "iconno": "",
+        "iconno": "../../../assets/images/user-icon/5436359.png",
         "date": "1968-11-16T00:00:00",
         "tipo": "normal"
     }

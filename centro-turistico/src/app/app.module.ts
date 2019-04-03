@@ -26,6 +26,8 @@ import { SiteRatingComponent } from './components/site-rating/site-rating.compon
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { FollowersComponent } from './components/followers/followers.component';
 import { LoginComponent } from './components/login/login.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { LoginComponent } from './components/login/login.component';
     SiteRatingComponent,
     ReviewsComponent,
     FollowersComponent,
-    LoginComponent
+    LoginComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import { LoginComponent } from './components/login/login.component';
     EmbedVideo.forRoot(),
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
-    RatingModule.forRoot()
+    RatingModule.forRoot(),
+    AccordionModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
