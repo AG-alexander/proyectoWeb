@@ -25,6 +25,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 import { SiteRatingComponent } from './components/site-rating/site-rating.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { FollowersComponent } from './components/followers/followers.component';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { FollowersComponent } from './components/followers/followers.component';
     DomSecurityPipe,
     SiteRatingComponent,
     ReviewsComponent,
-    FollowersComponent
+    FollowersComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

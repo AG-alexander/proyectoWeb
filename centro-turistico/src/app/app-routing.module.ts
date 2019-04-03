@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { SiteInformationComponent } from './components/site-information/site-information.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, children: [
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: 'home'}
 
   ]},
+  {path: 'login', component: LoginComponent},
   {path: '**', pathMatch: 'full', redirectTo: 'dashboard/home'}
 ];
 
