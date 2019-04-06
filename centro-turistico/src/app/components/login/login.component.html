@@ -1,0 +1,41 @@
+<div class="login-container-all">
+  <div class="login-container" [ngClass]="{'login-user-message': flagMessage}">
+    <div class="col-sm-3 ">
+      <form [formGroup]="fgLogin" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="usuario">Usuario</label>
+          <input type="text" class="form-control form-control-sm" formControlName="usuario" id="usuario"
+            placeholder="Escriba su usuario" [ngClass]="{'is-invalid': FG.usuario.errors && FG.usuario.touched}">
+          <div *ngIf="FG.usuario.errors?.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="FG.usuario.errors?.required">
+              * El usuario es requerido
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="text" class="form-control form-control-sm" formControlName="password" id="password"
+            placeholder="ejemplo: algo@algomas.com"
+            [ngClass]="{'is-invalid': FG.password.errors && FG.password.touched}">
+          <div *ngIf="FG.password.errors?.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="FG.password.errors?.required">
+              * La contraseña es requerida
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-outline-success btn-lg form-control form-control-sm" [disabled]="fgLogin.invalid"
+            type="submit">
+            <span>Ingresar</span>
+          </button>
+        </div>
+      </form>
+      <div *ngIf="flagInvalidUser" class="form-control-feedback text-danger">
+        * El usuario no fue encontrado, por favor, vuelca a intentarlo
+      </div>
+    </div>
+  </div>
+  <div *ngIf="flagMessage">
+    Cargando datos, por favor espere
+  </div>
+</div>

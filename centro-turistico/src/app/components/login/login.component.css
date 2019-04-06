@@ -1,0 +1,25 @@
+.login-container-all {
+    background-image: url("../../../assets/images/background-image.jpg");
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 20%;
+    overflow: hidden;
+}
+.login-user-message {
+    opacity: 0.5;
+}
+.login-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+.form-control{
+    max-width: 350px;
+}
+
+.form-control-feedback{
+    font-size: 20px;
+}

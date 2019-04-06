@@ -1,0 +1,30 @@
+[
+    {
+        "idNews": 1,
+        "title": "Nieve en riscos Ivericos",
+        "content": "Se reporta la caida de nieve en los riscos Ivericos del este de la peninsula del imperio Tartara",
+        "date": "1968-11-16T00:00:00",
+        "image": "../../../assets/images/carousel-images/beach.jpg"
+    },
+    {
+        "idNews": 2,
+        "title": "¿Nutrias de vacaciones?",
+        "content": "Luego de casi 13 años sin ver nutrias en los bosques canadiences, un pareja de guatemaltecos avista un grupo de nutrias de barba violeta, cerca de la represa Ichmertok Forcht",
+        "date": "1968-11-16T00:00:00",
+        "image": "../../../assets/images/carousel-images/beach.jpg"
+    },
+    {
+        "idNews": 3,
+        "title": "Tierras de nadie",
+        "content": "Las cuevas subterraneas de Mitsuakul en Mexico, un paraiso acuatico que parece haber salido una pelicula de Hollywood",
+        "date": "1968-11-16T00:00:00",
+        "image": "../../../assets/images/carousel-images/beach.jpg"
+    },
+    {
+        "idNews": 4,
+        "title": "¿Cascadas Dragon?",
+        "content": "Ecuentran en Costa Rica un pariente del ajolote, el dragon mexicano en peligro de extincion, viviendo en unas cascadas costarricenses, a 2500 metros de altura.",
+        "date": "1968-11-16T00:00:00",
+        "image": "../../../assets/images/carousel-images/beach.jpg"
+    }
+]

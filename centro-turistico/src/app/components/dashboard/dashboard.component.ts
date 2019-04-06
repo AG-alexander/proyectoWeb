@@ -26,5 +26,6 @@ export class DashboardComponent implements OnInit {
     this._dataStorage.setObjectValue(constant.SITES, SITES);
     this._dataStorage.setObjectValue(constant.USERS, USERS);
     this._dataStorage.setObjectValue(constant.FOLLOWERS, FOLLOWERS);
+    this._dataStorage.setObjectValue(constant.NEWS, NEWS);
   }
 }

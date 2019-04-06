@@ -5,7 +5,7 @@ export interface User {
     email: string; // correo
     descripcion: string; // descripcion
     iconno: string; // icono
-    date: Date; // fecha nacimineto
+    string: Date; // fecha nacimineto
     tipo: string; // tipo
 }
 
