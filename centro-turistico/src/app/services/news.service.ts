@@ -14,18 +14,21 @@ export class NewsService {
     return this._dataStorage.getObjectValue(constant.NEWS) as News[];
   }
 
+  getNewsById(id: number): News {
+    return (this._dataStorage.getObjectValue(constant.NEWS) as News[]).find(n => n.idNews == id);
+  }
+
   saveNew(news: News) {
-    let id: number = 0;
+    let index: number = -1;
     let news_list = this._dataStorage.getObjectValue(constant.NEWS) as News[];
 
-    news_list.forEach((item)=>{
+    news_list.forEach((item, index_list)=>{
       if (item.idNews == news.idNews) {
-        id = item.idNews;
+        index = index_list;
       }
     });
-
-    if (id > 0) {
-      news_list[id] = news;
+    if (index > 0) {
+      news_list[index] = news;
     } else {
       news_list.push(news);
     }
