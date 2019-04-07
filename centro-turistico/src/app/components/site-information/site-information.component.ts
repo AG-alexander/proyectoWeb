@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { SiteService, FollowerService, ReviewsService, RatingService } from '../../services/index';
 import { TouristicCentre, reviewsModel, followerModel } from '../../interfaces/index';
 import { ActivatedRoute } from '@angular/router';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-site-information',
   templateUrl: './site-information.component.html',
@@ -14,12 +15,15 @@ export class SiteInformationComponent implements OnInit {
   private reviews: reviewsModel[];
   private followers: followerModel[];
   private maxStars = 0;
+  img: string;
+  modalRef: BsModalRef;
   constructor(
     private _siteService: SiteService,
     private _reviewsService: ReviewsService,
     private _followersService: FollowerService,
     private _ratingService: RatingService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private modalService: BsModalService
     ) { }
 
     getSite() {
@@ -32,6 +36,11 @@ export class SiteInformationComponent implements OnInit {
 
   ngOnInit() {
     this.getSite();
+  }
+
+  openModal(template: TemplateRef<any>, image: string) {
+    this.modalRef = this.modalService.show(template);
+    this.img = image;
   }
 
 }
