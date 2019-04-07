@@ -1,3 +1,22 @@
-<p>
-  maintenance-news-list works!
-</p>
+<H1>Noticias</H1>
+<button class="btn btn-primary" (click)="addNew()">Agregar</button>
+<table class="table table-striped">
+  <thead>
+    <th>Nombre</th>
+    <th>Fecha</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let new of news_list">
+      <td>
+        {{new.title}}
+      </td>
+      <td>
+          {{new.date}}
+        </td>
+      <td>
+        <button class="btn btn-primary" (click)="updateNew(new.idNews)">Modificar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
