@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="col-md-4">
+    <form [formGroup]="formGroup">
+      <div class="form-group">
+        <label for="title">Título</label>
+        <input type="text" class="form-control form-control-sm" formControlName="title" id="title"
+          placeholder="Escriba el título" [ngClass]="{'is-invalid': FG.title.errors && FG.title.touched}">
+        <div *ngIf="FG.title.errors?.required" class="invalid-feedback">
+          <div class="form-control-feedback text-danger" *ngIf="FG.title.errors?.required">
+            * El título es requerido
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="content">Contenido</label>
+        <input type="text" class="form-control form-control-sm" formControlName="content" id="content"
+          placeholder="Escriba el contenido" [ngClass]="{'is-invalid': FG.content.errors && FG.content.touched}">
+        <div *ngIf="FG.content.errors?.required" class="invalid-feedback">
+          <div class="form-control-feedback text-danger" *ngIf="FG.content.errors?.required">
+            * El contenido es requerido
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="image">Imagen</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="image">Upload</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input form-control form-control-sm" formControlName="image" id="image"
+              placeholder="Seleccione una imagen" (change)="showImage(file)" #file>
+            <label class="custom-file-label" for="image">Choose file</label>
+            <div *ngIf="FG.image.errors?.required" class="invalid-feedback">
+              <div class="form-control-feedback text-danger" *ngIf="FG.image.errors?.required">
+                * La imagen es requerida
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" [disabled]="formGroup.invalid && imgValid" (click)="saveNews()">Guardar</button>
+    </form>
+    <img [src]="imageSrc" alt="" *ngIf="imageSrc" class="img-costume">
+  </div>
+</div>

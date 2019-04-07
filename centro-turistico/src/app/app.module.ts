@@ -27,6 +27,8 @@ import { FollowersComponent } from './components/followers/followers.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { MaintenanceNewsListComponent } from './components/maintenance-news-list/maintenance-news-list.component';
+import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-upset/maintenance-news-upset.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,9 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     ReviewsComponent,
     FollowersComponent,
     LoginComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    MaintenanceNewsListComponent,
+    MaintenanceNewsUpsetComponent
   ],
   imports: [
     BrowserModule,
