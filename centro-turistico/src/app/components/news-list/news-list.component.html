@@ -1,9 +1,11 @@
 <carousel>
-  <slide *ngFor="let new of news">
-    <img [src]="new.image" alt="first slide" style="display: block; width: 100%;">
-    <div class="carousel-caption d-none d-md-block">
-      <h3>{{new.title}}</h3>
-      <p>{{new.content}}</p>
-    </div>
-  </slide>
+    <slide *ngFor="let new of news">
+        <div>
+            <img [src]="new.image" alt="first slide" style="display: block; width: 60%; margin-left: auto; margin-right: auto; height: 300px; margin-top: 0">
+        </div>
+        <div class="carousel-caption " style="width: 40%;margin-left: auto; margin-right: auto;">
+            <h3>{{new.title}}</h3>
+            <p>{{new.content}}</p>
+        </div>
+    </slide>
 </carousel>
