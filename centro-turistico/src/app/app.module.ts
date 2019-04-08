@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -12,7 +12,6 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { TouristicCentresComponent } from './components/touristic-centres/touristic-centres.component';
-
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -31,6 +30,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { MaintenanceNewsListComponent } from './components/maintenance-news-list/maintenance-news-list.component';
 import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-upset/maintenance-news-upset.component';
 import { ServicesComponent } from './components/services/services.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +65,9 @@ import { ServicesComponent } from './components/services/services.component';
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
     RatingModule.forRoot(),
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    ModalModule.forRoot(),
+    PopoverModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

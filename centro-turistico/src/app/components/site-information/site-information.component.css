@@ -3,14 +3,15 @@
     padding-right: 15%;
     background-color: #585555;
 }
+
 .wrapper {
     width: 100%;
     max-height: 400px;
     margin: 0 auto;
     overflow-x: auto;
     overflow-y: auto;
-  }
-  
+}
+
 .zoom-effect-container {
     float: left;
     position: relative;
@@ -28,7 +29,7 @@
 }
 
 .item img {
-    max-width: 100%;   
+    max-width: 100%;
     max-height: 100%;
     -moz-transition: all 0.3s;
     -webkit-transition: all 0.3s;
@@ -38,7 +39,7 @@
 .item:hover img {
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
-    transform: scale(1.1);  
+    transform: scale(1.1);
 }
 
 img {
@@ -56,3 +57,13 @@ img {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+/* .modal-body {
+    width: 500px !important;
+    height: 600px !important;
+} */
+
+.img-modal {
+    width: 100% !important;
+    height: 95% !important;
+}
