@@ -78,3 +78,10 @@ img {
     font-size: 15px;
     text-align: justify;
 }
+.scroll-div {
+    max-height: 100vh;
+    overflow-y: auto;
+}
+.max-size {
+    max-height: 200px;
+}

@@ -7,29 +7,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <h2>Descripción</h2>
-                <p class="description-text">{{touristicCentre.description}}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <table class="table">
-                    <thead>
-                        <th>
-                            Horarios
-                        </th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let sche of touristicCentre.schedules">
-                            <td>{{sche}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <app-followers [followers]="followers"></app-followers>
+            <div class="col-md-4 scroll-div">
                 <app-site-rating [rate]="maxStars"></app-site-rating>
+                <div id="horarios">
+                    <h2>Horarios</h2>
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let sche of touristicCentre.schedules">
+                                <td>{{sche}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <app-followers [followers]="followers"></app-followers>
             </div>
             <div class="col-md-8">
+                <h2>Descripción</h2>
+                <p class="description-text">{{touristicCentre.description}}</p>
                 <h2>Imágenes</h2>
                 <div class="wrapper">
                     <div class="zoom-effect-container" *ngFor="let photo of touristicCentre.photos"
@@ -41,10 +35,9 @@
                 </div>
                 <app-video-player [urlYoutube]="touristicCentre.video "></app-video-player>
             </div>
+            <app-reviews [reviews]="reviews "></app-reviews>
         </div>
-        <app-reviews [reviews]="reviews "></app-reviews>
     </div>
-
 </div>
 <ng-template #template>
     <div class="modal-body">
