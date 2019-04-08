@@ -29,6 +29,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { MaintenanceNewsListComponent } from './components/maintenance-news-list/maintenance-news-list.component';
 import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-upset/maintenance-news-upset.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-ups
     CarouselModule.forRoot(),
     RatingModule.forRoot(),
     AccordionModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    PopoverModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
