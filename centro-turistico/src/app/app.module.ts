@@ -30,6 +30,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { MaintenanceNewsListComponent } from './components/maintenance-news-list/maintenance-news-list.component';
 import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-upset/maintenance-news-upset.component';
+import { ServicesComponent } from './components/services/services.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,8 @@ import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-ups
     LoginComponent,
     UserProfileComponent,
     MaintenanceNewsListComponent,
-    MaintenanceNewsUpsetComponent
+    MaintenanceNewsUpsetComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule,

@@ -6,3 +6,4 @@ export { TouristicCentre, followerXSite, ratingXSite, reviews, reviewsModel, fol
 export { User, EditorxSitio} from './user';
 export { photos, imageXSite, imageXUser} from './galery';
 export { permXRol, perms, rolXuser, roles } from './perms';
+export { Service } from './service';
