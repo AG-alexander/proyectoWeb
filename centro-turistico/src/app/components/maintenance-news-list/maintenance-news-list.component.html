@@ -1,22 +1,33 @@
-<H1>Noticias</H1>
-<button class="btn btn-primary" (click)="addNew()">Agregar</button>
+<div class="row">
+    <div class=" col-sm-2 col-md-2 col-lg-2">
+        <H1>Noticias</H1>
+    </div>
+</div>
+
 <table class="table table-striped">
-  <thead>
-    <th>Nombre</th>
-    <th>Fecha</th>
-    <th></th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let new of news_list">
-      <td>
-        {{new.title}}
-      </td>
-      <td>
-          {{new.date}}
-        </td>
-      <td>
-        <button class="btn btn-primary" (click)="updateNew(new.idNews)">Modificar</button>
-      </td>
-    </tr>
-  </tbody>
+    <thead>
+        <th width="47%">Nombre</th>
+        <th width="47%">Fecha</th>
+        <th width="6%">
+            <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="addNew()" placement="auto" popover="Agregar Noticias" triggers="mouseenter:mouseleave">
+                <i class="fa fa-plus"></i>
+            </button>
+        </th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let new of news_list">
+            <td width="47%">
+                {{new.title}}
+            </td>
+            <td width="47%">
+                {{new.date}}
+            </td>
+            <td width="6%">
+                <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="updateNew(new.idNews)" placement="auto" popover="Modificar Noticias" triggers="mouseenter:mouseleave">
+                    <i class="fa fa-pencil"></i>
+                </button>
+
+            </td>
+        </tr>
+    </tbody>
 </table>

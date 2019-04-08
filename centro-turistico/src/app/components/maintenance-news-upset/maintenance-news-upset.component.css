@@ -3,3 +3,16 @@
     height: 300px;
     border-radius: 3%;
 }
+
+.icons {
+    color: green !important;
+    font-size: 27px;
+    bottom: 0;
+    position: relative;
+}
+
+.centro {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    /* width: 20%; */
+}
