@@ -1,8 +1,8 @@
-<p>
-  site-information works!
-</p>
 <div class="container-fluid site-container">
-    <h1>{{touristicCentre.name}}</h1>
+    <div class="containered">
+      <img [src]="touristicCentre.photos[0]" alt="">
+      <div class="centered"><h1>{{touristicCentre.name}}</h1></div>
+    </div>
   <div class="row">
     <div class="col-md-12">
       <p>{{touristicCentre.description}}</p>
