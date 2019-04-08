@@ -1,11 +1,11 @@
 .container-all {
-    background-color: #000000;
+    background-color: #ffffff;
     padding-left: 15%;
     padding-right: 15%;
 }
 .site-container {
-    background-color: #585555;
-    color: aliceblue;
+    background-color: #ececec;
+    color: #000000;
 }
 
 .wrapper {
@@ -71,9 +71,7 @@ img {
     width: 100% !important;
     height: 95% !important;
 }
-.table {
-    color: aliceblue;
-}
+
 .description-text {
     font-size: 15px;
     text-align: justify;
