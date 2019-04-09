@@ -5,19 +5,19 @@
     display: flex;
     justify-content: center;
 }
+
 li {
     list-style: none;
 }
 
-.form-control{
-    max-width: 350px;
+.form-control {
+    max-width: 700px;
 }
 
-.btn{
+.btn {
     max-width: 120px;
 }
 
-.form-control-feedback{
+.form-control-feedback {
     font-size: 12px;
 }
-

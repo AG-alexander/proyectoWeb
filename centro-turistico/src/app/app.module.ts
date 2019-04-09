@@ -33,6 +33,7 @@ import { ServicesComponent } from './components/services/services.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { MaintenanceTouristicProfileListComponent } from './components/maintenance-touristic-profile-list/maintenance-touristic-profile-list.component';
 import { MaintenanceTouristicProfileUpSetComponent } from './components/maintenance-touristic-profile-up-set/maintenance-touristic-profile-up-set.component';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +73,7 @@ import { MaintenanceTouristicProfileUpSetComponent } from './components/maintena
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
+    TypeaheadModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

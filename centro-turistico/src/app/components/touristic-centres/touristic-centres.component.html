@@ -1,28 +1,22 @@
 <div class="container-fluid">
-  <div class="input-group mb-3 mt-3">
-    <input type="text" [(ngModel)]="value" class="form-control" placeholder="Nombre del centro turístico"
-      aria-label="Nombre o profesor" aria-describedby="button-addon2" (keyup.enter)="searchSites(value)">
-    <div class="input-group-append">
-      <button class="btn btn-outline-primary" type="button" (click)="searchSites(value)"
-        id="button-addon2">Buscar</button>
+    <div class="col-md-4 input-group mb-3 mt-3">
+        <input type="text" [(ngModel)]="selected" [typeahead]="typebyhead" class="form-control" placeholder="Nombre del centro turístico" aria-label="Nombre o profesor" aria-describedby="button-addon2" (change)="searchSites($event)">
     </div>
-  </div>
-  <div class="row no-gutters position-relative" *ngFor="let site of showedList">
-    <div class="col-md-6 mb-md-0 p-md-4">
-      <img src="{{site.photos[0]}}" class="w-100">
+    <div class="row no-gutters position-relative" *ngFor="let site of showedList">
+        <div class="col-md-2 mb-md-0 p-md-2 img">
+            <img src="{{site.photos[0]}}" class="w-100 img">
+        </div>
+        <div class="col-md-10 mb-md-0 p-md-2">
+            <h5 class="mt-0">{{site.name}}</h5>
+            <p>{{site.description}}</p>
+            <a [routerLink]="['/dashboard/site', site.idTouristicCentre]" class="stretched-link"></a>
+        </div>
     </div>
-    <div class="col-md-6 position-static p-4 pl-md-0">
-      <h5 class="mt-0">{{site.name}}</h5>
-      <p>{{site.description}}</p>
-      <a [routerLink]="['/dashboard/site', site.idTouristicCentre]" class="stretched-link"></a>
-    </div>
-  </div>
- 
-</div> 
+
+</div>
 
 <div class="row">
     <div class="col-md-4 offset-md-5">
-      <pagination [totalItems]="_site.showedSites.length" [itemsPerPage]="3" [(ngModel)]="currentPage"
-        (pageChanged)="pageChanged($event)" [pageBtnClass]=""></pagination>
+        <pagination [totalItems]="_site.showedSites.length" [itemsPerPage]="3" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" [pageBtnClass]=""></pagination>
     </div>
-  </div>
+</div>
