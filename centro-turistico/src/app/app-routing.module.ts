@@ -10,6 +10,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { MaintenanceNewsListComponent } from './components/maintenance-news-list/maintenance-news-list.component';
 import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-upset/maintenance-news-upset.component';
 import { ServicesComponent } from './components/services/services.component';
+import { MaintenanceTouristicProfileUpSetComponent } from './components/maintenance-touristic-profile-up-set/maintenance-touristic-profile-up-set.component';
+import { MaintenanceTouristicProfileListComponent } from './components/maintenance-touristic-profile-list/maintenance-touristic-profile-list.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, children: [
@@ -22,6 +24,9 @@ const routes: Routes = [
     {path: 'mainte-news-list', component: MaintenanceNewsListComponent},
     {path: 'mainte-news-up/:id', component: MaintenanceNewsUpsetComponent},
     {path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent},
+    {path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent},
+    {path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent},
+    {path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent},
     {path: '', pathMatch: 'full', redirectTo: 'home'}
 
   ]},

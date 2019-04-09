@@ -21,7 +21,7 @@ export class NewsService {
   saveNew(news: News) {
     let index: number = -1;
     let news_list = this._dataStorage.getObjectValue(constant.NEWS) as News[];
-
+    let last_id = this._dataStorage.getObjectValue(constant.IDNEWS) as number;
     news_list.forEach((item, index_list)=>{
       if (item.idNews == news.idNews) {
         index = index_list;
@@ -30,9 +30,11 @@ export class NewsService {
     if (index >= 0) {
       news_list[index] = news;
     } else {
+      news.idNews = last_id + 1;
       news_list.push(news);
     }
 
     this._dataStorage.setObjectValue(constant.NEWS, news_list);
+    this._dataStorage.setObjectValue(constant.IDNEWS, last_id + 1);
   }
 }

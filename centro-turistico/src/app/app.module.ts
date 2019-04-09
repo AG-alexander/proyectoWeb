@@ -31,6 +31,8 @@ import { MaintenanceNewsListComponent } from './components/maintenance-news-list
 import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-upset/maintenance-news-upset.component';
 import { ServicesComponent } from './components/services/services.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { MaintenanceTouristicProfileListComponent } from './components/maintenance-touristic-profile-list/maintenance-touristic-profile-list.component';
+import { MaintenanceTouristicProfileUpSetComponent } from './components/maintenance-touristic-profile-up-set/maintenance-touristic-profile-up-set.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +54,9 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     UserProfileComponent,
     MaintenanceNewsListComponent,
     MaintenanceNewsUpsetComponent,
-    ServicesComponent
+    ServicesComponent,
+    MaintenanceTouristicProfileListComponent,
+    MaintenanceTouristicProfileUpSetComponent
   ],
   imports: [
     BrowserModule,
