@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { MaintenanceNewsListComponent } from './components/maintenance-news-list/maintenance-news-list.component';
 import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-upset/maintenance-news-upset.component';
+import { ServicesComponent } from './components/services/services.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, children: [
@@ -16,6 +17,7 @@ const routes: Routes = [
     {path: 'about-us', component: AboutUsComponent},
     {path: 'contact-us', component: ContactUsComponent},
     {path: 'site/:id', component: SiteInformationComponent},
+    {path: 'services', component: ServicesComponent},
     {path: 'user-profile/:id', component: UserProfileComponent},
     {path: 'mainte-news-list', component: MaintenanceNewsListComponent},
     {path: 'mainte-news-up/:id', component: MaintenanceNewsUpsetComponent},
