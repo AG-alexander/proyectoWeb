@@ -27,7 +27,7 @@ export class NewsService {
         index = index_list;
       }
     });
-    if (index > 0) {
+    if (index >= 0) {
       news_list[index] = news;
     } else {
       news_list.push(news);

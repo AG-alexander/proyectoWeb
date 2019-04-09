@@ -2,7 +2,7 @@
     {
         "idTouristicCentre": 1,
         "name": "Los montañosos",
-        "description": "Zona montañosa neblinada",
+        "description": "Zona montañosa neblinada Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam corporis, id harum quo enim corrupti modi voluptatum doloribus esse aliquid alias atque quia, nesciunt et ullam accusantium. Placeat, adipisci iure!",
         "schedules": [
             "lunes a viernes de 9:00 am a 7:00 pm",
             "sabados y domingos de 10:00 am a 5:00 pm"
