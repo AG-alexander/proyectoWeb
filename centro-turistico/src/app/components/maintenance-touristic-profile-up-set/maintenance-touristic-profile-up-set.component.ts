@@ -59,6 +59,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
       tourProfile.idTouristicCentre = this.tourLoscalStorage.idTouristicCentre;
     } else {
       tourProfile.idTouristicCentre = 0;
+      tourProfile.idEditor = 0;
     }
     tourProfile.photos = this.img_list;
     this._siteService.saveTourProfile(tourProfile);

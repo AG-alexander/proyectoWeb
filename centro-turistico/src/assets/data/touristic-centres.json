@@ -21,7 +21,8 @@
         "city": "Buenos Aires", 
         "region": "Región Brunca", 
         "direccion": "2 kilometros norte del parque central de Buenos Aires",
-        "phone": "000000000"
+        "phone": "000000000",
+        "idEditor": 0
     },
     {
         "idTouristicCentre": 2,
@@ -45,6 +46,7 @@
         "city": "La Palma", 
         "region": "Región Brunca", 
         "direccion": "10 kilometros antes de llegar a platanillo, en direcion a la zona costera",
-        "phone": "000000000"
+        "phone": "000000000",
+        "idEditor": 0
     }
 ]

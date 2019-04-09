@@ -12,6 +12,7 @@ import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-ups
 import { ServicesComponent } from './components/services/services.component';
 import { MaintenanceTouristicProfileUpSetComponent } from './components/maintenance-touristic-profile-up-set/maintenance-touristic-profile-up-set.component';
 import { MaintenanceTouristicProfileListComponent } from './components/maintenance-touristic-profile-list/maintenance-touristic-profile-list.component';
+import { MaintenanceEditorsComponent } from './components/maintenance-editors/maintenance-editors.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, children: [
@@ -26,6 +27,7 @@ const routes: Routes = [
     {path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent},
     {path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent},
     {path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent},
+    {path: 'mainte-editor', component: MaintenanceEditorsComponent},
     {path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent},
     {path: '', pathMatch: 'full', redirectTo: 'home'}
 

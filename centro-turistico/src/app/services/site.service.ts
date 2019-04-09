@@ -9,7 +9,6 @@ import { constant } from 'src/app/constant-data/constant';
 })
 export class SiteService {
 
-  sites: TouristicCentre[] = sites;
   showedSites: TouristicCentre[];
   constructor(public _dataStorage: DataStorageService) {
     this.showedSites = [];
@@ -64,5 +63,9 @@ export class SiteService {
 
     this._dataStorage.setObjectValue(constant.SITES, tour_list);
     this._dataStorage.setObjectValue(constant.IDTOUR, last_id + 1);
+  }
+
+  saveTourProfiles(tour_list: TouristicCentre[]) {
+    this._dataStorage.setObjectValue(constant.SITES, tour_list);
   }
 }
