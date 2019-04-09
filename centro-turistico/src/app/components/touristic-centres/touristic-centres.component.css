@@ -9,6 +9,11 @@
     padding-left: 200px;
 }
 
+.img {
+    height: 100px;
+    width: 100px;
+}
+
 .card-container {
     height: 250px;
 }
@@ -18,6 +23,7 @@ h5 {
     font-size: 25;
     color: aliceblue;
 }
+
 p {
     font-family: tahoma;
     color: aliceblue;
