@@ -21,7 +21,7 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
     this._router.navigate(['dashboard/mainte-tour-set']);
   }
 
-  updateTourProfile(id: number) {debugger
+  updateTourProfile(id: number) {
     this._router.navigate(['dashboard/mainte-tour-up', id]);
   }
   ngOnInit() {
