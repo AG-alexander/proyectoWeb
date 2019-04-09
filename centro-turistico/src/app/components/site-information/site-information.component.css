@@ -88,3 +88,7 @@ img {
 .site {
     background-color: #cecece
 }
+.review-container {
+    max-height: 500px;
+    overflow-y: auto;
+}

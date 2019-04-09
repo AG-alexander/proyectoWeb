@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { SiteService, FollowerService, ReviewsService, RatingService } from '../../services/index';
-import { TouristicCentre, reviewsModel, followerModel } from '../../interfaces/index';
+import { TouristicCentre, reviewsModel, followerModel, Review } from '../../interfaces/index';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { PermissionService } from 'src/app/services/permission.service';
@@ -13,7 +13,7 @@ export class SiteInformationComponent implements OnInit {
 
   // COMPONENTS ATRIBUTES 
   private touristicCentre: TouristicCentre;
-  private reviews: reviewsModel[];
+  private reviews: Review[];
   private followers: followerModel[];
   private maxStars = 0;
   img: string;
@@ -43,6 +43,10 @@ export class SiteInformationComponent implements OnInit {
   openModal(template: TemplateRef<any>, image: string) {
     this.modalRef = this.modalService.show(template);
     this.img = image;
+  }
+
+  openModalReview(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
 }

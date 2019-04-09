@@ -1,18 +1,20 @@
 [
     {
         "id":1,
-        "siteId": 1,
-        "userId": 1,
+        "idSitio": 1,
+        "idUser": 1,
         "title": "",
         "description": "prueba de rating",
-        "date": "1968-11-16T00:00:00"
+        "date": "1968-11-16T00:00:00",
+        "duennoReview": ""
     },
     {
         "id":2,
-        "siteId": 1,
-        "userId": 2,
+        "idSitio": 1,
+        "idUser": 2,
         "title": "",
         "description": "prueba de rating",
-        "date": "1968-11-16T00:00:00"
+        "date": "1968-11-16T00:00:00",
+        "duennoReview": ""
     }
 ]

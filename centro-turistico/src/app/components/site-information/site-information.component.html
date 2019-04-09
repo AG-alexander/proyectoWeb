@@ -1,13 +1,13 @@
 <div class="container-all">
     <div class="top-head col-md-12 col-sm-12 col-lg-12">
         <h1>{{touristicCentre.name}}</h1>
+        <app-site-rating [rate]="maxStars"></app-site-rating>
     </div>
     <div class="site-container">
         <div class="site">
             <div class="row">
                 <div class="col-md-4">
                     <img [src]="touristicCentre.photos[0]" alt="">
-                    <app-site-rating [rate]="maxStars"></app-site-rating>
                     <button class="btn btn-primary btn-block" *ngIf="_permission.basico">Seguir</button>
                     <div id="horarios">
                         <h2>Horarios</h2>
@@ -35,6 +35,11 @@
                     <app-video-player [urlYoutube]="touristicCentre.video "></app-video-player>
                 </div>
             </div>
+           <div class="review-container">
+               <h2>Reseñas</h2>
+               <button class="btn btn-primary" (click)="openModalReview(Reviews)">Agregar Reseña</button>
+               <app-reviews [Review]="rev" *ngFor="let rev of reviews"></app-reviews>
+           </div>
         </div>
     </div>
 </div>
@@ -46,3 +51,12 @@
         <img class="img-modal" src="{{img}} " alt="">
     </div>
 </ng-template>
+
+<ng-template #Reviews>
+        <div class="modal-body">
+            <button type="button " class="close pull-right " aria-label="Close " (click)="modalRef.hide() ">
+                <span aria-hidden="true ">&times;</span>
+            </button>
+            <img class="img-modal" src="{{img}} " alt="">
+        </div>
+    </ng-template>
