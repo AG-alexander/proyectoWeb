@@ -3,6 +3,7 @@ import { SiteService, FollowerService, ReviewsService, RatingService } from '../
 import { TouristicCentre, reviewsModel, followerModel } from '../../interfaces/index';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { PermissionService } from 'src/app/services/permission.service';
 @Component({
   selector: 'app-site-information',
   templateUrl: './site-information.component.html',
@@ -23,7 +24,8 @@ export class SiteInformationComponent implements OnInit {
     private _followersService: FollowerService,
     private _ratingService: RatingService,
     private _activatedRoute: ActivatedRoute,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private _permission: PermissionService
     ) { }
 
     getSite() {

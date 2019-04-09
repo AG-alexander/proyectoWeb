@@ -8,7 +8,7 @@
                 <div class="col-md-4">
                     <img [src]="touristicCentre.photos[0]" alt="">
                     <app-site-rating [rate]="maxStars"></app-site-rating>
-                    <button class="btn btn-primary btn-block">Seguir</button>
+                    <button class="btn btn-primary btn-block" *ngIf="_permission.basico">Seguir</button>
                     <div id="horarios">
                         <h2>Horarios</h2>
                         <table class="table">
