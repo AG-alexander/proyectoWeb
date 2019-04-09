@@ -31,6 +31,7 @@ import { MaintenanceNewsListComponent } from './components/maintenance-news-list
 import { MaintenanceNewsUpsetComponent } from './components/maintenance-news-upset/maintenance-news-upset.component';
 import { ServicesComponent } from './components/services/services.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +69,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
+    TypeaheadModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
