@@ -17,7 +17,7 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
   newsLocalStorage: News;
   constructor(private FB: FormBuilder, private _activated: ActivatedRoute, private _newsService: NewsService) { }
   
-  showImage(event: any) {
+  onFileSelected(event: any) {debugger
     var reader = new FileReader();
     this.imagePath = event.files;
     reader.readAsDataURL(event.files[0]);
