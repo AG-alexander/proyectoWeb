@@ -41,6 +41,17 @@ export class SiteService {
     return null;
   }
 
+  getSiteByEditor(id: number): TouristicCentre[] {
+    if (id) {
+      let list: TouristicCentre[];
+      let aux: TouristicCentre[];
+      list = this._dataStorage.getObjectValue(constant.SITES);
+      aux = list.filter(item => item.idTouristicCentre == id);
+      return aux;
+    }
+    return null;
+  }
+
   getSites(): TouristicCentre [] {
     return this._dataStorage.getObjectValue(constant.SITES) as TouristicCentre [];
   }
