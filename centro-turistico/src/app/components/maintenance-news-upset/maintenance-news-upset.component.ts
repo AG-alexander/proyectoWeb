@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { News } from 'src/app/interfaces/index';
 import { NewsService } from 'src/app/services';
+
 @Component({
   selector: 'app-maintenance-news-upset',
   templateUrl: './maintenance-news-upset.component.html',

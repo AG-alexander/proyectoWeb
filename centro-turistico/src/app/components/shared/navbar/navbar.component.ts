@@ -23,6 +23,9 @@ export class NavbarComponent implements OnInit {
     this._dataStorage.setObjectValue(constant.USERS, USERS);
     this._dataStorage.setObjectValue(constant.FOLLOWERS, FOLLOWERS);
     this._dataStorage.setObjectValue(constant.NEWS, NEWS);
+
+    this._dataStorage.setObjectValue(constant.IDNEWS, constant.IDNEWSNUM);
+    this._dataStorage.setObjectValue(constant.IDTOUR, constant.IDTOURNUM);
   }
   ngOnInit() {
   }

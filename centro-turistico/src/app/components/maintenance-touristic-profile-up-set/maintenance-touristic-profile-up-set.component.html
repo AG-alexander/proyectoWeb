@@ -1,3 +1,52 @@
-<p>
-  maintenance-touristic-profile-up-set works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <form [formGroup]="formGroup">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control form-control-sm" formControlName="name" id="name"
+            placeholder="Escriba el nombre" [ngClass]="{'is-invalid': FG.name.errors && FG.name.touched}">
+          <div *ngIf="FG.name.errors?.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="FG.name.errors?.required">
+              * El nombre es requerido
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <input type="text" class="form-control form-control-sm" formControlName="description" id="description"
+            placeholder="Escriba la descripción"
+            [ngClass]="{'is-invalid': FG.description.errors && FG.description.touched}">
+          <div *ngIf="FG.description.errors?.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="FG.description.errors?.required">
+              * La descripción es requerida
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="schedules">Horarios</label>
+          <input type="text" class="form-control form-control-sm" formControlName="schedules" id="schedules"
+            placeholder="Escriba el horario" [ngClass]="{'is-invalid': FG.schedules.errors && FG.schedules.touched}">
+          <div *ngIf="FG.schedules.errors?.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="FG.schedules.errors?.required">
+              * La descripción es requerida
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" (click)="saveTourProfile()">Guardar</button>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <div>
+        <input style="display: none;" type="file" (change)="onFileSelected(fileInput)" #fileInput>
+        <button type="button" class="btn  icons -sm btn-default blockContent" (click)="fileInput.click()"
+          placement="auto" popover="Buscar Imagen" triggers="mouseenter:mouseleave">
+          <i class="fa fa-file-image-o"></i>
+        </button>
+      </div>
+      <div class="img-container">
+        <img [src]="img" alt="" class="img-size" *ngFor="let img of img_list">
+      </div>
+    </div>
+  </div>
+</div>

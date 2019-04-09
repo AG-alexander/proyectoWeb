@@ -40,4 +40,28 @@ export class SiteService {
     }
     return null;
   }
+
+  getSites(): TouristicCentre [] {
+    return this._dataStorage.getObjectValue(constant.SITES) as TouristicCentre [];
+  }
+
+  saveTourProfile(tour: TouristicCentre) {
+    let index: number = -1;
+    let tour_list = this._dataStorage.getObjectValue(constant.SITES) as TouristicCentre[];
+    let last_id = this._dataStorage.getObjectValue(constant.IDTOUR) as number;
+    tour_list.forEach((item, index_list)=>{
+      if (item.idTouristicCentre == tour.idTouristicCentre) {
+        index = index_list;
+      }
+    });
+    if (index >= 0) {
+      tour_list[index] = tour;
+    } else {
+      tour.idTouristicCentre = last_id + 1;
+      tour_list.push(tour);
+    }
+
+    this._dataStorage.setObjectValue(constant.SITES, tour_list);
+    this._dataStorage.setObjectValue(constant.IDTOUR, last_id + 1);
+  }
 }
