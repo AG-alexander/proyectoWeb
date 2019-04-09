@@ -16,13 +16,14 @@ export class SiteService {
    }
 
   getSite(name: string) {
+    let temp_list = this._dataStorage.getObjectValue(constant.SITES) as TouristicCentre [];
     if (!name) {
-      this.showedSites = Object.assign([],this.sites);
+      this.showedSites = temp_list;
     }
     else {
       name = name.toLowerCase();
       this.showedSites = [];
-      this.sites.forEach((site) => {
+      temp_list.forEach((site) => {
         if (site.name.toLowerCase().includes(name)) {
           this.showedSites.push(site);
         }
