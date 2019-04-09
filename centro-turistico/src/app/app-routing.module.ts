@@ -13,27 +13,32 @@ import { ServicesComponent } from './components/services/services.component';
 import { MaintenanceTouristicProfileUpSetComponent } from './components/maintenance-touristic-profile-up-set/maintenance-touristic-profile-up-set.component';
 import { MaintenanceTouristicProfileListComponent } from './components/maintenance-touristic-profile-list/maintenance-touristic-profile-list.component';
 import { MaintenanceEditorsComponent } from './components/maintenance-editors/maintenance-editors.component';
+import { AuthGuard } from './guards/auth.guard';
+import { EditorGuardGuard } from './guards/editor-guard.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
-  {path: 'dashboard', component: DashboardComponent, children: [
-    {path: 'home', component: HomeComponent},
-    {path: 'about-us', component: AboutUsComponent},
-    {path: 'contact-us', component: ContactUsComponent},
-    {path: 'site/:id', component: SiteInformationComponent},
-    {path: 'services', component: ServicesComponent},
-    {path: 'user-profile/:id', component: UserProfileComponent},
-    {path: 'mainte-news-list', component: MaintenanceNewsListComponent},
-    {path: 'mainte-news-up/:id', component: MaintenanceNewsUpsetComponent},
-    {path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent},
-    {path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent},
-    {path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent},
-    {path: 'mainte-editor', component: MaintenanceEditorsComponent},
-    {path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent},
-    {path: '', pathMatch: 'full', redirectTo: 'home'}
+  {
+    path: 'dashboard', component: DashboardComponent, children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'contact-us', component: ContactUsComponent },
+      { path: 'site/:id', component: SiteInformationComponent },
+      { path: 'services', component: ServicesComponent },
+      { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
+      { path: 'mainte-news-list', component: MaintenanceNewsListComponent, canActivate: [AuthGuard, AdminGuard] },
+      { path: 'mainte-news-up/:id', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard, AdminGuard] },
+      { path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard, AdminGuard] },
+      { path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent, canActivate: [AuthGuard, EditorGuardGuard] },
+      { path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, EditorGuardGuard] },
+      { path: 'mainte-editor', component: MaintenanceEditorsComponent },
+      { path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, EditorGuardGuard] },
+      { path: '', pathMatch: 'full', redirectTo: 'home' }
 
-  ]},
-  {path: 'login', component: LoginComponent},
-  {path: '**', pathMatch: 'full', redirectTo: 'dashboard/home'}
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: '**', pathMatch: 'full', redirectTo: 'dashboard/home' }
 ];
 
 @NgModule({

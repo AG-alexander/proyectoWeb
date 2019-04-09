@@ -52,6 +52,17 @@ export class SiteService {
     return null;
   }
 
+  isEditorOfSite(id: number): boolean {
+    if (id) {
+      let list: TouristicCentre[];
+      let aux: number;
+      list = this._dataStorage.getObjectValue(constant.SITES);
+      aux = list.findIndex(item => item.idTouristicCentre == id);
+      return aux > -1;
+    }
+    return false;
+  }
+
   getSites(): TouristicCentre [] {
     return this._dataStorage.getObjectValue(constant.SITES) as TouristicCentre [];
   }

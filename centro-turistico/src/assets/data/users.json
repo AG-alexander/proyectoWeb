@@ -7,7 +7,7 @@
         "descripcion": "me gusta beber",
         "iconno": "../../../assets/images/user-icon/1803065.png",
         "date": "1968-11-16T00:00:00",
-        "tipo": "admin"
+        "rol": "admin"
     },
     {
         "idUser": 2,
@@ -17,6 +17,26 @@
         "descripcion": "Correr, escalar, nadar",
         "iconno": "../../../assets/images/user-icon/5436359.png",
         "date": "1968-11-16T00:00:00",
-        "tipo": "normal"
+        "rol": "dueño"
+    },
+    {
+        "idUser": 3,
+        "userName": "timeMan",
+        "password": "reloj",
+        "email": "poppush@gmail.com",
+        "descripcion": "Correr, escalar, nadar",
+        "iconno": "../../../assets/images/user-icon/5436359.png",
+        "date": "1968-11-16T00:00:00",
+        "rol": "basico"
+    },
+    {
+        "idUser": 4,
+        "userName": "ladrillo",
+        "password": "amarillo",
+        "email": "poppush@gmail.com",
+        "descripcion": "Correr, escalar, nadar",
+        "iconno": "../../../assets/images/user-icon/5436359.png",
+        "date": "1968-11-16T00:00:00",
+        "rol": "basico"
     }
 ]

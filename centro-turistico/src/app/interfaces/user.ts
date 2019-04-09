@@ -1,3 +1,5 @@
+import { Rol } from './rol';
+
 export interface User {
     idUser: number; // identificador
     userName: string; // nombre
@@ -6,7 +8,7 @@ export interface User {
     descripcion: string; // descripcion
     iconno: string; // icono
     string: Date; // fecha nacimineto
-    tipo: string; // tipo
+    rol: string; // rol
 }
 
 export interface EditorxSitio {
