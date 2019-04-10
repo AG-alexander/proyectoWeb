@@ -1,11 +1,13 @@
 .container-all {
     background-color: #ffffff;
-    padding-left: 15%;
-    padding-right: 15%;
+    
 }
 .site-container {
     background-color: #ececec;
     color: #000000;
+    padding-left: 15%;
+    padding-right: 15%;
+    height: 100%;
 }
 
 .wrapper {
@@ -50,10 +52,9 @@ img {
     height: 200px;
     width: 100%;
 }
-.containered {
-    position: relative;
-    text-align: center;
-    color: white;
+.top-head {
+    background-color: black;
+    height: 50px;
   }
 .centered {
     position: absolute;
@@ -82,4 +83,12 @@ img {
 }
 .max-size {
     max-height: 200px;
+}
+
+.site {
+    background-color: #cecece
+}
+.review-container {
+    max-height: 500px;
+    overflow-y: auto;
 }

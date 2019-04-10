@@ -31,7 +31,7 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
     this.formGroup = this.FB.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
-      image: ['']
+      image: ['', Validators.required]
     });
   }
 
@@ -41,7 +41,7 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
     this.formGroup = this.FB.group({
       title: [this.newsLocalStorage.title, Validators.required],
       content: [this.newsLocalStorage.content, Validators.required],
-      image: ['']
+      image: [this.imageSrc, Validators.required]
     });
   }
   initPage() {

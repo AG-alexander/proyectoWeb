@@ -38,6 +38,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
 
   loadForm() {
     this.tourLoscalStorage = this._siteService.getSiteById(this.id);
+    this.img_list = this.tourLoscalStorage.photos;
     this.formGroup = this.FB.group({
       name: [this.tourLoscalStorage.name, Validators.required],
       description: [this.tourLoscalStorage.description, Validators.required],
@@ -58,6 +59,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
       tourProfile.idTouristicCentre = this.tourLoscalStorage.idTouristicCentre;
     } else {
       tourProfile.idTouristicCentre = 0;
+      tourProfile.idEditor = 0;
     }
     tourProfile.photos = this.img_list;
     this._siteService.saveTourProfile(tourProfile);

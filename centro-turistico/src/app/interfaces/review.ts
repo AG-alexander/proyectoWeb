@@ -5,4 +5,7 @@ export interface Review {
     date: Date;
     idUser: number;
     idSitio: number;
+    img: string;
+    dunnoReview: string;
+    userName: string;
 }
