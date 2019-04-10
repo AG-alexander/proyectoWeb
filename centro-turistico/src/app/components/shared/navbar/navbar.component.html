@@ -17,10 +17,10 @@
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['services']">Servicios</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="_permission.admin">
         <a class="nav-link" [routerLink]="['mainte-news-list']">Mantenimiento Noticias</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="_permission.admin.admin || _permission.admin.duenno">
         <a class="nav-link" [routerLink]="['mainte-tour-list']">Mantenimiento Perfiles Turisticos</a>
       </li>
     </ul>

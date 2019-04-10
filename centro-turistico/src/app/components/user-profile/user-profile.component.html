@@ -5,15 +5,21 @@
         </div>
         <div class="col-md-10">
             <h1>{{user.userName}}</h1>
-            {{user.descripcion}}
+            <label for="desciption">Descripción</label>
+            <p>{{user.descripcion}}</p>
+            <label for="email">Correo</label>
+            <p>{{user.email}}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div>
-                <accordion>
-                    <accordion-group heading="Sitios seguidos">
-                        This content is straight in the template.
+                <h2>Sitios seguidos</h2>
+                <accordion *ngFor="let data of userInfo">
+                    <accordion-group [heading]="data.nameSite">
+                            <app-site-rating [rate]="data.ratingSite"></app-site-rating>
+                            <h3>Comentarios en el sitio</h3>
+                            <p *ngFor="let re of data.reviews_list">{{re.description}}</p>
                     </accordion-group>
                 </accordion>
             </div>
