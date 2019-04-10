@@ -3,7 +3,7 @@
     <table class="table">
         <tbody>
             <tr *ngFor="let follower of followers">
-                <td> {{follower.img}} {{follower.user}}</td>
+                <td> <img [src]="follower.img" alt="" class="img-size"> {{follower.user}}</td>
             </tr>
         </tbody>
     </table>

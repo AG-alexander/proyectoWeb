@@ -14,6 +14,7 @@ export class FollowerService {
     let users: User[] = this._dataStorage.getObjectValue(constant.USERS);
     followers.forEach( (item)=> {
       item.user = users.find(us => us.idUser == item.userId).userName;
+      item.img = users.find(us => us.idUser == item.userId).iconno;
     });
     return followers.filter(item => item.siteId == idSite);
   }

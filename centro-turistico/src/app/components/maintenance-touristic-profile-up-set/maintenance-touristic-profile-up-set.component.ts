@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TouristicCentre } from 'src/app/interfaces/index';
-import { SiteService } from 'src/app/services/index';
+import { SiteService, AlertService} from 'src/app/services/index';
 
 @Component({
   selector: 'app-maintenance-touristic-profile-up-set',
@@ -19,7 +19,12 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   tourLoscalStorage: TouristicCentre;
   schedules_list: string[];
 
-  constructor(private FB: FormBuilder, private _siteService: SiteService, private _activated: ActivatedRoute) { }
+  constructor(
+    private FB: FormBuilder, 
+    private _siteService: SiteService, 
+    private _activated: ActivatedRoute,
+    private _router: Router,
+    private _alertService: AlertService) { }
 
   onFileSelected(event: any) {
     var reader = new FileReader();
@@ -30,6 +35,8 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
     }
   }
   initForm() {
+    this.img_list = [];
+    this.schedules_list = [];
     this.formGroup = this.FB.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -46,7 +53,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
       name: [this.tourLoscalStorage.name, Validators.required],
       description: [this.tourLoscalStorage.description, Validators.required],
       schedules: [''],
-      video: ['', Validators.required],
+      video: [this.tourLoscalStorage.video, Validators.required],
     });
   }
   initPage() {
@@ -68,6 +75,8 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
     tourProfile.schedules = this.schedules_list;
     tourProfile.photos = this.img_list;
     this._siteService.saveTourProfile(tourProfile);
+    this._router.navigate(['dashboard/mainte-tour-list']);
+    this._alertService.successInfoAlert("Perfil Turistico guardado correctamente");
   }
 
   addSchedule() {
@@ -81,9 +90,16 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
 
   deleteSchedule(index: number) {
     this.schedules_list.splice(index, 1);
+    this._alertService.successInfoAlert("Perfil Turistico eliminado correctamente");
   }
   get FG() {
     return this.formGroup.controls;
+  }
+
+  get Validated() {
+    return this.formGroup.valid 
+    && this.schedules_list.length > 0 
+    && this.img_list.length > 0;
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TouristicCentre, User } from 'src/app/interfaces/index';
-import { SiteService, UserService } from 'src/app/services/index';
+import { SiteService, UserService, AlertService } from 'src/app/services/index';
 
 @Component({
   selector: 'app-maintenance-editors',
@@ -12,7 +12,8 @@ export class MaintenanceEditorsComponent implements OnInit {
   editor_list: User[];
   constructor(
     private _siteService: SiteService,
-    private _userService: UserService) { }
+    private _userService: UserService,
+    private _alertService: AlertService) { }
 
   getSites() {
     this.tour_list = this._siteService.getSites();
@@ -24,6 +25,7 @@ export class MaintenanceEditorsComponent implements OnInit {
 
   saveChange() {
     this._siteService.saveTourProfiles(this.tour_list);
+    this._alertService.successInfoAlert("Cambios Guardados Correctamente");
   }
 
   ngOnInit() {
