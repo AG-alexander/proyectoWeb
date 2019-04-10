@@ -94,7 +94,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
 
   deleteSchedule(index: number) {
     this.schedules_list.splice(index, 1);
-    this._alertService.successInfoAlert("Perfil Turistico eliminado correctamente");
+    //this._alertService.successInfoAlert("Perfil Turistico eliminado correctamente");
   }
   get FG() {
     return this.formGroup.controls;
