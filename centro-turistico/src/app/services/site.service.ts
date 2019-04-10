@@ -46,7 +46,7 @@ export class SiteService {
       let list: TouristicCentre[];
       let aux: TouristicCentre[];
       list = this._dataStorage.getObjectValue(constant.SITES);
-      aux = list.filter(item => item.idTouristicCentre == id);
+      aux = list.filter(item => item.idEditor == id);
       return aux;
     }
     return null;
