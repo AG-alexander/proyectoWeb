@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AlertService} from './../../services/index'
 
 @Component({
   selector: 'app-contact-us',
@@ -9,12 +10,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ContactUsComponent implements OnInit {
 
   formGroup: FormGroup;
-  constructor(private Fb: FormBuilder) { }
+  constructor(private Fb: FormBuilder, private alert: AlertService) { }
 
   initForm(){
     this.formGroup = this.Fb.group({
       nombre: ['',[Validators.required]],
-      correo: ['',[Validators.required]],
+      correo: ['',[Validators.required, Validators.minLength(2), Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       asunto: ['',[Validators.required]] 
     });
   }
@@ -25,6 +26,11 @@ export class ContactUsComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+  }
+
+  sendEmail() {
+    this.formGroup.reset();
+    this.alert.successInfoAlert("Gracias, informacion enviada correctamente... pronto le estaremos contestando");
   }
 
 }

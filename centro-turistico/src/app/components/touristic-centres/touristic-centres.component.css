@@ -38,3 +38,9 @@ p {
         border-right: solid 1px red;
     }
 }
+
+.icons {
+    font-size: 27px;
+    bottom: 0;
+    position: relative;
+}
