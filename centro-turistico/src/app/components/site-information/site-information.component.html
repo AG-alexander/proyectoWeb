@@ -6,7 +6,7 @@
             </div>
             <div class=" col-md-8 col-sm-8 col-lg-8">
                 <div class="rating">
-                    <app-site-rating [rate]="maxStars"></app-site-rating>
+                    <app-site-rating [rate]="maxStars" [readOnly]="true"></app-site-rating>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
                     <button class="btn btn-primary btn-block" [ngClass]="{'btn-success': isFollower}"
                         (click)="addFollower()" popover="{{Message}}"
                         triggers="mouseenter:mouseleave" *ngIf="_permission.basico">{{MessageFollower}}</button>
-
+                        <!-- <app-site-rating [rate]="maxStars"></app-site-rating> -->
                     <app-followers [followers]="followers"></app-followers>
                     <div id="horarios">
                         <h2>Horarios</h2>

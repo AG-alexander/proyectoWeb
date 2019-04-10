@@ -17,7 +17,7 @@
                 <h2>Sitios seguidos</h2>
                 <accordion *ngFor="let data of userInfo">
                     <accordion-group [heading]="data.nameSite">
-                            <app-site-rating [rate]="data.ratingSite"></app-site-rating>
+                            <app-site-rating [rate]="data.ratingSite" [readOnly]="true"></app-site-rating>
                             <h3>Comentarios en el sitio</h3>
                             <p *ngFor="let re of data.reviews_list">{{re.description}}</p>
                     </accordion-group>
