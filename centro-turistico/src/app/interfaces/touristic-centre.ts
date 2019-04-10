@@ -44,4 +44,5 @@ export interface reviewsModel extends reviews {
 export interface followerModel extends followerXSite
 {
     user: string;
+    img:string;
 }

@@ -1,24 +1,29 @@
 <div class="col-sm-12 col-md-12 col-lg-12 ">
-  <div class="review-container-all">
-    <div class="review-container">
-      <div class="user-review">
-        <div class="col-sm-4 col-md-4 col-lg-4">
-          <div class="row">
-            <div class="col-2">
-              <img [src]="Review.img" alt="" class="img-size">
+    <div class="review-container-all">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="logo">
+                    <img [src]="Review.img" alt="" class="img-size">
+                </div>
             </div>
-            <div class="col-2">
-              <p>{{Review.userName}}</p>
+            <div class="col-sm-3">
+                <div class="name">
+                    <p>{{Review.userName}}</p>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-sm-8 col-md-8 col-lg-8">
-          <p>{{Review.description}}</p>
+        <div class="review-container">
+
+            <div class="user-review">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                </div>
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                    <p>{{Review.description}}</p>
+                </div>
+            </div>
+            <div class="duenno-review">
+                <p></p>
+            </div>
         </div>
-      </div>
-      <div class="duenno-review">
-        <p></p>
-      </div>
     </div>
-  </div>
 </div>

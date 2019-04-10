@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { SiteService, FollowerService, ReviewsService, RatingService } from '../../services/index';
+import { SiteService, FollowerService, ReviewsService, RatingService, AlertService } from '../../services/index';
 import { TouristicCentre, reviewsModel, followerModel, Review } from '../../interfaces/index';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -29,8 +29,12 @@ export class SiteInformationComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private modalService: BsModalService,
     private _permission: PermissionService,
-    private FB: FormBuilder
-    ) {}
+    private FB: FormBuilder,
+    private alert: AlertService
+    ) {
+
+      console.log(0);
+    }
 
     getSite() {
       this.id = +this._activatedRoute.snapshot.params['id'];
@@ -68,6 +72,7 @@ export class SiteInformationComponent implements OnInit {
         this.reviews = this._reviewsService.getReviewsBySite(this.id);
       }
       this.formGroupModal.reset();
+      this.alert.successInfoAlert("Reseña creada con exito");
       this.modalRef.hide();
       this.modalRef = null;
     }

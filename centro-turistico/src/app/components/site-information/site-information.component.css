@@ -104,6 +104,27 @@ img {
     float: right;
 }
 
+.btnResena {
+    float: right;
+    font-size: 25px;
+}
+
 .descriptionContiner {
     min-height: 200px;
+}
+
+.img-size {
+    width: 25px;
+    height: 25px;
+}
+
+.photoImg {
+    width: 80px;
+    height: 60px;
+}
+
+.menu ul li {
+    float: left;
+    list-style-type: none;
+    padding: 10px;
 }
