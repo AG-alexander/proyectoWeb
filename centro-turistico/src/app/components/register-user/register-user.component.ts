@@ -41,6 +41,7 @@ export class RegisterUserComponent implements OnInit {
     let user: User;
     user = this.formGroup.value as User;
     user.rol = 'basico';
+    user.iconno = this.imgUser;
     this._userService.addUser(user);
     this._router.navigate(['login']);
     this._alertService.successInfoAlert("Usuario creado correramente");

@@ -24,11 +24,17 @@
           </div>
         </div>
         <div class="form-group">
-          <button class="btn btn-outline-success btn-lg form-control form-control-sm" [disabled]="fgLogin.invalid"
+          <button class="btn btn-outline-success btn-lg form-control" [disabled]="fgLogin.invalid"
             type="submit">
             <span>Ingresar</span>
           </button>
         </div>
+        <div class="form-group">
+            <button class="btn btn-outline-success btn-lg form-control" (click)="sing()"
+              type="button">
+              <span>Resgistrate</span>
+            </button>
+          </div>
       </form>
       <div *ngIf="flagInvalidUser" class="form-control-feedback text-danger">
         * El usuario no fue encontrado, por favor, vuelca a intentarlo
