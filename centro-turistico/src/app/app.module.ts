@@ -35,6 +35,7 @@ import { MaintenanceTouristicProfileListComponent } from './components/maintenan
 import { MaintenanceTouristicProfileUpSetComponent } from './components/maintenance-touristic-profile-up-set/maintenance-touristic-profile-up-set.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MaintenanceEditorsComponent } from './components/maintenance-editors/maintenance-editors.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { MaintenanceEditorsComponent } from './components/maintenance-editors/ma
     ServicesComponent,
     MaintenanceTouristicProfileListComponent,
     MaintenanceTouristicProfileUpSetComponent,
-    MaintenanceEditorsComponent
+    MaintenanceEditorsComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,

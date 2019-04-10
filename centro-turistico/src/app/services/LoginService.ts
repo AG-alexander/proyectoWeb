@@ -10,6 +10,7 @@ export class LoginService {
   users: User[] = user;
   constructor(private _dataStorage: DataStorageService) { }
   getUser(userName: string, password: string): boolean {
+    this.users = this._dataStorage.getObjectValue(constant.USERS);
     if (this.users) {
       for (let user of this.users) {
         if (user.password === password && user.userName === userName) {

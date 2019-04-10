@@ -52,12 +52,12 @@ export class SiteService {
     return null;
   }
 
-  isEditorOfSite(id: number): boolean {
+  isEditorOfSite(id: number, idEditor: number): boolean {
     if (id) {
       let list: TouristicCentre[];
       let aux: number;
       list = this._dataStorage.getObjectValue(constant.SITES);
-      aux = list.findIndex(item => item.idTouristicCentre == id);
+      aux = list.findIndex(item => item.idTouristicCentre == id && item.idEditor == idEditor);
       return aux > -1;
     }
     return false;

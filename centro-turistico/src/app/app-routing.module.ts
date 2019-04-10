@@ -16,6 +16,7 @@ import { MaintenanceEditorsComponent } from './components/maintenance-editors/ma
 import { AuthGuard } from './guards/auth.guard';
 import { EditorGuardGuard } from './guards/editor-guard.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterUserComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'dashboard/home' }
 ];
 

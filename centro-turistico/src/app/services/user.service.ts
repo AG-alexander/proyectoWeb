@@ -19,4 +19,10 @@ export class UserService {
     return this._dataStorage.getObjectValue(constant.USERS);
   }
 
+  addUser(user: User) {
+    let users = this._dataStorage.getObjectValue(constant.USERS) as User[];
+    users.push(user);
+    this._dataStorage.setObjectValue(constant.USERS, users);
+  }
+
 }
