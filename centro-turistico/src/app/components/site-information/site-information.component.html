@@ -37,7 +37,7 @@
             </div>
            <div class="review-container">
                <h2>Reseñas</h2>
-               <button class="btn btn-primary" (click)="openModalReview(Reviews)">Agregar Reseña</button>
+               <button class="btn btn-primary" (click)="openModalReview(Reviews)" *ngIf="_permission.basico">Agregar Reseña</button>
                <app-reviews [Review]="rev" *ngFor="let rev of reviews"></app-reviews>
            </div>
         </div>
@@ -57,6 +57,17 @@
             <button type="button " class="close pull-right " aria-label="Close " (click)="modalRef.hide() ">
                 <span aria-hidden="true ">&times;</span>
             </button>
-            <img class="img-modal" src="{{img}} " alt="">
+            <form [formGroup]="formGroupModal">
+                <div class="form-group">
+                    <label for="description">Escribe un comentario</label>
+                    <input type="text" class="form-control form-control-sm" formControlName="description" id="description" placeholder="Escriba el contenido" [ngClass]="{'is-invalid': FG.description.errors && FG.description.touched}">
+                    <div *ngIf="FG.description.errors?.required" class="invalid-feedback">
+                        <div class="form-control-feedback text-danger" *ngIf="FG.description.errors?.required">
+                            * El contenido es requerido
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="confirm()" >Yes</button>
+            </form>
         </div>
     </ng-template>
