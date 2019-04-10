@@ -8,6 +8,7 @@ import { EmbedVideoService } from 'ngx-embed-video';
 export class VideoPlayerComponent implements OnInit {
   @Input() urlYoutube: string;
   youtubeUrl = '2TLB5TdSwBA';
+  youtubePath = 'https://www.youtube.com/embed/';
   iframe_html: any;
   constructor(private videoService: EmbedVideoService) { }
 

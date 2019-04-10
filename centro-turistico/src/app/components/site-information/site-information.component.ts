@@ -74,7 +74,7 @@ export class SiteInformationComponent implements OnInit {
       this.formGroupModal.reset();
       this.alert.successInfoAlert("Reseña creada con exito");
       this.modalRef.hide();
-
+      this.modalRef = null;
     }
   }
 

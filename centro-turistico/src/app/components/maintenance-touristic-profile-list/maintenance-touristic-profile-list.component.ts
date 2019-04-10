@@ -31,6 +31,12 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
   updateTourProfile(id: number) {
     this._router.navigate(['dashboard/mainte-tour-up', id]);
   }
+
+  deleteTourProfile(id: number) {
+    this._siteService.deleteTourProfile(id);
+    this.getSites();
+  }
+
   ngOnInit() {
     this.user = this._userService.getUser();
     this.getSites();

@@ -37,4 +37,11 @@ export class NewsService {
     this._dataStorage.setObjectValue(constant.NEWS, news_list);
     this._dataStorage.setObjectValue(constant.IDNEWS, last_id + 1);
   }
+  deleteNew(id: number): boolean {
+    let news_list = this._dataStorage.getObjectValue(constant.NEWS) as News[];
+    let indix = news_list.findIndex(item => item.idNews == id);
+    news_list.splice(indix, 1);
+    this._dataStorage.setObjectValue(constant.NEWS, news_list);
+    return true;
+  }
 }
