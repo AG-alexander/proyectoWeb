@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router  } from '@angular/router';
 import { News } from 'src/app/interfaces/index';
-import { NewsService } from 'src/app/services';
+import { NewsService, AlertService } from 'src/app/services/index';
 
 @Component({
   selector: 'app-maintenance-news-upset',
@@ -16,7 +16,10 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
   imagePath: string;
   formGroup: FormGroup
   newsLocalStorage: News;
-  constructor(private FB: FormBuilder, private _activated: ActivatedRoute, private _newsService: NewsService) { }
+  constructor(private FB: FormBuilder, private _activated: ActivatedRoute, private _newsService: NewsService,
+    private alert: AlertService, private router: Router ) {
+    
+   }
   
   onFileSelected(event: any) {
     var reader = new FileReader();
@@ -41,7 +44,7 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
     this.formGroup = this.FB.group({
       title: [this.newsLocalStorage.title, Validators.required],
       content: [this.newsLocalStorage.content, Validators.required],
-      image: [this.imageSrc, Validators.required]
+      image: ['', Validators.required]
     });
   }
   initPage() {
@@ -62,6 +65,9 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
     }
     news.image = this.imageSrc;
     this._newsService.saveNew(news);
+    this.alert.successInfoAlert('Creado el sitio correctamente');
+    this.router.navigate(['dashboard/mainte-news-list']);
+
   }
   get FG() {
     return this.formGroup.controls;
@@ -72,6 +78,7 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
   }
   ngOnInit() {
     this.initPage();
+    console.log(0);
   }
 
 }

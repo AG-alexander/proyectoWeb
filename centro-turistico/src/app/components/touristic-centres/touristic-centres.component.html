@@ -1,7 +1,17 @@
 <div class="container-fluid">
-    <div class="col-md-4 input-group mb-3 mt-3">
-        <input type="text" [(ngModel)]="selected" [typeahead]="typebyhead" class="form-control" placeholder="Nombre del centro turístico" aria-label="Nombre o profesor" aria-describedby="button-addon2" (change)="searchSites($event)">
+    <div class="row">
+        <div class="col-md-4 input-group mb-3 mt-3">
+            <input type="text" [(ngModel)]="selected" class="form-control" placeholder="Nombre del centro turístico" aria-label="Nombre o profesor" aria-describedby="button-addon2">
+        </div>
+        <div class="col-md-4 input-group mb-3 mt-3">
+            <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="searchSites()" placement="auto" popover="Buscar" triggers="mouseenter:mouseleave">
+                <i class="fa fa-search icons"></i>
+            </button>
+        </div>
     </div>
+
+
+
     <div class="row no-gutters position-relative" *ngFor="let site of showedList">
         <div class="col-md-2 mb-md-0 p-md-2 img">
             <img src="{{site.photos[0]}}" class="w-100 img">

@@ -20,11 +20,10 @@ export class TouristicCentresComponent implements OnInit {
   constructor(private _site: SiteService,
     private _thm: TypeaheadModule) {
     this.value = "";
-    console.log(0);
    }
 
-  searchSites(valor: string) {
-    this._site.getSite(valor);
+  searchSites() {
+    this._site.getSite(this.selected);
     this.showedList = this._site.showedSites;
     
   }
@@ -37,10 +36,10 @@ export class TouristicCentresComponent implements OnInit {
   ngOnInit() {
     this._site.getSite(this.value);
     this.showedList = this._site.showedSites.slice(0,3);
-    this.showedList.forEach( x =>{
+    // this.showedList.forEach( x =>{
       
-      this.typebyhead.push(x.name);
-      })
+    //   this.typebyhead.push(x.name);
+    //   })
     //this._site._dataStorage.setObjectValue('sites',this._site.sites);
     //console.log(this._site.getObjectValue('sites'));
   }
