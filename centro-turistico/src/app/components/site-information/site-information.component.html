@@ -50,14 +50,12 @@
                     <app-video-player [urlYoutube]="touristicCentre.video "></app-video-player>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
+
            <div class="review-container">
                <h2>Reseñas</h2>
                <button class="btn btn-primary" (click)="openModalReview(Reviews)" *ngIf="_permission.basico">Agregar Reseña</button>
                <app-reviews [Review]="rev" *ngFor="let rev of reviews"></app-reviews>
            </div>
->>>>>>> 98be3b0b1c1614d0de8abf581ac08fe01ce25f2d
         </div>
     </div>
 </div>
@@ -75,11 +73,11 @@
         <button type="button " class="close pull-right " aria-label="Close " (click)="modalRef.hide() ">
                 <span aria-hidden="true ">&times;</span>
             </button>
-<<<<<<< HEAD
+
         <img class="img-modal" src="{{img}} " alt="">
     </div>
 </ng-template>
-=======
+
             <form [formGroup]="formGroupModal">
                 <div class="form-group">
                     <label for="description">Escribe un comentario</label>
@@ -94,4 +92,8 @@
             </form>
         </div>
     </ng-template>
->>>>>>> 98be3b0b1c1614d0de8abf581ac08fe01ce25f2d
+
+        <img class="img-modal" src="{{img}} " alt="">
+    </div>
+</ng-template>
+
