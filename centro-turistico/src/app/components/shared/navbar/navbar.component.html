@@ -27,8 +27,13 @@
   </div>
   <div class="navbar-login">
     <div *ngIf="user">
-      <img [src]="user.iconno" alt="" class="img-user-loged navbar-img-login">  
+      <img [src]="user.iconno" alt="" class="img-user-loged navbar-img-login">
       <a [routerLink]="['user-profile', user.idUser]">{{user.userName}}</a>
+      <div *ngIf="user">
+        <li>
+          <button class="btn btn-primary" (click)="logout()">Log-out</button>
+        </li>
+      </div>
     </div>
     <div *ngIf="!(user)">
       <li>

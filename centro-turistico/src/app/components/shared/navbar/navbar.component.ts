@@ -8,6 +8,8 @@ import SITES from 'src/assets/data/touristic-centres.json';
 import USERS from 'src/assets/data/users.json';
 import FOLLOWERS from 'src/assets/data/followers.json';
 import { User } from 'src/app/interfaces/index';
+import { PermissionService } from 'src/app/services/permission.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -17,7 +19,10 @@ export class NavbarComponent implements OnInit {
 
   user: User;
 
-  constructor(private _dataStorage: DataStorageService) { }
+  constructor(
+    private _dataStorage: DataStorageService,
+    private _permission: PermissionService,
+    private _router: Router) { }
   click(){
     //this._dataStorage.setObjectValue(this.constant.NEWS, NEWS);
     this._dataStorage.setObjectValue(constant.RATINGS, RATINGS);
@@ -31,8 +36,15 @@ export class NavbarComponent implements OnInit {
     this._dataStorage.setObjectValue(constant.IDTOUR, constant.IDTOURNUM);
     this._dataStorage.setObjectValue(constant.IDUSER, constant.IDUSERNUM);
   }
+
+  logout(){
+    this._dataStorage.setObjectValue(constant.USER, null);
+    this._router.navigate(['../login']);
+  }
   ngOnInit() {
     this.user = this._dataStorage.getObjectValue(constant.USER) as User;
+    this._permission.setPermission();
+    
   }
 
 }

@@ -11,13 +11,13 @@ export class PermissionService {
   admin: boolean;
 
   constructor(private _user: UserService) {
-    this.admin = false;
-    this.duenno = false;
-    this.basico = false;
     this.setPermission();
   }
 
   setPermission() {
+    this.admin = false;
+    this.duenno = false;
+    this.basico = false;
     let user = this._user.getUser();
     if (user) {
       switch (user.rol) {
