@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SiteRatingComponent implements OnInit {
   @Input() rate;
-  max: number = 10;
+  max: number = 5;
   percent: number;
   constructor() { }
 
