@@ -1,0 +1,15 @@
+.navbar-login {
+    float: right;
+}
+.navbar-img-login {
+    float: left;
+    margin-right: 2px;
+}
+.img-user-loged {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+}
+p {
+    color: aliceblue;
+}

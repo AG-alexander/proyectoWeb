@@ -7,12 +7,15 @@ import REVIEWS from 'src/assets/data/reviews.json';
 import SITES from 'src/assets/data/touristic-centres.json';
 import USERS from 'src/assets/data/users.json';
 import FOLLOWERS from 'src/assets/data/followers.json';
+import { User } from 'src/app/interfaces/index';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  user: User;
 
   constructor(private _dataStorage: DataStorageService) { }
   click(){
@@ -28,6 +31,7 @@ export class NavbarComponent implements OnInit {
     this._dataStorage.setObjectValue(constant.IDTOUR, constant.IDTOURNUM);
   }
   ngOnInit() {
+    this.user = this._dataStorage.getObjectValue(constant.USER) as User;
   }
 
 }
