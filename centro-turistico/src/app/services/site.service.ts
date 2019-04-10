@@ -90,4 +90,12 @@ export class SiteService {
   saveTourProfiles(tour_list: TouristicCentre[]) {
     this._dataStorage.setObjectValue(constant.SITES, tour_list);
   }
+
+  deleteTourProfile(id: number) {
+    let tour_list = this._dataStorage.getObjectValue(constant.SITES) as TouristicCentre[];
+    let indix = tour_list.findIndex(item => item.idTouristicCentre == id);
+    tour_list.splice(indix, 1);
+    this._dataStorage.setObjectValue(constant.SITES, tour_list);
+    return true;
+  }
 }
