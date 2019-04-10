@@ -24,14 +24,12 @@ export class EditorGuardGuard implements  CanActivate{
     }
   
   canActivate(){
-    if (!this.user) {
-      return false;
+    if ((this.user.rol == "dueño" || this.user.rol == "admin")) {
+      //this._router.navigate([this._location.path]);
+      return true;
     }
-    if (!(this.user.rol == "dueño")) {
-      this._router.navigate([this._location.path]);
-      return false;
-    }
-    return true;
+    return false;
   }
+    
   
 }

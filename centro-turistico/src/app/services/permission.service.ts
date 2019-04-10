@@ -7,12 +7,12 @@ import { UserService } from './user.service';
 export class PermissionService {
 
   basico: boolean;
-  dueño: boolean;
+  duenno: boolean;
   admin: boolean;
 
   constructor(private _user: UserService) {
     this.admin = false;
-    this.dueño = false;
+    this.duenno = false;
     this.basico = false;
     this.setPermission();
   }
@@ -21,9 +21,9 @@ export class PermissionService {
     let user = this._user.getUser();
     if (user) {
       switch (user.rol) {
-        case "admin": this.admin = true; this.dueño = true; this.basico = true;
+        case "admin": this.admin = true; this.basico = true;
           break;
-        case "dueño": this.dueño = true; this.basico = true;
+        case "duenno": this.duenno = true; this.basico = true;
           break;
         case "basico": this.basico = true;
           break;

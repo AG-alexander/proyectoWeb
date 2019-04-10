@@ -14,7 +14,7 @@
       </button>
     </th>
   </thead>
-  <tbody>
+  <tbody *ngIf="_permission.duenno">
     <tr *ngFor="let tour of tour_list">
       <td width="88%">
         {{tour.name}}
