@@ -1,19 +1,31 @@
 .review-container-all {
-    border-top-right-radius: 25px;
-    border-top-left-radius: 25px;
+    /* border-top-right-radius: 25px;
+    border-top-left-radius: 25px;*/
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: #343a40;
-    padding-top: 10px;
+    /* padding-top: 10px; */
 }
 
 .review-container {
-    margin-top: 25px;;
+    /* margin-top: 25px; */
+    min-height: 50px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: #fefefe;
 }
+
 .img-size {
     width: 25px;
     height: 25px;
+}
+
+.logo {
+    margin-top: 5px;
+    float: right;
+}
+
+.name {
+    margin-top: 9px;
+    color: #fefefe;
 }
