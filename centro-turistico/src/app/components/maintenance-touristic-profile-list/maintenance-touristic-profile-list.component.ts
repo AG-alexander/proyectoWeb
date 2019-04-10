@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SiteService, UserService } from 'src/app/services/index';
 import { TouristicCentre, User } from 'src/app/interfaces/index';
 import { Router } from '@angular/router';
+import { PermissionService } from 'src/app/services/permission.service';
 
 @Component({
   selector: 'app-maintenance-touristic-profile-list',
@@ -15,7 +16,8 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
   constructor(
     private _siteService: SiteService,
     private _userService: UserService,
-    private _router: Router
+    private _router: Router,
+    private _permission: PermissionService
     ) { }
 
   getSites() {
