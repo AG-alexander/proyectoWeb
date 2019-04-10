@@ -30,6 +30,8 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
     }
   }
   initForm() {
+    this.img_list = [];
+    this.schedules_list = [];
     this.formGroup = this.FB.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -46,7 +48,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
       name: [this.tourLoscalStorage.name, Validators.required],
       description: [this.tourLoscalStorage.description, Validators.required],
       schedules: [''],
-      video: ['', Validators.required],
+      video: [this.tourLoscalStorage.video, Validators.required],
     });
   }
   initPage() {
@@ -84,6 +86,12 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   }
   get FG() {
     return this.formGroup.controls;
+  }
+
+  get Validated() {
+    return this.formGroup.valid 
+    && this.schedules_list.length > 0 
+    && this.img_list.length > 0;
   }
 
   ngOnInit() {

@@ -27,8 +27,7 @@
           <div>
             <label for="schedules">Horarios</label>
             <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btn-add-schedules"
-              (click)="addSchedule()" placement="auto" popover="Eliminar Noticias"
-              triggers="mouseenter:mouseleave">
+              (click)="addSchedule()" placement="auto" popover="Eliminar Noticias" triggers="mouseenter:mouseleave">
               <i class="fa fa-plus"></i>
             </button>
           </div>
@@ -66,7 +65,7 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary" (click)="saveTourProfile()">Guardar</button>
+        <button class="btn btn-primary" (click)="saveTourProfile()" [disabled]="!(Validated)">Guardar</button>
       </form>
     </div>
     <div class="col-md-4">
