@@ -14,6 +14,7 @@ export interface TouristicCentre {
     region: string; // region
     direccion: string; // direccion
     phone: string; // telefono
+    idEditor: number;
 }
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { reviewsModel } from 'src/app/interfaces/index';
+import { reviewsModel, Review } from 'src/app/interfaces/index';
 
 @Component({
   selector: 'app-reviews',
@@ -8,12 +8,10 @@ import { reviewsModel } from 'src/app/interfaces/index';
 })
 export class ReviewsComponent implements OnInit {
 
-  @Input() reviews: reviewsModel[];
-  flagMessage: boolean;
+  @Input() Review: Review;
   constructor() { }
 
   ngOnInit() {
-    this.flagMessage = this.reviews == undefined? true : false;
   }
 
 }

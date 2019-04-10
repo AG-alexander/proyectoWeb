@@ -15,4 +15,8 @@ export class UserService {
     return this._dataStorage.getObjectValue(constant.USER);
   }
 
+  getEditor(): User[] {
+    return this._dataStorage.getObjectValue(constant.USERS);
+  }
+
 }

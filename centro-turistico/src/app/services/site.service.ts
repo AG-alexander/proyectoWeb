@@ -9,20 +9,20 @@ import { constant } from 'src/app/constant-data/constant';
 })
 export class SiteService {
 
-  sites: TouristicCentre[] = sites;
   showedSites: TouristicCentre[];
   constructor(public _dataStorage: DataStorageService) {
     this.showedSites = [];
    }
 
   getSite(name: string) {
+    let temp_list = this._dataStorage.getObjectValue(constant.SITES) as TouristicCentre [];
     if (!name) {
-      this.showedSites = Object.assign([],this.sites);
+      this.showedSites = temp_list;
     }
     else {
       name = name.toLowerCase();
       this.showedSites = [];
-      this.sites.forEach((site) => {
+      temp_list.forEach((site) => {
         if (site.name.toLowerCase().includes(name)) {
           this.showedSites.push(site);
         }
@@ -39,6 +39,28 @@ export class SiteService {
       return aux;
     }
     return null;
+  }
+
+  getSiteByEditor(id: number): TouristicCentre[] {
+    if (id) {
+      let list: TouristicCentre[];
+      let aux: TouristicCentre[];
+      list = this._dataStorage.getObjectValue(constant.SITES);
+      aux = list.filter(item => item.idTouristicCentre == id);
+      return aux;
+    }
+    return null;
+  }
+
+  isEditorOfSite(id: number): boolean {
+    if (id) {
+      let list: TouristicCentre[];
+      let aux: number;
+      list = this._dataStorage.getObjectValue(constant.SITES);
+      aux = list.findIndex(item => item.idTouristicCentre == id);
+      return aux > -1;
+    }
+    return false;
   }
 
   getSites(): TouristicCentre [] {
@@ -63,5 +85,9 @@ export class SiteService {
 
     this._dataStorage.setObjectValue(constant.SITES, tour_list);
     this._dataStorage.setObjectValue(constant.IDTOUR, last_id + 1);
+  }
+
+  saveTourProfiles(tour_list: TouristicCentre[]) {
+    this._dataStorage.setObjectValue(constant.SITES, tour_list);
   }
 }

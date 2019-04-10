@@ -11,7 +11,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 export class TouristicCentresComponent implements OnInit {
 
   value: string;
-  currentPage = 2;
+  currentPage = 1;
   page: number;
   showedList: TouristicCentre[];
   selected: string;
