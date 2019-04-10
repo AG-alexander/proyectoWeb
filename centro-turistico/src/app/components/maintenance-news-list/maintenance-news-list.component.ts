@@ -19,6 +19,10 @@ export class MaintenanceNewsListComponent implements OnInit {
   updateNew(id: number){
     this._router.navigate(['dashboard/mainte-news-up', id]);
   }
+  deleteNew(id: number) {
+    this._newsService.deleteNew(id);
+    this.news_list = this._newsService.getNews();
+  }
   
   ngOnInit() {
     this.news_list = this._newsService.getNews();

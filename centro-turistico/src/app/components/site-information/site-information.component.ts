@@ -69,6 +69,7 @@ export class SiteInformationComponent implements OnInit {
       }
       this.formGroupModal.reset();
       this.modalRef.hide();
+      this.modalRef = null;
     }
   }
 
