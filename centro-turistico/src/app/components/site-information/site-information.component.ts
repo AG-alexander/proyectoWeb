@@ -4,6 +4,7 @@ import { TouristicCentre, reviewsModel, followerModel, Review } from '../../inte
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { PermissionService } from 'src/app/services/permission.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-site-information',
   templateUrl: './site-information.component.html',
@@ -18,6 +19,8 @@ export class SiteInformationComponent implements OnInit {
   private maxStars = 0;
   img: string;
   modalRef: BsModalRef;
+  formGroupModal: FormGroup;
+  id: number;
   constructor(
     private _siteService: SiteService,
     private _reviewsService: ReviewsService,
@@ -25,19 +28,21 @@ export class SiteInformationComponent implements OnInit {
     private _ratingService: RatingService,
     private _activatedRoute: ActivatedRoute,
     private modalService: BsModalService,
-    private _permission: PermissionService
-    ) { }
+    private _permission: PermissionService,
+    private FB: FormBuilder
+    ) {}
 
     getSite() {
-      let id = +this._activatedRoute.snapshot.params['id'];
-      this.touristicCentre = this._siteService.getSiteById(id);
-      this.reviews = this._reviewsService.getReviewsBySite(id);
-      this.followers = this._followersService.getFollowersBySite(id);
-      this.maxStars = this._ratingService.getRatingBySite(id);
+      this.id = +this._activatedRoute.snapshot.params['id'];
+      this.touristicCentre = this._siteService.getSiteById(this.id);
+      this.reviews = this._reviewsService.getReviewsBySite(this.id);
+      this.followers = this._followersService.getFollowersBySite(this.id);
+      this.maxStars = this._ratingService.getRatingBySite(this.id);
     }
 
   ngOnInit() {
     this.getSite();
+    this.initForm();
   }
 
   openModal(template: TemplateRef<any>, image: string) {
@@ -47,6 +52,28 @@ export class SiteInformationComponent implements OnInit {
 
   openModalReview(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  initForm() {
+    this.formGroupModal = this.FB.group({
+      description: ['', Validators.required]
+    });
+  }
+
+  confirm() {
+    if (this.formGroupModal.valid) {
+      let review: Review = this.formGroupModal.value as Review;
+      review.idSitio = this.id;
+      if (this._reviewsService.saveReview(review)) {
+        this.reviews = this._reviewsService.getReviewsBySite(this.id);
+      }
+      this.formGroupModal.reset();
+      this.modalRef.hide();
+    }
+  }
+
+  get FG() {
+    return this.formGroupModal.controls;
   }
 
 }
