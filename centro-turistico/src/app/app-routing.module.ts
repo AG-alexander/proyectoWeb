@@ -26,13 +26,13 @@ const routes: Routes = [
       { path: 'site/:id', component: SiteInformationComponent },
       { path: 'services', component: ServicesComponent },
       { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
-      { path: 'mainte-news-list', component: MaintenanceNewsListComponent, canActivate: [AuthGuard, AdminGuard] },
-      { path: 'mainte-news-up/:id', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard, AdminGuard] },
-      { path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard, AdminGuard] },
-      { path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent, canActivate: [AuthGuard, EditorGuardGuard] },
-      { path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, EditorGuardGuard] },
+      { path: 'mainte-news-list', component: MaintenanceNewsListComponent, canActivate: [AuthGuard ] },
+      { path: 'mainte-news-up/:id', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard ] },
+      { path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard ] },
+      { path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent, canActivate: [ ] },
+      { path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [ ] }, 
       { path: 'mainte-editor', component: MaintenanceEditorsComponent },
-      { path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, EditorGuardGuard] },
+      { path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard ] },
       { path: '', pathMatch: 'full', redirectTo: 'home' }
 
     ]
