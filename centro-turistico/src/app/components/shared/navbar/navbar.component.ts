@@ -22,7 +22,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     private _dataStorage: DataStorageService,
     private _permission: PermissionService,
-    private _router: Router) { }
+    private _router: Router) {
+      console.log(0);
+     }
   click(){
     //this._dataStorage.setObjectValue(this.constant.NEWS, NEWS);
     this._dataStorage.setObjectValue(constant.RATINGS, RATINGS);
@@ -31,6 +33,7 @@ export class NavbarComponent implements OnInit {
     this._dataStorage.setObjectValue(constant.USERS, USERS);
     this._dataStorage.setObjectValue(constant.FOLLOWERS, FOLLOWERS);
     this._dataStorage.setObjectValue(constant.NEWS, NEWS);
+    this._dataStorage.setObjectValue(constant.USER, null);
 
     this._dataStorage.setObjectValue(constant.IDNEWS, constant.IDNEWSNUM);
     this._dataStorage.setObjectValue(constant.IDTOUR, constant.IDTOURNUM);
@@ -39,7 +42,9 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     this._dataStorage.setObjectValue(constant.USER, null);
-    this._router.navigate(['../login']);
+    this._router.navigate(['home']);
+    this.user = null
+    this._permission.setPermission();
   }
   ngOnInit() {
     this.user = this._dataStorage.getObjectValue(constant.USER) as User;

@@ -6,10 +6,25 @@
     margin-right: 2px;
 }
 .img-user-loged {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 100%;
+    bottom: 0;
+    position: relative;
 }
 p {
     color: aliceblue;
+}
+
+.icons {
+    color: white !important;
+    font-size: 27px;
+    bottom: 0;
+    position: relative;
+}
+
+.img{
+    color: white !important;
+    bottom: -15px;
+    position: relative;
 }

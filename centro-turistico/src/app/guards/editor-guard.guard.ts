@@ -27,7 +27,7 @@ export class EditorGuardGuard implements  CanActivate{
     }
   
   canActivate(state: RouterStateSnapshot, path: ActivatedRouteSnapshot){
-    if ((this.user.rol == "dueño" || this.user.rol == "admin")) {
+    if ((this.user.rol == "duenno" || this.user.rol == "admin")) {
       //this._router.navigate([this._location.path]);
       if (path.url.toString().includes("mainte-tour-up")) {
         let id = +(state as unknown as ActivatedRouteSnapshot).params['id'];
