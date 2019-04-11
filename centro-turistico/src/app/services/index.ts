@@ -9,3 +9,4 @@ export { LoginService } from '../services/LoginService';
 export { NewsService } from '../services/news.service';
 export { UserService } from '../services/user.service';
 export { AlertService } from '../services/alert.service'
+export { PermissionService } from '../services/permission.service'

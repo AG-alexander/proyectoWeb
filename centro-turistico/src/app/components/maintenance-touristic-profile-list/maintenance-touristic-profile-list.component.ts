@@ -21,7 +21,14 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
     ) { }
 
   getSites() {
-    this.tour_list = this._siteService.getSiteByEditor(this.user.idUser);
+    if (this._permission.duenno){
+      this.tour_list = this._siteService.getSiteByEditor(this.user.idUser);
+    }else {
+      if (this._permission.admin) {
+        this.tour_list = this._siteService.getSites();
+      }
+    }
+    
   }
 
   addTourProfile() {
@@ -29,7 +36,7 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
   }
 
   updateTourProfile(id: number) {
-    this._router.navigate(['dashboard/mainte-tour-up', id]);
+    this._router.navigate([`dashboard/mainte-tour-up/${id}`]);
   }
 
   deleteTourProfile(id: number) {
