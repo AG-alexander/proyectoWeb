@@ -1,3 +1,4 @@
+import { Review } from './review';
 
 export interface TouristicCentre {
     idTouristicCentre: number; // identificador
@@ -45,4 +46,11 @@ export interface followerModel extends followerXSite
 {
     user: string;
     img: string;
+}
+
+export interface userInfo
+{
+    nameSite: string;
+    ratingSite: number;
+    reviews_list: Review[];
 }

@@ -6,7 +6,7 @@
             </div>
             <div class=" col-md-8 col-sm-8 col-lg-8">
                 <div class="rating">
-                    <app-site-rating [rate]="maxStars"></app-site-rating>
+                    <app-site-rating [rate]="maxStars" [readOnly]="true"></app-site-rating>
                 </div>
             </div>
         </div>
@@ -16,8 +16,10 @@
             <div class="row">
                 <div class="col-md-4">
                     <img [src]="touristicCentre.photos[0]" alt="">
-                    <!-- <button class="btn btn-primary btn-block" *ngIf="_permission.basico">Seguir</button>
-                     -->
+                    <button class="btn btn-primary btn-block" [ngClass]="{'btn-success': isFollower}"
+                        (click)="addFollower()" popover="{{Message}}"
+                        triggers="mouseenter:mouseleave" *ngIf="_permission.basico">{{MessageFollower}}</button>
+                        <!-- <app-site-rating [rate]="maxStars"></app-site-rating> -->
                     <app-followers [followers]="followers"></app-followers>
                     <div id="horarios">
                         <h2>Horarios</h2>
@@ -40,7 +42,10 @@
                             <h2>Reseñas</h2>
                         </div>
                         <div class="col-sm-9 col-md-9 col-lg-9">
-                            <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena" (click)="openModalReview(Reviews)" placement="auto" popover="Nueva Reseña" triggers="mouseenter:mouseleave">
+                            <button type="button"
+                                class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
+                                (click)="openModalReview(Reviews)" placement="auto" popover="Nueva Reseña"
+                                triggers="mouseenter:mouseleave" *ngIf="_permission.basico">
                                 <i class="fa fa-pencil-square-o"></i>
                             </button>
                         </div>
@@ -82,7 +87,9 @@
         <form [formGroup]="formGroupModal">
             <div class="form-group">
                 <label for="description">Escribe un comentario</label>
-                <input type="text" class="form-control form-control-sm" formControlName="description" id="description" placeholder="Escriba el contenido" [ngClass]="{'is-invalid': FG.description.errors && FG.description.touched}">
+                <input type="text" class="form-control form-control-sm" formControlName="description" id="description"
+                    placeholder="Escriba el contenido"
+                    [ngClass]="{'is-invalid': FG.description.errors && FG.description.touched}">
                 <div *ngIf="FG.description.errors?.required" class="invalid-feedback">
                     <div class="form-control-feedback text-danger" *ngIf="FG.description.errors?.required">
                         * El contenido es requerido

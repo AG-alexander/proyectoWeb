@@ -1,0 +1,15 @@
+.center-form {
+    float: right;
+}
+.img-size {
+    max-width: 100%;
+    max-height: 50%;
+}
+
+.icons {
+    color: green !important;
+    font-size: 27px;
+    
+    position: relative;
+}
+

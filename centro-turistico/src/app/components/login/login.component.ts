@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   fgLogin: FormGroup;
   flagInvalidUser: boolean;
   flagMessage: boolean;
-  constructor(private Fb: FormBuilder, private _route: Router, private _loginService: LoginService) { }
+  constructor(private Fb: FormBuilder, private _router: Router, private _loginService: LoginService) { }
 
   initForm(){
     this.fgLogin = this.Fb.group({
@@ -30,14 +30,16 @@ export class LoginComponent implements OnInit {
       this.flagMessage = true;
       if (this._loginService.getUser(this.fgLogin.controls['usuario'].value,
        this.fgLogin.controls['password'].value)) {
-        this._route.navigate(['dashboard/']);
+        this._router.navigate(['dashboard/']);
       }else {
         this.flagInvalidUser = true;
         this.flagMessage = false;
       }
     }
   }
-
+  sing() {
+    this._router.navigate(['register']);
+  }
   ngOnInit() {
     this.flagInvalidUser = false;
     this.initForm();

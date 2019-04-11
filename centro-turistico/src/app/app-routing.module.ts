@@ -16,6 +16,7 @@ import { MaintenanceEditorsComponent } from './components/maintenance-editors/ma
 import { AuthGuard } from './guards/auth.guard';
 import { EditorGuardGuard } from './guards/editor-guard.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 
 const routes: Routes = [
   {
@@ -26,18 +27,19 @@ const routes: Routes = [
       { path: 'site/:id', component: SiteInformationComponent },
       { path: 'services', component: ServicesComponent },
       { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
-      { path: 'mainte-news-list', component: MaintenanceNewsListComponent, canActivate: [AuthGuard ] },
-      { path: 'mainte-news-up/:id', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard ] },
-      { path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard ] },
-      { path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent, canActivate: [ ] },
-      { path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [ ] }, 
-      { path: 'mainte-editor', component: MaintenanceEditorsComponent },
-      { path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard ] },
+      { path: 'mainte-news-list', component: MaintenanceNewsListComponent, canActivate: [AuthGuard, AdminGuard ] },
+      { path: 'mainte-news-up/:id', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard, AdminGuard ] },
+      { path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard, AdminGuard ] },
+      { path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent, canActivate: [AuthGuard, EditorGuardGuard ] },
+      { path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, EditorGuardGuard ] }, 
+      { path: 'mainte-editor', component: MaintenanceEditorsComponent, canActivate: [AuthGuard, AdminGuard ] },
+      { path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, EditorGuardGuard ] },
       { path: '', pathMatch: 'full', redirectTo: 'home' }
 
     ]
   },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterUserComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'dashboard/home' }
 ];
 

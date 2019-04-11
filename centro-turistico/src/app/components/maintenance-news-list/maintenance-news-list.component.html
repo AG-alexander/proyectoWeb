@@ -1,37 +1,39 @@
-<div class="row">
-    <div class=" col-sm-2 col-md-2 col-lg-2">
-        <H1>Noticias</H1>
-    </div>
+<div class="container-all container-fluid">
+        <div class="row">
+                <div class=" col-sm-2 col-md-2 col-lg-2">
+                    <H1>Noticias</H1>
+                </div>
+            </div>
+            
+            <table class="table table-striped">
+                <thead>
+                    <th width="47%">Nombre</th>
+                    <th width="47%">Fecha</th>
+                    <th width="6%">
+                        <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="addNew()" placement="auto" popover="Agregar Noticias" triggers="mouseenter:mouseleave">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let new of news_list">
+                        <td width="44%">
+                            {{new.title}}
+                        </td>
+                        <td width="44%">
+                            {{new.date}}
+                        </td>
+                        <td width="6%">
+                            <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="updateNew(new.idNews)" placement="auto" popover="Modificar Noticias" triggers="mouseenter:mouseleave">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        </td>
+                        <td width="6%">
+                            <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="deleteNew(new.idNews)" placement="auto" popover="Eliminar Noticias" triggers="mouseenter:mouseleave">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 </div>
-
-<table class="table table-striped">
-    <thead>
-        <th width="47%">Nombre</th>
-        <th width="47%">Fecha</th>
-        <th width="6%">
-            <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="addNew()" placement="auto" popover="Agregar Noticias" triggers="mouseenter:mouseleave">
-                <i class="fa fa-plus"></i>
-            </button>
-        </th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let new of news_list">
-            <td width="44%">
-                {{new.title}}
-            </td>
-            <td width="44%">
-                {{new.date}}
-            </td>
-            <td width="6%">
-                <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="updateNew(new.idNews)" placement="auto" popover="Modificar Noticias" triggers="mouseenter:mouseleave">
-                    <i class="fa fa-pencil"></i>
-                </button>
-            </td>
-            <td width="6%">
-                <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="deleteNew(new.idNews)" placement="auto" popover="Eliminar Noticias" triggers="mouseenter:mouseleave">
-                    <i class="fa fa-trash"></i>
-                </button>
-            </td>
-        </tr>
-    </tbody>
-</table>
