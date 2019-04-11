@@ -10,10 +10,16 @@
                 <div class="name">
                     <p>{{Review.userName}}</p>
                 </div>
+            </div> 
+            <div class="col-sm-7" *ngIf="owner">
+                <div class="logo">
+                    <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena" (click)=" deleteRevi(Review.id)" placement="auto" popover="Eliminar Reseña" triggers="mouseenter:mouseleave">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="review-container">
-
             <div class="user-review">
                 <div class="col-sm-4 col-md-4 col-lg-4">
                 </div>

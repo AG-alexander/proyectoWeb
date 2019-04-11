@@ -1,6 +1,6 @@
 [
     {
-        "id":1,
+        "idReview":1,
         "idSitio": 1,
         "idUser": 1,
         "title": "",
@@ -9,7 +9,7 @@
         "duennoReview": ""
     },
     {
-        "id":2,
+        "idReview":2,
         "idSitio": 1,
         "idUser": 2,
         "title": "",

@@ -34,4 +34,11 @@ export class ReviewsService {
     this._dataStorage.setObjectValue(constant.REVIEWS, reviews);
     return true;
   }
+
+  deleteReview(review: number, page: number){
+    let revLits = this.getReviewsBySite(page);
+    let index = revLits.findIndex(item => item.idReview == review);
+    revLits.slice(index, 1);
+    this._dataStorage.setObjectValue(constant.REVIEWS, revLits);
+  }
 }

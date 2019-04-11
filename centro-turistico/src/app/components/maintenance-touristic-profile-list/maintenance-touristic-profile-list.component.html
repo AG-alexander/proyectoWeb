@@ -16,7 +16,7 @@
         </button>
       </th>
     </thead>
-    <tbody *ngIf="_permission.duenno">
+    <tbody>
       <tr *ngFor="let tour of tour_list">
         <td width="88%">
           {{tour.name}}
@@ -24,14 +24,14 @@
         <td width="6%">
           <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom"
             (click)="updateTourProfile(tour.idTouristicCentre)" placement="auto" popover="Modificar Perfil Turistico"
-            triggers="mouseenter:mouseleave">
+            triggers="mouseenter:mouseleave" *ngIf="_permission.duenno">
             <i class="fa fa-pencil"></i>
           </button>
         </td>
         <td width="6%">
           <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom"
             (click)="deleteTourProfile(tour.idTouristicCentre)" placement="auto" popover="Eliminar Perfil Turistico"
-            triggers="mouseenter:mouseleave">
+            triggers="mouseenter:mouseleave" *ngIf="_permission.duenno">
             <i class="fa fa-trash"></i>
           </button>
         </td>
