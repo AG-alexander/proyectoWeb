@@ -13,16 +13,16 @@ export class AuthGuard implements CanActivate {
   route: ActivatedRouteSnapshot;
   user: User;
   constructor(
-    private _router: Router, 
-    private _loginService: LoginService,
-    private _userService: UserService
+    private router: Router, 
+    private loginService: LoginService,
+    private userService: UserService
     ){
-      this.user = this._userService.getUser();
+      this.user = this.userService.getUser();
     }
   
   canActivate(){
-    if (!this._loginService.isLogged()) {
-      this._router.navigate(['/login']);
+    if (!this.loginService.isLogged()) {
+      this.router.navigate(['/login']);
       alert("No estás logueado");
       return false;
 

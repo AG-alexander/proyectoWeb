@@ -5,27 +5,27 @@
         <form [formGroup]="formGroup" (ngSubmit)="sendEmail()">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control form-control-sm" formControlName="nombre" id="nombre" placeholder="Escriba su nombre" [ngClass]="{'is-invalid': FG.nombre.errors && FG.nombre.touched}">
-                <div *ngIf="FG.nombre.errors?.required" class="invalid-feedback">
-                    <div class="form-control-feedback text-danger" *ngIf="FG.nombre.errors?.required">
+                <input type="text" class="form-control form-control-sm" formControlName="nombre" id="nombre" placeholder="Escriba su nombre" [ngClass]="{'is-invalid': fG.nombre.errors && fG.nombre.touched}">
+                <div *ngIf="fG.nombre.errors?.required" class="invalid-feedback">
+                    <div class="form-control-feedback text-danger" *ngIf="fG.nombre.errors?.required">
                         * El nombre es requerido
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="correo">Correo</label>
-                <input type="text" class="form-control form-control-sm" formControlName="correo" id="correo" placeholder="ejemplo: algo@algomas.com" [ngClass]="{'is-invalid': FG.correo.errors && FG.correo.touched}">
-                <div *ngIf="FG.correo.errors?.required" class="invalid-feedback">
-                    <div class="form-control-feedback text-danger" *ngIf="FG.correo.errors?.required">
+                <input type="text" class="form-control form-control-sm" formControlName="correo" id="correo" placeholder="ejemplo: algo@algomas.com" [ngClass]="{'is-invalid': fG.correo.errors && fG.correo.touched}">
+                <div *ngIf="fG.correo.errors?.required" class="invalid-feedback">
+                    <div class="form-control-feedback text-danger" *ngIf="fG.correo.errors?.required">
                         * El correo es requerido
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="asunto">Asunto</label>
-                <input type="text" class="form-control form-control-sm" formControlName="asunto" id="asunto" placeholder="Escriba el asunto" [ngClass]="{'is-invalid': FG.asunto.errors && FG.asunto.touched}">
-                <div *ngIf="FG.asunto.errors?.required" class="invalid-feedback">
-                    <div class="form-control-feedback text-danger" *ngIf="FG.asunto.errors?.required">
+                <input type="text" class="form-control form-control-sm" formControlName="asunto" id="asunto" placeholder="Escriba el asunto" [ngClass]="{'is-invalid': fG.asunto.errors && fG.asunto.touched}">
+                <div *ngIf="fG.asunto.errors?.required" class="invalid-feedback">
+                    <div class="form-control-feedback text-danger" *ngIf="fG.asunto.errors?.required">
                         * El asunto es requerido
                     </div>
                 </div>

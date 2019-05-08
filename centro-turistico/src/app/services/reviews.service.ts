@@ -10,13 +10,13 @@ import { UserService } from './user.service';
 export class ReviewsService {
 
   constructor(
-    private _dataStorage: DataStorageService,
-    private _userService: UserService) {
+    private dataStorage: DataStorageService,
+    private userService: UserService) {
    }
 
   getReviewsBySite(idSite: number){
-    let reviews: Review[] = this._dataStorage.getObjectValue(constant.REVIEWS);
-    let users: User[] = this._dataStorage.getObjectValue(constant.USERS);
+    let reviews: Review[] = this.dataStorage.getObjectValue(constant.REVIEWS);
+    let users: User[] = this.dataStorage.getObjectValue(constant.USERS);
     reviews = reviews.filter(item => item.idSitio == idSite);
     reviews.forEach( (item)=> {
       item.img = users.find(us => us.idUser == item.idUser).iconno;
@@ -26,19 +26,26 @@ export class ReviewsService {
   }
 
   saveReview(review: Review) {
-    let user = this._userService.getUser();
-    let reviews = this._dataStorage.getObjectValue(constant.REVIEWS) as Review[];
+    let user = this.userService.getUser();
+    let reviews = this.dataStorage.getObjectValue(constant.REVIEWS) as Review[];
     review.idUser = user.idUser;
     review.img = user.iconno;
     reviews.push(review);
-    this._dataStorage.setObjectValue(constant.REVIEWS, reviews);
+    this.dataStorage.setObjectValue(constant.REVIEWS, reviews);
     return true;
+  }
+
+  updateReview(review: Review) {
+    let revLits = this.dataStorage.getObjectValue(constant.REVIEWS) as Review [];
+    let index = revLits.findIndex(item => item.idReview == review.idReview);
+    revLits[index] = review;
+    this.dataStorage.setObjectValue(constant.REVIEWS, revLits);
   }
 
   deleteReview(review: number, page: number){
     let revLits = this.getReviewsBySite(page);
     let index = revLits.findIndex(item => item.idReview == review);
     revLits.slice(index, 1);
-    this._dataStorage.setObjectValue(constant.REVIEWS, revLits);
+    this.dataStorage.setObjectValue(constant.REVIEWS, revLits);
   }
 }

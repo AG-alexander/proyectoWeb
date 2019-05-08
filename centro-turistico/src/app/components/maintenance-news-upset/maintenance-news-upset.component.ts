@@ -16,7 +16,7 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
   imagePath: string;
   formGroup: FormGroup
   newsLocalStorage: News;
-  constructor(private FB: FormBuilder, private _activated: ActivatedRoute, private _newsService: NewsService,
+  constructor(private fB: FormBuilder, private activated: ActivatedRoute, private newsService: NewsService,
     private alert: AlertService, private router: Router ) {
     
    }
@@ -25,13 +25,13 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
     var reader = new FileReader();
     this.imagePath = event.files;
     reader.readAsDataURL(event.files[0]);
-    reader.onload = (_event) => { 
+    reader.onload = (event) => { 
       this.imageSrc = reader.result; 
     }
   }
 
   initForm() {
-    this.formGroup = this.FB.group({
+    this.formGroup = this.fB.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
       image: ['', Validators.required]
@@ -39,16 +39,16 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
   }
 
   loadForm() {
-    this.newsLocalStorage = this._newsService.getNewsById(this.id);
+    this.newsLocalStorage = this.newsService.getNewsById(this.id);
     this.imageSrc = this.newsLocalStorage.image;
-    this.formGroup = this.FB.group({
+    this.formGroup = this.fB.group({
       title: [this.newsLocalStorage.title, Validators.required],
       content: [this.newsLocalStorage.content, Validators.required],
       image: ['', Validators.required]
     });
   }
   initPage() {
-    this.id = +this._activated.snapshot.params['id'];
+    this.id = +this.activated.snapshot.params['id'];
     if (this.id > 0) {
       this.loadForm();
     } else {
@@ -64,12 +64,12 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
       news.date = new Date();
     }
     news.image = this.imageSrc;
-    this._newsService.saveNew(news);
+    this.newsService.saveNew(news);
     this.alert.successInfoAlert('Creado el sitio correctamente');
     this.router.navigate(['dashboard/mainte-news-list']);
 
   }
-  get FG() {
+  get fG() {
     return this.formGroup.controls;
   }
   

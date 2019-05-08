@@ -9,22 +9,22 @@ import { constant } from '../constant-data/constant.js';
 export class UserService {
 
   users: User[] = user as User[];
-  constructor(private _dataStorage: DataStorageService) { }
+  constructor(private dataStorage: DataStorageService) { }
 
   getUser(): User {
-    return this._dataStorage.getObjectValue(constant.USER);
+    return this.dataStorage.getObjectValue(constant.USER);
   }
 
   getEditor(): User[] {
-    return this._dataStorage.getObjectValue(constant.USERS);
+    return this.dataStorage.getObjectValue(constant.USERS);
   }
 
   addUser(user: User) {
-    let users = this._dataStorage.getObjectValue(constant.USERS) as User[];
-    user.idUser = +this._dataStorage.getObjectValue(constant.IDUSER);
+    let users = this.dataStorage.getObjectValue(constant.USERS) as User[];
+    user.idUser = +this.dataStorage.getObjectValue(constant.IDUSER);
     users.push(user);
-    this._dataStorage.setObjectValue(constant.IDUSER, user.idUser+1);
-    this._dataStorage.setObjectValue(constant.USERS, users);
+    this.dataStorage.setObjectValue(constant.IDUSER, user.idUser+1);
+    this.dataStorage.setObjectValue(constant.USERS, users);
   }
 
 }

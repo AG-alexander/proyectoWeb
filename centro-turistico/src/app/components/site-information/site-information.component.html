@@ -17,9 +17,9 @@
                 <div class="col-md-4">
                     <img [src]="touristicCentre.photos[0]" alt="">
                     <button class="btn btn-primary btn-block" [ngClass]="{'btn-success': isFollower}"
-                        (click)="addFollower()" popover="{{Message}}"
-                        triggers="mouseenter:mouseleave" *ngIf="_permission.basico">{{MessageFollower}}</button>
-                        <!-- <app-site-rating [rate]="maxStars"></app-site-rating> -->
+                        (click)="addFollower()" popover="{{message}}" triggers="mouseenter:mouseleave"
+                        *ngIf="permission.basico">{{messageFollower}}</button>
+                    <!-- <app-site-rating [rate]="maxStars"></app-site-rating> -->
                     <app-followers [followers]="followers"></app-followers>
                     <div id="horarios">
                         <h2>Horarios</h2>
@@ -45,14 +45,15 @@
                             <button type="button"
                                 class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
                                 (click)="openModalReview(Reviews)" placement="auto" popover="Nueva Reseña"
-                                triggers="mouseenter:mouseleave" *ngIf="_permission.basico">
+                                triggers="mouseenter:mouseleave" *ngIf="permission.basico">
                                 <i class="fa fa-pencil-square-o"></i>
                             </button>
                         </div>
                     </div>
                     <div class="review-container">
                         <div>
-                            <app-reviews [Review]="rev" *ngFor="let rev of reviews"></app-reviews>
+                            <app-reviews [reviewInput]="rev" (addReviewAnswer)="answerReview(ReviewAnswer, $event)"
+                                *ngFor="let rev of reviews"></app-reviews>
                         </div>
                     </div>
                     <h2>Galeria</h2>
@@ -97,6 +98,29 @@
                 </div>
             </div>
             <button type="button" class="btn btn-primary" (click)="confirm()">Yes</button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #ReviewAnswer>
+    <div class="modal-body">
+        <form [formGroup]="formGroupModalAnswer">
+            <div class="form-group">
+                <label for="review-coment">Comentario</label>
+                <label id="review-coment" class="form-control form-control-sm">{{review.description}}</label>
+            </div>
+            <div class="form-group">
+                <label for="answer">Escribe una respuesta</label>
+                <input type="text" class="form-control form-control-sm" formControlName="answer" id="answer"
+                    placeholder="Escribe una respuesta"
+                    [ngClass]="{'is-invalid': FGA.answer.errors && FGA.answer.touched}">
+                <div *ngIf="FGA.answer.errors?.required" class="invalid-feedback">
+                    <div class="form-control-feedback text-danger" *ngIf="FGA.answer.errors?.required">
+                        * La respuesta es requerida
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="answerConfirm()" [disabled]="formGroupModalAnswer.invalid">Yes</button>
         </form>
     </div>
 </ng-template>

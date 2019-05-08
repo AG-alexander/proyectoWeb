@@ -1,5 +1,5 @@
 export interface infoError {
-    Message:string;
+    message:string;
     Code: number;
 }
 

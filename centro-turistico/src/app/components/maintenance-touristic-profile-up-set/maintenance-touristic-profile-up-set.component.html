@@ -5,9 +5,9 @@
         <div class="form-group">
           <label for="name">Nombre</label>
           <input type="text" class="form-control form-control-sm" formControlName="name" id="name"
-            placeholder="Escriba el nombre" [ngClass]="{'is-invalid': FG.name.errors && FG.name.touched}">
-          <div *ngIf="FG.name.errors?.required" class="invalid-feedback">
-            <div class="form-control-feedback text-danger" *ngIf="FG.name.errors?.required">
+            placeholder="Escriba el nombre" [ngClass]="{'is-invalid': fG.name.errors && fG.name.touched}">
+          <div *ngIf="fG.name.errors?.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="fG.name.errors?.required">
               * El nombre es requerido
             </div>
           </div>
@@ -16,9 +16,9 @@
           <label for="description">Descripción</label>
           <input type="text" class="form-control form-control-sm" formControlName="description" id="description"
             placeholder="Escriba la descripción"
-            [ngClass]="{'is-invalid': FG.description.errors && FG.description.touched}">
-          <div *ngIf="FG.description.errors?.required" class="invalid-feedback">
-            <div class="form-control-feedback text-danger" *ngIf="FG.description.errors?.required">
+            [ngClass]="{'is-invalid': fG.description.errors && fG.description.touched}">
+          <div *ngIf="fG.description.errors?.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="fG.description.errors?.required">
               * La descripción es requerida
             </div>
           </div>
@@ -58,13 +58,13 @@
         <div class="form-group">
           <label for="video">Video</label>
           <input type="text" class="form-control form-control-sm" formControlName="video" id="video"
-            placeholder="Escriba el id del video" [ngClass]="{'is-invalid': FG.video.errors && FG.video.touched}">
-          <div *ngIf="FG.video.errors?.required" class="invalid-feedback">
-            <div class="form-control-feedback text-danger" *ngIf="FG.video.errors?.required">
+            placeholder="Escriba el id del video" [ngClass]="{'is-invalid': fG.video.errors && fG.video.touched}">
+          <div *ngIf="fG.video.errors?.required" class="invalid-feedback">
+            <div class="form-control-feedback text-danger" *ngIf="fG.video.errors?.required">
               * El video es requerido
             </div>
           </div>
-          <app-video-player [urlYoutube]="FG.video.value"></app-video-player>
+          <app-video-player [urlYoutube]="fG.video.value"></app-video-player>
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="!(Validated)">Guardar</button>
       </form>
@@ -78,7 +78,7 @@
         </button>
       </div>
       <div class="img-container">
-        <img [src]="img" alt="" class="img-size" *ngFor="let img of img_list">
+        <img [src]="img" alt="" class="img-size" *ngFor="let img of imgList">
       </div>
     </div>
   </div>

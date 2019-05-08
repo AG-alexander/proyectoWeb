@@ -9,33 +9,33 @@ import { constant } from 'src/app/constant-data/constant';
   styleUrls: ['./maintenance-editors.component.css']
 })
 export class MaintenanceEditorsComponent implements OnInit {
-  tour_list: TouristicCentre [];
-  editor_list: User[];
+  tourList: TouristicCentre [];
+  editorList: User[];
   constructor(
-    private _siteService: SiteService,
-    private _data: DataStorageService,
-    private _userService: UserService,
-    private _alertService: AlertService) { }
+    private siteService: SiteService,
+    private data: DataStorageService,
+    private userService: UserService,
+    private alertService: AlertService) { }
 
   getSites() {
-    this.tour_list = this._siteService.getSites();
+    this.tourList = this.siteService.getSites();
   }
 
   getEditors() {
-    this.editor_list = this._userService.getEditor();
+    this.editorList = this.userService.getEditor();
   }
 
   saveChange() {
-    this.editor_list.forEach((item) => {
-      if (this.tour_list.findIndex(itemm => itemm.idEditor == item.idUser) > -1) {
+    this.editorList.forEach((item) => {
+      if (this.tourList.findIndex(itemm => itemm.idEditor == item.idUser) > -1) {
         item.rol = "duenno";
       } else {
         item.rol = "basico";
       }
     });
-    this._data.setObjectValue(constant.USERS, this.editor_list);
-    this._siteService.saveTourProfiles(this.tour_list);
-    this._alertService.successInfoAlert("Cambios Guardados Correctamente");
+    this.data.setObjectValue(constant.USERS, this.editorList);
+    this.siteService.saveTourProfiles(this.tourList);
+    this.alertService.successInfoAlert("Cambios Guardados Correctamente");
   }
 
   ngOnInit() {

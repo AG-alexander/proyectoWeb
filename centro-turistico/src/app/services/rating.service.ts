@@ -7,10 +7,10 @@ import { constant } from '../constant-data/constant';
 })
 export class RatingService {
 
-  constructor(private _dataStorage: DataStorageService) { }
+  constructor(private dataStorage: DataStorageService) { }
 
   getRatingBySite(idSite: number) {
-    let ratings: ratingXSite[] = this._dataStorage.getObjectValue(constant.RATINGS);
+    let ratings: ratingXSite[] = this.dataStorage.getObjectValue(constant.RATINGS);
     let value = 0;
     ratings.filter(item => item.siteId == idSite);
     ratings.forEach(

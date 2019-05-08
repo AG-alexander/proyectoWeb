@@ -15,32 +15,32 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   id: number;
   imageSrc: any;
   imagePath: string;
-  img_list: string[];
+  imgList: string[];
   formGroup: FormGroup
   tourLoscalStorage: TouristicCentre;
-  schedules_list: string[];
+  schedulesList: string[];
   user: User;
 
   constructor(
     private FB: FormBuilder, 
-    private _siteService: SiteService, 
-    private _activated: ActivatedRoute,
-    private _router: Router,
-    private _alertService: AlertService, 
-    private _userService: UserService,
-    private _location: Location) { }
+    private siteService: SiteService, 
+    private activated: ActivatedRoute,
+    private router: Router,
+    private alertService: AlertService, 
+    private userService: UserService,
+    private location: Location) { }
 
   onFileSelected(event: any) {
     var reader = new FileReader();
     this.imagePath = event.files;
     reader.readAsDataURL(event.files[0]);
-    reader.onload = (_event) => {
-      this.img_list.push(reader.result.toString());
+    reader.onload = (event) => {
+      this.imgList.push(reader.result.toString());
     }
   }
   initForm() {
-    this.img_list = [];
-    this.schedules_list = [];
+    this.imgList = [];
+    this.schedulesList = [];
     this.formGroup = this.FB.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -50,9 +50,9 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   }
 
   loadForm() {
-    this.tourLoscalStorage = this._siteService.getSiteById(this.id);
-    this.img_list = this.tourLoscalStorage.photos;
-    this.schedules_list = this.tourLoscalStorage.schedules;
+    this.tourLoscalStorage = this.siteService.getSiteById(this.id);
+    this.imgList = this.tourLoscalStorage.photos;
+    this.schedulesList = this.tourLoscalStorage.schedules;
     this.formGroup = this.FB.group({
       name: [this.tourLoscalStorage.name, Validators.required],
       description: [this.tourLoscalStorage.description, Validators.required],
@@ -61,7 +61,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
     });
   }
   initPage() {
-    this.id = +this._activated.snapshot.params['id'];
+    this.id = +this.activated.snapshot.params['id'];
     if (this.id > 0) {
       this.loadForm();
     } else {
@@ -76,38 +76,38 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
       tourProfile.idTouristicCentre = 0;
       tourProfile.idEditor = 0;
     }
-    tourProfile.schedules = this.schedules_list;
-    tourProfile.photos = this.img_list;
-    this._siteService.saveTourProfile(tourProfile);
-    this._router.navigate(['dashboard/mainte-tour-list']);
-    this._alertService.successInfoAlert("Perfil Turistico guardado correctamente");
+    tourProfile.schedules = this.schedulesList;
+    tourProfile.photos = this.imgList;
+    this.siteService.saveTourProfile(tourProfile);
+    this.router.navigate(['dashboard/mainte-tour-list']);
+    this.alertService.successInfoAlert("Perfil Turistico guardado correctamente");
   }
 
   addSchedule() {
     let data: string = this.formGroup.controls['schedules'].value;
     data = data.trim();
     if (data.length > 0) {
-      this.schedules_list.push(data);
+      this.schedulesList.push(data);
       this.formGroup.controls['schedules'].setValue('');
     }
   }
 
   deleteSchedule(index: number) {
-    this.schedules_list.splice(index, 1);
+    this.schedulesList.splice(index, 1);
     //this._alertService.successInfoAlert("Perfil Turistico eliminado correctamente");
   }
-  get FG() {
+  get fG() {
     return this.formGroup.controls;
   }
 
   get Validated() {
     return this.formGroup.valid 
-    && this.schedules_list.length > 0 
-    && this.img_list.length > 0;
+    && this.schedulesList.length > 0 
+    && this.imgList.length > 0;
   }
 
   ngOnInit() {
-    this.img_list = [];
+    this.imgList = [];
     this.initPage();
   }
 

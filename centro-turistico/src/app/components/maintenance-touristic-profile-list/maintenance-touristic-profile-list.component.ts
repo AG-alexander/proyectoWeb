@@ -11,41 +11,41 @@ import { PermissionService } from 'src/app/services/permission.service';
 })
 export class MaintenanceTouristicProfileListComponent implements OnInit {
 
-  tour_list: TouristicCentre[];
+  tourList: TouristicCentre[];
   user: User;
   constructor(
-    private _siteService: SiteService,
-    private _userService: UserService,
-    private _router: Router,
-    private _permission: PermissionService
+    private siteService: SiteService,
+    private userService: UserService,
+    private router: Router,
+    private permission: PermissionService
     ) { }
 
   getSites() {
-    if (this._permission.duenno){
-      this.tour_list = this._siteService.getSiteByEditor(this.user.idUser);
+    if (this.permission.duenno){
+      this.tourList = this.siteService.getSiteByEditor(this.user.idUser);
     }else {
-      if (this._permission.admin) {
-        this.tour_list = this._siteService.getSites();
+      if (this.permission.admin) {
+        this.tourList = this.siteService.getSites();
       }
     }
     
   }
 
   addTourProfile() {
-    this._router.navigate(['dashboard/mainte-tour-set']);
+    this.router.navigate(['dashboard/mainte-tour-set']);
   }
 
   updateTourProfile(id: number) {
-    this._router.navigate([`dashboard/mainte-tour-up/${id}`]);
+    this.router.navigate([`dashboard/mainte-tour-up/${id}`]);
   }
 
   deleteTourProfile(id: number) {
-    this._siteService.deleteTourProfile(id);
+    this.siteService.deleteTourProfile(id);
     this.getSites();
   }
 
   ngOnInit() {
-    this.user = this._userService.getUser();
+    this.user = this.userService.getUser();
     this.getSites();
   }
 
