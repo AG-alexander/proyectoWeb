@@ -3,18 +3,34 @@
         <div class="row">
             <div class="col-sm-2">
                 <div class="logo">
-                    <img [src]="Review.img" alt="" class="img-size">
+                    <img [src]="reviewInput.img" alt="" class="img-size">
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="name">
-                    <p>{{Review.userName}}</p>
+                    <p>{{reviewInput.userName}}</p>
                 </div>
-            </div> 
+            </div>
             <div class="col-sm-7" *ngIf="owner">
                 <div class="logo">
-                    <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena" (click)=" deleteRevi(Review.id)" placement="auto" popover="Eliminar Reseña" triggers="mouseenter:mouseleave">
+                    <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
+                        (click)=" deleteRevi(reviewInput.id)" placement="auto" popover="Eliminar Reseña"
+                        triggers="mouseenter:mouseleave">
                         <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+                <div class="logo">
+                    <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
+                        (click)="answerReview()" placement="auto" popover="Responder comentario"
+                        triggers="mouseenter:mouseleave">
+                        <i class="fa fa-envelope-square"></i>
+                    </button>
+                </div>
+                <div class="logo">
+                    <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
+                        (click)="blocked()" placement="auto" popover="Bloquear comentario"
+                        triggers="mouseenter:mouseleave">
+                        <i class="fa fa-ban"></i>
                     </button>
                 </div>
             </div>
@@ -24,11 +40,12 @@
                 <div class="col-sm-4 col-md-4 col-lg-4">
                 </div>
                 <div class="col-sm-8 col-md-8 col-lg-8">
-                    <p>{{Review.description}}</p>
+                    <p *ngIf="reviewInput.blocked">{{reviewInput.description}}</p>
+                    <p *ngIf="!reviewInput.blocked">Comentario Bloqueado</p>
                 </div>
             </div>
-            <div class="duenno-review">
-                <p></p>
+            <div class="duenno-review col-sm-8 col-md-8 col-lg-8">
+                <p>{{reviewInput.dunnoReview}}</p>
             </div>
         </div>
     </div>

@@ -13,8 +13,7 @@ import { ServicesComponent } from './components/services/services.component';
 import { MaintenanceTouristicProfileUpSetComponent } from './components/maintenance-touristic-profile-up-set/maintenance-touristic-profile-up-set.component';
 import { MaintenanceTouristicProfileListComponent } from './components/maintenance-touristic-profile-list/maintenance-touristic-profile-list.component';
 import { MaintenanceEditorsComponent } from './components/maintenance-editors/maintenance-editors.component';
-import { AuthGuard } from './guards/auth.guard';
-import { EditorGuardGuard } from './guards/editor-guard.guard';
+import { AuthGuard } from './guards/auth.guard'; 
 import { AdminGuard } from './guards/admin.guard';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 
@@ -27,13 +26,13 @@ const routes: Routes = [
       { path: 'site/:id', component: SiteInformationComponent },
       { path: 'services', component: ServicesComponent },
       { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
-      { path: 'mainte-news-list', component: MaintenanceNewsListComponent, canActivate: [AuthGuard, AdminGuard ] },
+      { path: 'mainte-news-list', component: MaintenanceNewsListComponent, canActivate: [AuthGuard, AdminGuard ], data: {roles:['duenno', 'admin']} },
       { path: 'mainte-news-up/:id', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard, AdminGuard ] },
       { path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard, AdminGuard ] },
-      { path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent, canActivate: [AuthGuard, EditorGuardGuard ] },
-      { path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, EditorGuardGuard ] }, 
+      { path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent, canActivate: [AdminGuard], data: {roles:['duenno', 'admin']} },
+      { path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, AdminGuard ], data: {roles:['duenno', 'admin']} }, 
       { path: 'mainte-editor', component: MaintenanceEditorsComponent, canActivate: [AuthGuard, AdminGuard ] },
-      { path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, EditorGuardGuard ] },
+      { path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, AdminGuard ], data: {roles:['duenno', 'admin']} },
       { path: '', pathMatch: 'full', redirectTo: 'home' }
 
     ]

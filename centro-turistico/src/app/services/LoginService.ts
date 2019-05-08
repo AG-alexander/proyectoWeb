@@ -8,13 +8,13 @@ import { constant } from '../constant-data/constant.js';
 })
 export class LoginService {
   users: User[] = user;
-  constructor(private _dataStorage: DataStorageService) { }
+  constructor(private dataStorage: DataStorageService) { }
   getUser(userName: string, password: string): boolean {
-    this.users = this._dataStorage.getObjectValue(constant.USERS);
+    this.users = this.dataStorage.getObjectValue(constant.USERS);
     if (this.users) {
       for (let user of this.users) {
         if (user.password === password && user.userName === userName) {
-          this._dataStorage.setObjectValue(constant.USER, user);
+          this.dataStorage.setObjectValue(constant.USER, user);
           return true;
         }
       }
@@ -23,6 +23,6 @@ export class LoginService {
   }
 
   isLogged(): boolean {
-    return this._dataStorage.getObjectValue(constant.USER)==null? false : true;
+    return this.dataStorage.getObjectValue(constant.USER)==null? false : true;
   }
 }

@@ -1,32 +1,40 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
-import { LoginService, UserService, SiteService } from '../services/index';
+import { UserService, SiteService } from '../services/index';
 import { User } from '../interfaces/index';
 import { Location } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements  CanActivate{
-  path: ActivatedRouteSnapshot[];  
+export class AdminGuard implements CanActivate {
+  path: ActivatedRouteSnapshot[];
   route: ActivatedRouteSnapshot;
   user: User;
   constructor(
-    private _router: Router, 
-    private _loginService: LoginService,
-    private _userService: UserService,
-    private _siteService: SiteService, 
-    private _location: Location, 
-    private _activated: ActivatedRoute
-    ){
-      this.user = this._userService.getUser();
-    }
-  canActivate(){
-    if (!(this.user.rol == "admin")) {
-     // this._router.navigate([this._location.path]);
-      return false;
-    }
-    return true;
+    private router: Router,
+    private userService: UserService,
+    private siteService: SiteService,
+    private location: Location,
+  ) {
+    this.user = this.userService.getUser();
+  }
+  canActivate(path: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    console.log(path)
+    if (this.user) {
+      let index = path.data.roles.findIndex(item => this.user.rol.includes(item));
+      if (index > -1) {
+      //   this.router.navigate([this.location.path]);
+      //   if (path.url.toString().includes("mainte-tour-up")) {
+      //     let id = +path.params['id'];
+      //     if (!this.siteService.isEditorOfSite(id, this.user.idUser)) {
+      //     this.location.back();
+      //      return false;
+      //     }
+      //   }
+         return true;
+      }
+    }this.location.back();
+    return false;
   }
 }

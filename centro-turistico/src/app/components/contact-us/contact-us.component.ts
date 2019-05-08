@@ -10,17 +10,17 @@ import { AlertService} from './../../services/index'
 export class ContactUsComponent implements OnInit {
 
   formGroup: FormGroup;
-  constructor(private Fb: FormBuilder, private alert: AlertService) { }
+  constructor(private fB: FormBuilder, private alert: AlertService) { }
 
   initForm(){
-    this.formGroup = this.Fb.group({
+    this.formGroup = this.fB.group({
       nombre: ['',[Validators.required]],
       correo: ['',[Validators.required, Validators.minLength(2), Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       asunto: ['',[Validators.required]] 
     });
   }
 
-  get FG() {
+  get fG() {
     return this.formGroup.controls;
   }
 

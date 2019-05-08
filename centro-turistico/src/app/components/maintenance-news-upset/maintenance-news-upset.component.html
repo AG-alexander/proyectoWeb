@@ -5,18 +5,18 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="title">Título</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="title" id="title" placeholder="Escriba el título" [ngClass]="{'is-invalid': FG.title.errors && FG.title.touched}">
-                    <div *ngIf="FG.title.errors?.required" class="invalid-feedback">
-                        <div class="form-control-feedback text-danger" *ngIf="FG.title.errors?.required">
+                    <input type="text" class="form-control form-control-sm" formControlName="title" id="title" placeholder="Escriba el título" [ngClass]="{'is-invalid': fG.title.errors && fG.title.touched}">
+                    <div *ngIf="fG.title.errors?.required" class="invalid-feedback">
+                        <div class="form-control-feedback text-danger" *ngIf="fG.title.errors?.required">
                             * El título es requerido
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="content">Contenido</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="content" id="content" placeholder="Escriba el contenido" [ngClass]="{'is-invalid': FG.content.errors && FG.content.touched}">
-                    <div *ngIf="FG.content.errors?.required" class="invalid-feedback">
-                        <div class="form-control-feedback text-danger" *ngIf="FG.content.errors?.required">
+                    <input type="text" class="form-control form-control-sm" formControlName="content" id="content" placeholder="Escriba el contenido" [ngClass]="{'is-invalid': fG.content.errors && fG.content.touched}">
+                    <div *ngIf="fG.content.errors?.required" class="invalid-feedback">
+                        <div class="form-control-feedback text-danger" *ngIf="fG.content.errors?.required">
                             * El contenido es requerido
                         </div>
                     </div>

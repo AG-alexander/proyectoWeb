@@ -8,4 +8,5 @@ export interface Review {
     img: string;
     dunnoReview: string;
     userName: string;
+    blocked: boolean;
 }

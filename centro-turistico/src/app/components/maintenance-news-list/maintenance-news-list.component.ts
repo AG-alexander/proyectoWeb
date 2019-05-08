@@ -9,25 +9,25 @@ import { News } from 'src/app/interfaces/index';
 })
 export class MaintenanceNewsListComponent implements OnInit {
 
-  news_list: News[];
-  constructor(private _newsService: NewsService, private _router: Router, 
+  newsList: News[];
+  constructor(private newsService: NewsService, private router: Router, 
   private alerts: AlertService) { }
 
   addNew(){
-    this._router.navigate(['dashboard/mainte-news-set']);
+    this.router.navigate(['dashboard/mainte-news-set']);
   }
 
   updateNew(id: number){
-    this._router.navigate(['dashboard/mainte-news-up', id]);
+    this.router.navigate(['dashboard/mainte-news-up', id]);
   }
   deleteNew(id: number) {
-    this._newsService.deleteNew(id);
-    this.news_list = this._newsService.getNews();
+    this.newsService.deleteNew(id);
+    this.newsList = this.newsService.getNews();
     this.alerts.successInfoAlert('Sitio eliminado Correctamente')
   }
   
   ngOnInit() {
-    this.news_list = this._newsService.getNews();
+    this.newsList = this.newsService.getNews();
   }
 
 }

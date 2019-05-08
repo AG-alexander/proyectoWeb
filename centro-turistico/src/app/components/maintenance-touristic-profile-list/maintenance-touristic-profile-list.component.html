@@ -9,7 +9,7 @@
     <thead>
       <th width="94%">Nombre</th>
       <th width="6%">
-        <button type="button" *ngIf="_permission.admin" class="btn btn-link btn-xs justify-content-rigth padd-bottom"
+        <button type="button" *ngIf="permission.admin" class="btn btn-link btn-xs justify-content-rigth padd-bottom"
           (click)="addTourProfile()" placement="auto" popover="Agregar Perfil Turistico"
           triggers="mouseenter:mouseleave">
           <i class="fa fa-plus"></i>

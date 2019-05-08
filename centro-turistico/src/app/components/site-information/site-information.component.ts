@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { SiteService, FollowerService, ReviewsService, RatingService, AlertService, UserService } from '../../services/index';
-import { TouristicCentre, reviewsModel, followerModel, Review, User } from '../../interfaces/index';
+import { TouristicCentre, followerModel, Review, User } from '../../interfaces/index';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { PermissionService } from 'src/app/services/permission.service';
@@ -20,44 +20,43 @@ export class SiteInformationComponent implements OnInit {
   img: string;
   modalRef: BsModalRef;
   formGroupModal: FormGroup;
+  formGroupModalAnswer: FormGroup;
   id: number;
   isFollower: boolean;
   user: User;
-  MessageFollower: string;
-  Message: string;
+  messageFollower: string;
+  message: string;
+  review: Review;
   constructor(
-    private _siteService: SiteService,
-    private _reviewsService: ReviewsService,
-    private _followersService: FollowerService,
-    private _ratingService: RatingService,
-    private _activatedRoute: ActivatedRoute,
-    private _userService: UserService,
+    private siteService: SiteService,
+    private reviewsService: ReviewsService,
+    private followersService: FollowerService,
+    private ratingService: RatingService,
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService,
     private modalService: BsModalService,
-    private _permission: PermissionService,
-    private FB: FormBuilder,
+    private permission: PermissionService,
+    private fB: FormBuilder,
     private alert: AlertService
-  ) {
-
-    console.log(0);
-  }
+  ) {}
 
   getSite() {
-    this.id = +this._activatedRoute.snapshot.params['id'];
-    this.touristicCentre = this._siteService.getSiteById(this.id);
-    this.reviews = this._reviewsService.getReviewsBySite(this.id);
-    this.followers = this._followersService.getFollowersBySite(this.id);
-    this.maxStars = this._ratingService.getRatingBySite(this.id);
+    this.id = +this.activatedRoute.snapshot.params['id'];
+    this.touristicCentre = this.siteService.getSiteById(this.id);
+    this.reviews = this.reviewsService.getReviewsBySite(this.id);
+    this.followers = this.followersService.getFollowersBySite(this.id);
+    this.maxStars = this.ratingService.getRatingBySite(this.id);
   }
 
   ngOnInit() {
     this.getSite();
     this.initForm();
-    this.user = this._userService.getUser();
+    this.user = this.userService.getUser();
     if (this.user) {
-      this.isFollower = this._followersService.isFollower(this.user.idUser, this.id);
+      this.isFollower = this.followersService.isFollower(this.user.idUser, this.id);
     }
-    this.Message = this.isFollower? "Dejar de seguir":"Comenzar a seguir";
-    this.MessageFollower = this.isFollower? "Siguiendo":"Seguir";
+    this.message = this.isFollower? "Dejar de seguir":"Comenzar a seguir";
+    this.messageFollower = this.isFollower? "Siguiendo":"Seguir";
   }
 
   openModal(template: TemplateRef<any>, image: string) {
@@ -66,12 +65,18 @@ export class SiteInformationComponent implements OnInit {
   }
 
   openModalReview(template: TemplateRef<any>) {
+    this.formGroupModal.reset();
+    this.formGroupModalAnswer.reset();
     this.modalRef = this.modalService.show(template);
   }
 
   initForm() {
-    this.formGroupModal = this.FB.group({
+    this.formGroupModal = this.fB.group({
       description: ['', Validators.required]
+    });
+
+    this.formGroupModalAnswer = this.fB.group({
+      answer: ['', Validators.required]
     });
   }
 
@@ -79,8 +84,8 @@ export class SiteInformationComponent implements OnInit {
     if (this.formGroupModal.valid) {
       let review: Review = this.formGroupModal.value as Review;
       review.idSitio = this.id;
-      if (this._reviewsService.saveReview(review)) {
-        this.reviews = this._reviewsService.getReviewsBySite(this.id);
+      if (this.reviewsService.saveReview(review)) {
+        this.reviews = this.reviewsService.getReviewsBySite(this.id);
       }
       this.formGroupModal.reset();
       this.alert.successInfoAlert("Reseña creada con exito");
@@ -88,20 +93,41 @@ export class SiteInformationComponent implements OnInit {
       this.modalRef = null;
     }
   }
+
+  answerConfirm() {
+    if (this.formGroupModalAnswer.valid) {
+      this.review.dunnoReview = this.formGroupModalAnswer.controls['answer'].value;
+      this.reviewsService.updateReview(this.review);
+      this.alert.successInfoAlert("Respuesta agregada con exito");
+      this.modalRef.hide();
+      this.modalRef = null;
+    }
+  }
+
   addFollower() {
     if (this.isFollower) {
-      this._followersService.deleteFollower(this.user.idUser, this.id);
+      this.followersService.deleteFollower(this.user.idUser, this.id);
       this.isFollower = false;
     } else {
-      this._followersService.addFollower(this.user.idUser, this.id);
+      this.followersService.addFollower(this.user.idUser, this.id);
        this.isFollower = true;
     }
-    this.Message = this.isFollower? "Dejar de seguir":"Comenzar a seguir";
-    this.MessageFollower = this.isFollower? "Siguiendo":"Seguir";
+    this.message = this.isFollower? "Dejar de seguir":"Comenzar a seguir";
+    this.messageFollower = this.isFollower? "Siguiendo":"Seguir";
+  }
+
+  answerReview(template: TemplateRef<any>, $event) {
+    this.review = $event;
+    this.modalRef = this.modalService.show(template);
   }
 
   get FG() {
     return this.formGroupModal.controls;
   }
+
+  get FGA() {
+    return this.formGroupModalAnswer.controls;
+  }
+
 
 }

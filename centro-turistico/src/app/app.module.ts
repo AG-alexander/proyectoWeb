@@ -4,9 +4,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AboutUsComponent } from './components/about-us/about-us.component';
@@ -36,6 +36,7 @@ import { MaintenanceTouristicProfileUpSetComponent } from './components/maintena
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MaintenanceEditorsComponent } from './components/maintenance-editors/maintenance-editors.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { LoginService, UserService, AlertService, PermissionService, ReviewsService, DataStorageService, FollowerService, NewsService, RatingService, SiteService } from '../app/services/index';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +80,18 @@ import { RegisterUserComponent } from './components/register-user/register-user.
     PopoverModule.forRoot(),
     TypeaheadModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    UserService,
+    AlertService,
+    PermissionService,
+    ReviewsService,
+    DataStorageService,
+    FollowerService,
+    NewsService,
+    RatingService,
+    SiteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,10 +10,10 @@ import { News } from 'src/app/interfaces/index';
 export class NewsListComponent implements OnInit {
 
   news: News[];
-  constructor(private _newService: NewsService) { }
+  constructor(private newService: NewsService) { }
 
   ngOnInit() {
-    this.news = this._newService.getNews();
+    this.news = this.newService.getNews();
   }
 
 }

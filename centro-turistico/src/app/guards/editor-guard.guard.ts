@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, UrlTree, Router, ActivatedRoute, RouterStateSnapshot, UrlSegment } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
-import { LoginService, UserService, SiteService } from '../services/index';
+import { UserService, SiteService } from '../services/index';
 import { User } from '../interfaces/index';
 import { Location } from '@angular/common';
 @Injectable({
@@ -11,28 +10,27 @@ import { Location } from '@angular/common';
 export class EditorGuardGuard implements  CanActivate{
   path: ActivatedRouteSnapshot[];  
   route: ActivatedRouteSnapshot;
-  _state: RouterStateSnapshot
+  state: RouterStateSnapshot
   user: User;
   constructor(
-    private _router: Router, 
-    private _loginService: LoginService,
-    private _userService: UserService,
-    private _siteService: SiteService, 
-    private _location: Location, 
-    private _activated: ActivatedRoute
+    private router: Router, 
+    private userService: UserService,
+    private siteService: SiteService, 
+    private location: Location, 
     ){
-      this.user = this._userService.getUser();
-      this._state = this._router.routerState.snapshot;
+      this.user = this.userService.getUser();
+      this.state = this.router.routerState.snapshot;
       
     }
   
-  canActivate(state: RouterStateSnapshot, path: ActivatedRouteSnapshot){
-    if ((this.user.rol == "duenno" || this.user.rol == "admin")) {
-      //this._router.navigate([this._location.path]);
-      if (path.url.toString().includes("mainte-tour-up")) {
+  canActivate(path: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+    console.log(path)
+    if (this.user.rol.includes(path.data.roles[0]) || this.user.rol.includes(path.data.roles[1])) {
+      //this.router.navigate([this.location.path]);
+      if (path.url.toString().includes("mainte-tour-up")) {debugger
         let id = +(state as unknown as ActivatedRouteSnapshot).params['id'];
-        if (!this._siteService.isEditorOfSite(id, this.user.idUser)) {
-        this._location.back();
+        if (!this.siteService.isEditorOfSite(id, this.user.idUser)) {
+        this.location.back();
          return false;
         }
       }

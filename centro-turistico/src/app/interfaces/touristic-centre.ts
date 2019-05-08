@@ -52,5 +52,5 @@ export interface userInfo
 {
     nameSite: string;
     ratingSite: number;
-    reviews_list: Review[];
+    reviewsList: Review[];
 }

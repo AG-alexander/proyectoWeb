@@ -10,7 +10,7 @@ export class PermissionService {
   duenno: boolean;
   admin: boolean;
 
-  constructor(private _user: UserService) {
+  constructor(private user: UserService) {
     this.setPermission();
   }
 
@@ -18,7 +18,7 @@ export class PermissionService {
     this.admin = false;
     this.duenno = false;
     this.basico = false;
-    let user = this._user.getUser();
+    let user = this.user.getUser();
     if (user) {
       switch (user.rol) {
         case "admin": this.admin = true; this.basico = true;

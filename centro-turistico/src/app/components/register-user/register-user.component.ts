@@ -15,16 +15,16 @@ export class RegisterUserComponent implements OnInit {
   imgUser: string;
   imagePath: string;
   constructor(
-    private FB: FormBuilder,
-     private _userService: UserService,
-     private _alertService: AlertService,
-     private _router: Router) { }
+    private fB: FormBuilder,
+     private userService: UserService,
+     private alertService: AlertService,
+     private router: Router) { }
 
   initForm() {
-    this.formGroup = this.FB.group({
+    this.formGroup = this.fB.group({
       userName: ['', Validators.required],
       password: ['', Validators.required],
-      email: ['', [Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
+      email: ['', [Validators.required,Validators.pattern('[a-z0-9.%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
       descripcion: ['', Validators.required],
       iconno: ['']
     });
@@ -33,7 +33,7 @@ export class RegisterUserComponent implements OnInit {
     var reader = new FileReader();
     this.imagePath = event.files;
     reader.readAsDataURL(event.files[0]);
-    reader.onload = (_event) => {
+    reader.onload = (event) => {
       this.imgUser = reader.result.toString();
     }
   }
@@ -42,14 +42,14 @@ export class RegisterUserComponent implements OnInit {
     user = this.formGroup.value as User;
     user.rol = 'basico';
     user.iconno = this.imgUser;
-    this._userService.addUser(user);
-    this._router.navigate(['login']);
-    this._alertService.successInfoAlert("Usuario creado correramente");
+    this.userService.addUser(user);
+    this.router.navigate(['login']);
+    this.alertService.successInfoAlert("Usuario creado correramente");
   }
   get Valided() {
     return this.formGroup.invalid || this.imgUser == "";
   }
-  get FG() {
+  get fG() {
     return this.formGroup.controls;
   }
   ngOnInit() {
