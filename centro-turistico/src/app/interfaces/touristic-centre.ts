@@ -16,12 +16,13 @@ export interface TouristicCentre {
     direccion: string; // direccion
     phone: string; // telefono
     idEditor: number;
+    id?: string; // id de firebase
 }
 
 
 export interface followerXSite
 {
-    id:number;
+    id?: string;
     siteId: number;
     userId: number;
 }

@@ -25,7 +25,11 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
       this.tourList = this.siteService.getSiteByEditor(this.user.idUser);
     }else {
       if (this.permission.admin) {
-        this.tourList = this.siteService.getSites();
+        this.siteService.getTouristicCentre().subscribe(
+          res => {
+            this.tourList = res;
+          }
+        );
       }
     }
     

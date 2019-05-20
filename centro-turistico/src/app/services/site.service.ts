@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import {TouristicCentre} from '../interfaces/index';
-import {} from '../services/index';
+import { AlertService } from '../services/alert.service';
 import { DataStorageService } from './data-storage.service.js';
 import { constant } from 'src/app/constant-data/constant';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class SiteService {
 
   showedSites: TouristicCentre[];
-  constructor(public dataStorage: DataStorageService) {
+  constructor(
+    public dataStorage: DataStorageService,
+    public angularFirestore: AngularFirestore,
+    private alertas: AlertService,
+    private location: Location) {
     this.showedSites = [];
    }
 
@@ -96,5 +103,44 @@ export class SiteService {
     tourList.splice(indix, 1);
     this.dataStorage.setObjectValue(constant.SITES, tourList);
     return true;
+  }
+
+  //  FIREBASE
+  getTouristicCentre(): Observable<TouristicCentre[]> {
+    return this.angularFirestore.collection<TouristicCentre>('sitios').valueChanges();
+  }
+
+  getTouristicCentreById(id: string): Observable<TouristicCentre[]> {
+    return this.angularFirestore.collection<TouristicCentre>('sitios', ref => ref.where('id', '==', id)).valueChanges();
+  }
+
+  deleteTouristicCentre(id: string) {
+    this.angularFirestore.collection<TouristicCentre>('sitios').doc(id).delete().then(()=>{
+      this.alertas.successInfoAlert("Eliminado correctamente");
+    }).catch(()=>{
+      this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo eliminar el registro");
+    });
+  }
+
+  saveTouristicCentre(TouristicCentre: TouristicCentre) {
+    if (TouristicCentre.id) {
+      this.angularFirestore.collection<TouristicCentre>('sitios').doc(TouristicCentre.id).update(TouristicCentre).then(()=>{
+        this.alertas.successInfoAlert("Actualización exitosa");
+        this.location.back();
+      }).catch(()=>{
+        this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
+        this.location.back();
+      });
+     
+    } else {
+      TouristicCentre.id = this.angularFirestore.createId();
+      this.angularFirestore.collection<TouristicCentre>('sitios').doc(TouristicCentre.id).set(TouristicCentre).then(()=>{
+        this.alertas.successInfoAlert("Inserción exitosa");
+        this.location.back();
+      }).catch(()=>{
+        this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
+        this.location.back();
+      });
+    }
   }
 }

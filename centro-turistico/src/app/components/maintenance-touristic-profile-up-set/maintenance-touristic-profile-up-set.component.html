@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
-      <form [formGroup]="formGroup" (ngSubmit)="saveTourProfile()">
+      <form [formGroup]="formGroup" (ngSubmit)="saveSitio()">
         <div class="form-group">
           <label for="name">Nombre</label>
           <input type="text" class="form-control form-control-sm" formControlName="name" id="name"
@@ -40,7 +40,7 @@
           </div>
           <table class="table table-striped">
             <tbody>
-              <tr *ngFor="let sche of schedules_list; index as i">
+              <tr *ngFor="let sche of schedulesList; index as i">
                 <td width="94%">
                   {{sche}}
                 </td>

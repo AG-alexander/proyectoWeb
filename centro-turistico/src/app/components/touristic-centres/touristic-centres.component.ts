@@ -32,7 +32,12 @@ export class TouristicCentresComponent implements OnInit {
   }
   ngOnInit() {
     this.site.getSite(this.value);
+   if(this.site.showedSites != null) {
     this.showedList = this.site.showedSites.slice(0,3);
+   } else {
+    this.site.showedSites = [];
+     this.showedList = [];
+   }
     // this.showedList.forEach( x =>{
       
     //   this.typebyhead.push(x.name);

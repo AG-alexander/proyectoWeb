@@ -25,9 +25,18 @@ export class MaintenanceNewsListComponent implements OnInit {
     this.newsList = this.newsService.getNews();
     this.alerts.successInfoAlert('Sitio eliminado Correctamente')
   }
+
+  deleteNoticia(id: string) {
+    this.newsService.deleteNoticias(id);
+  }
   
   ngOnInit() {
-    this.newsList = this.newsService.getNews();
+    this.newsService.getNoticias().subscribe(
+      res => {
+        this.newsList = res;
+        console.log(res);
+      }
+    );
   }
 
 }
