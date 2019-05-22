@@ -42,7 +42,7 @@
           </div>
           <div class="col-sm-8">
               <img [src]="user.iconno" alt="" class="img-user-loged img navbar-img-login">
-              <a [routerLink]="['user-profile', user.idUser]" class="img">   {{user.userName}}</a>
+              <a [routerLink]="['user-profile', user.id]" class="img">{{user.userName}}</a>
           </div>    
       </div> 
       <div *ngIf="!user">

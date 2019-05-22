@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit {
     this.permission.setPermission();
   }
   ngOnInit() {
-    this.user = this.log.currentUser;
+    this.user = this.dataStorage.getObjectValue(constant.USER);
     this.permission.setPermission();
     
   }

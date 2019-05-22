@@ -69,20 +69,20 @@ export class RatingService {
     if (ratingXSite.id) {
       this.angularFirestore.collection<ratingXSite>('rating').doc(ratingXSite.id).update(ratingXSite).then(() => {
         this.alertas.successInfoAlert("Actualización exitosa");
-        this.location.back();
+      //  this.location.back();
       }).catch(() => {
         this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
-        this.location.back();
+      //  this.location.back();
       });
 
     } else {
       ratingXSite.id = this.angularFirestore.createId();
       this.angularFirestore.collection<ratingXSite>('rating').doc(ratingXSite.id).set(ratingXSite).then(() => {
         this.alertas.successInfoAlert("Inserción exitosa");
-        this.location.back();
+      //  this.location.back();
       }).catch(() => {
         this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
-        this.location.back();
+      //  this.location.back();
       });
     }
   }

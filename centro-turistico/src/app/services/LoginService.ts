@@ -56,6 +56,7 @@ export class LoginService {
   setCurrentUser(email: string) {
     this.userSuscription = this.getUsuarioByEmail(email).subscribe((usuarios) => {
       this.currentUser = usuarios[0];  
+      this.dataStorage.setObjectValue(constant.USER, this.currentUser);
       this.router.navigateByUrl('dashboard');
     },
     err => {},
