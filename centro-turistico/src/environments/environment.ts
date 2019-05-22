@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyAWA4zITJJyuuZL6X27ZeE1CVktthognG4",
+    apiKey: "AIzaSyAa7DqPdpTleuE_hjwYBWzGc06tuXcCZ00",
     authDomain: "centro-turistico.firebaseapp.com",
     databaseURL: "https://centro-turistico.firebaseio.com",
     projectId: "centro-turistico",

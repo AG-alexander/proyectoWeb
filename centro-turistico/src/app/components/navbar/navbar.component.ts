@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataStorageService } from 'src/app/services/index';
+import { DataStorageService, LoginService } from 'src/app/services/index';
 import { constant } from 'src/app/constant-data/constant';
 import NEWS from 'src/assets/data/news.json';
 import RATINGS from 'src/assets/data/rating.json';
@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private dataStorage: DataStorageService,
     private permission: PermissionService,
+    private log: LoginService,
     private router: Router) {
      }
   chargeData(){
@@ -46,7 +47,7 @@ export class NavbarComponent implements OnInit {
     this.permission.setPermission();
   }
   ngOnInit() {
-    this.user = this.dataStorage.getObjectValue(constant.USER) as User;
+    this.user = this.log.currentUser;
     this.permission.setPermission();
     
   }

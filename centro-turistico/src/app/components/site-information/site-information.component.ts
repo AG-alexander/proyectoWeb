@@ -21,7 +21,7 @@ export class SiteInformationComponent implements OnInit {
   modalRef: BsModalRef;
   formGroupModal: FormGroup;
   formGroupModalAnswer: FormGroup;
-  id: number;
+  id: string;
   isFollower: boolean;
   user: User;
   messageFollower: string;
@@ -41,10 +41,27 @@ export class SiteInformationComponent implements OnInit {
   ) {}
 
   getSite() {
-    this.id = +this.activatedRoute.snapshot.params['id'];
-    this.touristicCentre = this.siteService.getSiteById(this.id);
-    this.reviews = this.reviewsService.getReviewsBySite(this.id);
-    this.followers = this.followersService.getFollowersBySite(this.id);
+    this.id = this.activatedRoute.snapshot.params['id'];
+
+    this.siteService.getTouristicCentreById(this.id).subscribe(
+      res => {
+        this.touristicCentre = res[0];
+        console.log(this.touristicCentre);
+      }
+    );
+
+    this.reviewsService.getReviewBySite(this.id).subscribe(
+      res => {
+        this.reviews = res;
+      }
+    );
+
+    this.followersService.getSeguidoresById(this.id).subscribe(
+      res => {
+        this.followers = res;
+      }
+    );
+
     this.maxStars = this.ratingService.getRatingBySite(this.id);
   }
 
@@ -53,7 +70,7 @@ export class SiteInformationComponent implements OnInit {
     this.initForm();
     this.user = this.userService.getUser();
     if (this.user) {
-      this.isFollower = this.followersService.isFollower(this.user.idUser, this.id);
+     // this.isFollower = this.followersService.isFollower(this.user.idUser, this.id);
     }
     this.message = this.isFollower? "Dejar de seguir":"Comenzar a seguir";
     this.messageFollower = this.isFollower? "Siguiendo":"Seguir";
@@ -83,12 +100,10 @@ export class SiteInformationComponent implements OnInit {
   confirm() {
     if (this.formGroupModal.valid) {
       let review: Review = this.formGroupModal.value as Review;
-      review.idSitio = this.id;
-      if (this.reviewsService.saveReview(review)) {
-        this.reviews = this.reviewsService.getReviewsBySite(this.id);
-      }
+  //    review.idSitio = this.id;
+      this.reviewsService.saveReview(review)
       this.formGroupModal.reset();
-      this.alert.successInfoAlert("Reseña creada con exito");
+  //    this.alert.successInfoAlert("Reseña creada con exito");
       this.modalRef.hide();
       this.modalRef = null;
     }
@@ -97,8 +112,8 @@ export class SiteInformationComponent implements OnInit {
   answerConfirm() {
     if (this.formGroupModalAnswer.valid) {
       this.review.dunnoReview = this.formGroupModalAnswer.controls['answer'].value;
-      this.reviewsService.updateReview(this.review);
-      this.alert.successInfoAlert("Respuesta agregada con exito");
+      this.reviewsService.saveReview(this.review);
+    //  this.alert.successInfoAlert("Respuesta agregada con exito");
       this.modalRef.hide();
       this.modalRef = null;
     }
@@ -106,10 +121,17 @@ export class SiteInformationComponent implements OnInit {
 
   addFollower() {
     if (this.isFollower) {
-      this.followersService.deleteFollower(this.user.idUser, this.id);
+      this.followersService.deleteSeguidores(this.id);
+    //  this.followersService.deleteFollower(this.user.idUser, this.id);
       this.isFollower = false;
     } else {
-      this.followersService.addFollower(this.user.idUser, this.id);
+      let follow: followerModel = {
+        siteId: this.id,
+        userId: this.user.idUser.toString(),
+        user: this.user.iconno
+      }
+      this.followersService.saveSeguidores(follow);
+   //   this.followersService.addFollower(this.user.idUser, this.id);
        this.isFollower = true;
     }
     this.message = this.isFollower? "Dejar de seguir":"Comenzar a seguir";

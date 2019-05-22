@@ -3,13 +3,18 @@ import user from '../../assets/data/users.json';
 import { User } from '../interfaces/index';
 import { DataStorageService } from '../services/data-storage.service';
 import { constant } from '../constant-data/constant.js';
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
   users: User[] = user as User[];
-  constructor(private dataStorage: DataStorageService) { }
+  constructor(
+    private dataStorage: DataStorageService,
+    public afAuth: AngularFireAuth) { }
 
   getUser(): User {
     return this.dataStorage.getObjectValue(constant.USER);

@@ -17,55 +17,63 @@ export class FollowerService {
     private alertas: AlertService,
     private location: Location) { }
 
-  getFollowersBySite(idSite: number) {
-    let followers: followerModel[] = this.dataStorage.getObjectValue(constant.FOLLOWERS);
-    let users: User[] = this.dataStorage.getObjectValue(constant.USERS);
-    followers.forEach((item) => {
-      item.user = users.find(us => us.idUser == item.userId).userName;
-      item.img = users.find(us => us.idUser == item.userId).iconno;
-    });
-    return followers.filter(item => item.siteId == idSite);
-  }
+  // getFollowersBySite(idSite: number) {
+  //   let followers: followerModel[] = this.dataStorage.getObjectValue(constant.FOLLOWERS);
+  //   let users: User[] = this.dataStorage.getObjectValue(constant.USERS);
+  //   followers.forEach((item) => {
+  //     item.user = users.find(us => us.idUser == item.userId).userName;
+  //     item.img = users.find(us => us.idUser == item.userId).iconno;
+  //   });
+  //   return followers.filter(item => item.siteId == idSite);
+  // }
 
-  isFollower(idUser: number, idSite: number) {
-    let followers: followerModel[] = this.dataStorage.getObjectValue(constant.FOLLOWERS);
-    let index = followers.findIndex(item => item.siteId == idSite && item.userId == idUser);
-    return index > -1;
-  }
-  addFollower(idUser: number, idSite: number) {
-    if (!this.isFollower(idUser, idSite)) {
-      let followers: followerModel[] = this.dataStorage.getObjectValue(constant.FOLLOWERS);
-      let newFollower: followerModel;
-      newFollower = {
-        userId: idUser,
-        siteId: idSite,
-        id: "",
-        img: "",
-        user: ""
-      }
-      followers.push(newFollower);
-      this.dataStorage.setObjectValue(constant.FOLLOWERS, followers);
-    }
-  }
-  deleteFollower(idUser: number, idSite: number) {
-    if (this.isFollower(idUser, idSite)) {
-      let followers: followerModel[] = this.dataStorage.getObjectValue(constant.FOLLOWERS);
-      let index = followers.findIndex(item => item.userId == idUser && item.siteId == idSite);
-      followers.splice(index, 1);
-      this.dataStorage.setObjectValue(constant.FOLLOWERS, followers);
-    }
-  }
+  // isFollower(idUser: number, idSite: number) {
+  //   let followers: followerModel[] = this.dataStorage.getObjectValue(constant.FOLLOWERS);
+  //   let index = followers.findIndex(item => item.siteId == idSite && item.userId == idUser);
+  //   return index > -1;
+  // }
+  // addFollower(idUser: number, idSite: number) {
+  //   if (!this.isFollower(idUser, idSite)) {
+  //     let followers: followerModel[] = this.dataStorage.getObjectValue(constant.FOLLOWERS);
+  //     let newFollower: followerModel;
+  //     newFollower = {
+  //       userId: idUser,
+  //       siteId: idSite,
+  //       id: "",
+  //       img: "",
+  //       user: ""
+  //     }
+  //     followers.push(newFollower);
+  //     this.dataStorage.setObjectValue(constant.FOLLOWERS, followers);
+  //   }
+  // }
+  // deleteFollower(idUser: number, idSite: number) {
+  //   if (this.isFollower(idUser, idSite)) {
+  //     let followers: followerModel[] = this.dataStorage.getObjectValue(constant.FOLLOWERS);
+  //     let index = followers.findIndex(item => item.userId == idUser && item.siteId == idSite);
+  //     followers.splice(index, 1);
+  //     this.dataStorage.setObjectValue(constant.FOLLOWERS, followers);
+  //   }
+  // }
 
   //  FIREBASE
-  getNoticias(): Observable<followerModel[]> {
+  getSeguidores(): Observable<followerModel[]> {
     return this.angularFirestore.collection<followerModel>('seguidores').valueChanges();
   }
 
-  getNoticiaById(id: string): Observable<followerModel[]> {
+  getSeguidoresById(id: string): Observable<followerModel[]> {
     return this.angularFirestore.collection<followerModel>('seguidores', ref => ref.where('id', '==', id)).valueChanges();
   }
 
-  deleteNoticias(id: string) {
+  getSeguidoresBySite(id: string): Observable<followerModel[]> {
+    return this.angularFirestore.collection<followerModel>('seguidores', ref => ref.where('siteId', '==', id)).valueChanges();
+  }
+
+  getSitiosByUsuario(id: string): Observable<followerModel[]> {
+    return this.angularFirestore.collection<followerModel>('seguidores', ref => ref.where('userId', '==', id)).valueChanges();
+  }
+
+  deleteSeguidores(id: string) {
     this.angularFirestore.collection<followerModel>('seguidores').doc(id).delete().then(() => {
       this.alertas.successInfoAlert("Eliminado correctamente");
     }).catch(() => {
@@ -73,7 +81,7 @@ export class FollowerService {
     });
   }
 
-  savefollowerModel(followerModel: followerModel) {
+  saveSeguidores(followerModel: followerModel) {
     if (followerModel.id) {
       this.angularFirestore.collection<followerModel>('seguidores').doc(followerModel.id).update(followerModel).then(() => {
         this.alertas.successInfoAlert("Actualización exitosa");

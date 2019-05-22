@@ -32,16 +32,16 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.fgLogin.valid) {
-      // this.flagMessage = true;
-      // this.loginService.login(this.fgLogin.controls['usuario'].value,
-      // this.fgLogin.controls['password'].value)
-      if ( this.loginService.getUser(this.fgLogin.controls['usuario'].value,
-      this.fgLogin.controls['password'].value)) {
-        this.router.navigate(['dashboard/']);
-      } else {
-        this.flagInvalidUser = true;
-        this.flagMessage = false;
-      }
+      this.flagMessage = true;
+      this.loginService.login(this.fgLogin.controls['usuario'].value,
+      this.fgLogin.controls['password'].value)
+      // if ( this.loginService.getUser(this.fgLogin.controls['usuario'].value,
+      // this.fgLogin.controls['password'].value)) {
+      //   this.router.navigate(['dashboard/']);
+      // } else {
+      //   this.flagInvalidUser = true;
+      //   this.flagMessage = false;
+      // }
     }
   }
   userSing() {

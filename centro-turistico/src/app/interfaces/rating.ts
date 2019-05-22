@@ -3,4 +3,5 @@ export interface Rating {
     rating: number;
     idUser: number;
     idTouristicCentre: number;
+    id? : string;
 }

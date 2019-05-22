@@ -23,8 +23,8 @@ export interface TouristicCentre {
 export interface followerXSite
 {
     id?: string;
-    siteId: number;
-    userId: number;
+    siteId: string;
+    userId: string;
 }
 
 export interface ratingXSite extends followerXSite{
@@ -45,8 +45,8 @@ export interface reviewsModel extends reviews {
 
 export interface followerModel extends followerXSite
 {
-    user: string;
-    img: string;
+    user?: string;
+    img?: string;
 }
 
 export interface userInfo

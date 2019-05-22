@@ -43,8 +43,8 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
     this.router.navigate([`dashboard/mainte-tour-up/${id}`]);
   }
 
-  deleteTourProfile(id: number) {
-    this.siteService.deleteTourProfile(id);
+  deleteTourProfile(id: string) {
+    this.siteService.deleteTouristicCentre(id);
     this.getSites();
   }
 
