@@ -37,6 +37,31 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MaintenanceEditorsComponent } from './components/maintenance-editors/maintenance-editors.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { LoginService, UserService, AlertService, PermissionService, ReviewsService, DataStorageService, FollowerService, NewsService, RatingService, SiteService } from '../app/services/index';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { FirestoreSettingsToken} from '@angular/fire/firestore';
+// let config = new AuthServiceConfig([
+//   {
+//     id: GoogleLoginProvider.PROVIDER_ID,
+//     provider: new GoogleLoginProvider("450749556733-euth9ke14g8ahei3j0v85sqo61ko5hca.apps.googleusercontent.com")
+//   },
+//   // {
+//   //   id: FacebookLoginProvider.PROVIDER_ID,
+//   //   provider: new FacebookLoginProvider("Facebook-App-Id")
+//   // }
+// ]);
+
+// export function provideConfig() {
+//   return config;
+// }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +104,11 @@ import { LoginService, UserService, AlertService, PermissionService, ReviewsServ
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
     TypeaheadModule.forRoot(),
+    SocialLoginModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule, 
   ],
   providers: [
     LoginService,
@@ -90,7 +120,9 @@ import { LoginService, UserService, AlertService, PermissionService, ReviewsServ
     FollowerService,
     NewsService,
     RatingService,
-    SiteService
+    SiteService,
+    { provide: FirestoreSettingsToken, useValue: {} }
+
   ],
   bootstrap: [AppComponent]
 })

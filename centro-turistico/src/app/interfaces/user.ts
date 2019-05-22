@@ -9,6 +9,7 @@ export interface User {
     iconno: string; // icono
     string: Date; // fecha nacimineto
     rol: string; // rol
+    id: string;
 }
 
 export interface EditorxSitio {

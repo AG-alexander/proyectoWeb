@@ -61,8 +61,8 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
     });
   }
   initPage() {
-    this.id = +this.activated.snapshot.params['id'];
-    if (this.id > 0) {
+    this.id = this.activated.snapshot.params['id'];
+    if (this.id != undefined) {
       this.loadForm();
     } else {
       this.initForm();
@@ -70,7 +70,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   }
   saveTourProfile() {
     let tourProfile = this.formGroup.value as TouristicCentre;
-    if (this.id > 0) {
+    if (this.id != undefined) {
       tourProfile.idTouristicCentre = this.tourLoscalStorage.idTouristicCentre;
     } else {
       tourProfile.idTouristicCentre = 0;
@@ -104,6 +104,19 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
     return this.formGroup.valid 
     && this.schedulesList.length > 0 
     && this.imgList.length > 0;
+  }
+
+  saveSitio() {debugger
+    let tourProfile = this.formGroup.value as TouristicCentre;
+    if (this.id != undefined) {
+      tourProfile.idTouristicCentre = this.tourLoscalStorage.idTouristicCentre;
+    } else {
+      tourProfile.idTouristicCentre = 0;
+      tourProfile.idEditor = 0;
+    }
+    tourProfile.schedules = this.schedulesList;
+    tourProfile.photos = this.imgList;
+    this.siteService.saveTouristicCentre(tourProfile);
   }
 
   ngOnInit() {

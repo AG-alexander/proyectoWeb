@@ -16,14 +16,15 @@ export interface TouristicCentre {
     direccion: string; // direccion
     phone: string; // telefono
     idEditor: number;
+    id?: string; // id de firebase
 }
 
 
 export interface followerXSite
 {
-    id:number;
-    siteId: number;
-    userId: number;
+    id?: string;
+    siteId: string;
+    userId: string;
 }
 
 export interface ratingXSite extends followerXSite{
@@ -44,8 +45,8 @@ export interface reviewsModel extends reviews {
 
 export interface followerModel extends followerXSite
 {
-    user: string;
-    img: string;
+    user?: string;
+    img?: string;
 }
 
 export interface userInfo

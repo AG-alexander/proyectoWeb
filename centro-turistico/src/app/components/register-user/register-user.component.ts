@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserService, AlertService } from 'src/app/services';
+import { UserService, AlertService, LoginService } from 'src/app/services';
 import { User } from 'src/app/interfaces/index';
 import { Router } from '@angular/router';
 
@@ -18,6 +18,7 @@ export class RegisterUserComponent implements OnInit {
     private fB: FormBuilder,
      private userService: UserService,
      private alertService: AlertService,
+     private log: LoginService,
      private router: Router) { }
 
   initForm() {
@@ -42,9 +43,9 @@ export class RegisterUserComponent implements OnInit {
     user = this.formGroup.value as User;
     user.rol = 'basico';
     user.iconno = this.imgUser;
-    this.userService.addUser(user);
-    this.router.navigate(['login']);
-    this.alertService.successInfoAlert("Usuario creado correramente");
+    this.log.register(user, user.password);
+    //this.router.navigate(['login']);
+   // this.alertService.successInfoAlert("Usuario creado correramente");
   }
   get Valided() {
     return this.formGroup.invalid || this.imgUser == "";

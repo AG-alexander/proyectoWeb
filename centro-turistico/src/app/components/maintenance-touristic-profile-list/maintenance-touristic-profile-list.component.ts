@@ -25,7 +25,11 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
       this.tourList = this.siteService.getSiteByEditor(this.user.idUser);
     }else {
       if (this.permission.admin) {
-        this.tourList = this.siteService.getSites();
+        this.siteService.getTouristicCentre().subscribe(
+          res => {
+            this.tourList = res;
+          }
+        );
       }
     }
     
@@ -39,8 +43,8 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
     this.router.navigate([`dashboard/mainte-tour-up/${id}`]);
   }
 
-  deleteTourProfile(id: number) {
-    this.siteService.deleteTourProfile(id);
+  deleteTourProfile(id: string) {
+    this.siteService.deleteTouristicCentre(id);
     this.getSites();
   }
 

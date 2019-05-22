@@ -23,9 +23,9 @@
                     <app-followers [followers]="followers"></app-followers>
                     <div id="horarios">
                         <h2>Horarios</h2>
-                        <table class="table">
+                        <table class="table" *ngIf="touristicCentre.schedules">
                             <tbody>
-                                <tr *ngFor="let sche of touristicCentre.schedules">
+                                <tr  *ngFor="let sche of touristicCentre.schedules">
                                     <td>{{sche}}</td>
                                 </tr>
                             </tbody>

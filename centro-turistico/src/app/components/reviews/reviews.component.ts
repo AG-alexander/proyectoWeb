@@ -24,7 +24,7 @@ export class ReviewsComponent implements OnInit {
 
   deleteRevi(rev: number){
     
-    this.review.deleteReview(rev, this.reviewInput.idSitio)
+    this.review.deleteReview(this.reviewInput.id)
     this.sAlert.successInfoAlert("Se elimino la reseña correctamente");
   }
 
