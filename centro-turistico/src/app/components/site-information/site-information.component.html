@@ -1,78 +1,82 @@
-<div class="container-all">
-    <div class="top-head">
-        <div class="row">
-            <div class="col-md-4 col-sm-4 col-lg-4">
-                <h1>{{touristicCentre.name}}</h1>
-            </div>
-            <div class=" col-md-8 col-sm-8 col-lg-8">
-                <div class="rating">
-                    <app-site-rating [rate]="maxStars" [readOnly]="true"></app-site-rating>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="site-container">
-        <div class="site">
+<div *ngIf="flag">
+    <div class="container-all">
+        <div class="top-head">
             <div class="row">
-                <div class="col-md-4">
-                    <img [src]="touristicCentre.photos[0]" alt="">
-                    <button class="btn btn-primary btn-block" [ngClass]="{'btn-success': isFollower}"
-                        (click)="addFollower()" popover="{{message}}" triggers="mouseenter:mouseleave"
-                        *ngIf="permission.basico">{{messageFollower}}</button>
-                    <!-- <app-site-rating [rate]="maxStars"></app-site-rating> -->
-                    <app-followers [followers]="followers"></app-followers>
-                    <div id="horarios">
-                        <h2>Horarios</h2>
-                        <table class="table" *ngIf="touristicCentre.schedules">
-                            <tbody>
-                                <tr  *ngFor="let sche of touristicCentre.schedules">
-                                    <td>{{sche}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    <h1>{{touristicCentre.name}}</h1>
+                </div>
+                <div class=" col-md-8 col-sm-8 col-lg-8">
+                    <div class="rating">
+                        <app-site-rating [rate]="maxStars" [readOnly]="true"></app-site-rating>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="descriptionContiner">
-                        <h2>Descripción</h2>
-                        <p>{{touristicCentre.description}}</p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <h2>Reseñas</h2>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-lg-9">
-                            <button type="button"
-                                class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
-                                (click)="openModalReview(Reviews)" placement="auto" popover="Nueva Reseña"
-                                triggers="mouseenter:mouseleave" *ngIf="permission.basico">
-                                <i class="fa fa-pencil-square-o"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="review-container">
-                        <div>
-                            <app-reviews [reviewInput]="rev" (addReviewAnswer)="answerReview(ReviewAnswer, $event)"
-                                *ngFor="let rev of reviews"></app-reviews>
-                        </div>
-                    </div>
-                    <h2>Galeria</h2>
-                    <div class="wrapper">
-                        <div class="menu">
-                            <ul>
-                                <li *ngFor="let photo of touristicCentre.photos" (click)="openModal(template, photo)">
-                                    <img src="{{photo}}" class="photoImg" alt="">
-                                </li>
-                            </ul>
+            </div>
+        </div>
+        <div class="site-container">
+            <div class="site">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img [src]="touristicCentre.photos[0]" alt="">
+                        <button class="btn btn-primary btn-block" [ngClass]="{'btn-success': isFollower}"
+                            (click)="addFollower()" popover="{{message}}" triggers="mouseenter:mouseleave"
+                            *ngIf="permission.basico">{{messageFollower}}</button>
+                        <!-- <app-site-rating [rate]="maxStars"></app-site-rating> -->
+                        <app-followers [followers]="followers"></app-followers>
+                        <div id="horarios">
+                            <h2>Horarios</h2>
+                            <div *ngIf="touristicCentre.schedules">
+                                <table class="table">
+                                    <tbody>
+                                        <tr *ngFor="let sche of touristicCentre.schedules">
+                                            <td>{{sche}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <app-video-player [urlYoutube]="touristicCentre.video"></app-video-player>
+                    <div class="col-md-8">
+                        <div class="descriptionContiner">
+                            <h2>Descripción</h2>
+                            <p>{{touristicCentre.description}}</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <h2>Reseñas</h2>
+                            </div>
+                            <div class="col-sm-9 col-md-9 col-lg-9">
+                                <button type="button"
+                                    class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
+                                    (click)="openModalReview(Reviews)" placement="auto" popover="Nueva Reseña"
+                                    triggers="mouseenter:mouseleave" *ngIf="permission.basico">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="review-container">
+                            <div>
+                                <app-reviews [reviewInput]="rev" (addReviewAnswer)="answerReview(ReviewAnswer, $event)"
+                                    *ngFor="let rev of reviews"></app-reviews>
+                            </div>
+                        </div>
+                        <h2>Galeria</h2>
+                        <div class="wrapper">
+                            <div class="menu">
+                                <ul>
+                                    <li *ngFor="let photo of touristicCentre.photos" (click)="openModal(template, photo)">
+                                        <img src="{{photo}}" class="photoImg" alt="">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <app-video-player [urlYoutube]="touristicCentre.video"></app-video-player>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>
-
 
 <ng-template #template>
     <div class="modal-body">
@@ -120,7 +124,8 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" (click)="answerConfirm()" [disabled]="formGroupModalAnswer.invalid">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="answerConfirm()"
+                [disabled]="formGroupModalAnswer.invalid">Yes</button>
         </form>
     </div>
 </ng-template>

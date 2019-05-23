@@ -40,8 +40,74 @@ export class LoginService {
   isLogged(): boolean {
     return this.dataStorage.getObjectValue(constant.USER) == null ? false : true;
   }
+
+  async  loginWithFacebook() {debugger
+    await this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((value)=> {
+      this.userSuscription = this.getUsuarioByEmail(value.user.email).subscribe((usuarios) => {debugger
+        if (usuarios[0]) {debugger
+          
+        this.currentUser = usuarios[0];
+        this.dataStorage.setObjectValue(constant.USER, this.currentUser);
+        this.router.navigateByUrl('dashboard');
+        } else {
+          let user: User = {
+            email: value.user.email,
+            iconno: value.user.photoURL,
+            id: this.angularFirestore.createId(),
+            descripcion: "",
+            rol: "basico",
+            userName: value.user.displayName,
+            idUser: 0,
+            password: ""
+          }
+          this.saveUsuario(user);
+          this.currentUser = user;
+          this.dataStorage.setObjectValue(constant.USER, this.currentUser);
+          this.router.navigateByUrl('dashboard');
+        }
+      },
+      err => {},
+      () => {
+       
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+    //this.router.navigate(['admin/list']);
+  }
+
   async  loginWithGoogle() {
-    await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((value)=> {
+      this.userSuscription = this.getUsuarioByEmail(value.user.email).subscribe((usuarios) => {
+        if (usuarios[0]) {
+          
+        this.currentUser = usuarios[0];
+        this.dataStorage.setObjectValue(constant.USER, this.currentUser);
+        this.router.navigateByUrl('dashboard');
+        } else {
+          let user: User = {
+            email: value.user.email,
+            iconno: value.user.photoURL,
+            id: this.angularFirestore.createId(),
+            descripcion: "",
+            rol: "basico",
+            userName: value.user.displayName,
+            idUser: 0,
+            password: ""
+          }
+          this.saveUsuario(user);
+          this.currentUser = user;
+          this.dataStorage.setObjectValue(constant.USER, this.currentUser);
+          this.router.navigateByUrl('dashboard');
+        }
+      },
+      err => {},
+      () => {
+       
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
     //this.router.navigate(['admin/list']);
   }
   login(email: string, password: string) {
