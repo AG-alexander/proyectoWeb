@@ -12,14 +12,14 @@
         </th>
       </thead>
       <tbody>
-        <tr *ngFor="let tour of tour_list">
+        <tr *ngFor="let tour of tourList">
           <td width="47%">
             {{tour.name}}
           </td>
           <td width="47%">
             <select name="editors" [(ngModel)]="tour.idEditor" class="form-control">
               <option value="0">Seleccione un editor</option>
-              <option *ngFor="let editor of editor_list" [value]="editor.idUser">{{editor.userName}}</option>
+              <option *ngFor="let editor of editorList" [value]="editor.idUser">{{editor.userName}}</option>
             </select>
           </td>
           <td width="6%">

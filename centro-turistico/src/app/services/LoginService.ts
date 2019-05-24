@@ -41,10 +41,10 @@ export class LoginService {
     return this.dataStorage.getObjectValue(constant.USER) == null ? false : true;
   }
 
-  async  loginWithFacebook() {debugger
+  async  loginWithFacebook() {
     await this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((value)=> {
-      this.userSuscription = this.getUsuarioByEmail(value.user.email).subscribe((usuarios) => {debugger
-        if (usuarios[0]) {debugger
+      this.userSuscription = this.getUsuarioByEmail(value.user.email).subscribe((usuarios) => {
+        if (usuarios[0]) {
           
         this.currentUser = usuarios[0];
         this.dataStorage.setObjectValue(constant.USER, this.currentUser);

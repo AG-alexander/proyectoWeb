@@ -44,9 +44,10 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FirestoreSettingsToken} from '@angular/fire/firestore';
+import { FirebaseStorageService } from './services/firebase-storage.service';
 // let config = new AuthServiceConfig([
 //   {
 //     id: GoogleLoginProvider.PROVIDER_ID,
@@ -121,6 +122,7 @@ import { FirestoreSettingsToken} from '@angular/fire/firestore';
     NewsService,
     RatingService,
     SiteService,
+    FirebaseStorageService,
     { provide: FirestoreSettingsToken, useValue: {} }
 
   ],
