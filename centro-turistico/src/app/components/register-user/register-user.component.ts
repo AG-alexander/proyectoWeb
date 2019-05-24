@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService, AlertService, LoginService } from 'src/app/services';
 import { User } from 'src/app/interfaces/index';
 import { Router } from '@angular/router';
+import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
 
 @Component({
   selector: 'app-register-user',
@@ -19,6 +20,7 @@ export class RegisterUserComponent implements OnInit {
      private userService: UserService,
      private alertService: AlertService,
      private log: LoginService,
+     private fbStorage: FirebaseStorageService,
      private router: Router) { }
 
   initForm() {
@@ -39,10 +41,14 @@ export class RegisterUserComponent implements OnInit {
     }
   }
   onSubmit(){
+    console.log("affffffffffffffffffffffffffffffffff");
     let user: User;
     user = this.formGroup.value as User;
     user.rol = 'basico';
     user.iconno = this.imgUser;
+    this.fbStorage.upload(this.imagePath);
+    console.log(this.fbStorage.task.task.snapshot);
+    user.iconno = this.fbStorage.id;
     this.log.register(user, user.password);
     //this.router.navigate(['login']);
    // this.alertService.successInfoAlert("Usuario creado correramente");
@@ -54,7 +60,7 @@ export class RegisterUserComponent implements OnInit {
     return this.formGroup.controls;
   }
   ngOnInit() {
-    this.imgUser = "";
+    this.imgUser = "";debugger
     this.initForm();
   }
 

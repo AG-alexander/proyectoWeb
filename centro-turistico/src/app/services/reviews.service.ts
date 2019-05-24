@@ -78,23 +78,23 @@ export class ReviewsService {
   }
 
   saveReview(Review: Review) {
-    if (Review.id) {
+    if (Review.id) {debugger
       this.angularFirestore.collection<Review>('review').doc(Review.id).update(Review).then(()=>{
         this.alertas.successInfoAlert("Actualización exitosa");
-        this.location.back();
+      //  this.location.back();
       }).catch(()=>{
         this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
-        this.location.back();
+      //  this.location.back();
       });
      
     } else {
       Review.id = this.angularFirestore.createId();
       this.angularFirestore.collection<Review>('review').doc(Review.id).set(Review).then(()=>{
         this.alertas.successInfoAlert("Reseña creada con éxito");
-        this.location.back();
+      //  this.location.back();
       }).catch(()=>{
         this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
-        this.location.back();
+      //  this.location.back();
       });
     }
   }

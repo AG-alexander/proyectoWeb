@@ -17,7 +17,7 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
     private siteService: SiteService,
     private userService: UserService,
     private router: Router,
-    private permission: PermissionService
+    public permission: PermissionService
     ) { }
 
   getSites() {

@@ -14,6 +14,7 @@ export class UserService {
   users: User[] = user as User[];
   constructor(
     private dataStorage: DataStorageService,
+    public angularFirestore: AngularFirestore,
     public afAuth: AngularFireAuth) { }
 
   getUser(): User {
@@ -30,6 +31,10 @@ export class UserService {
     users.push(user);
     this.dataStorage.setObjectValue(constant.IDUSER, user.idUser+1);
     this.dataStorage.setObjectValue(constant.USERS, users);
+  }
+
+  getUserById(id: string): Observable<User[]> {
+    return this.angularFirestore.collection<User>('users', ref => ref.where('id', '==', id)).valueChanges();
   }
 
 }

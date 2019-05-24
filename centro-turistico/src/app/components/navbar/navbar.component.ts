@@ -10,6 +10,8 @@ import FOLLOWERS from 'src/assets/data/followers.json';
 import { User } from 'src/app/interfaces/index';
 import { PermissionService } from 'src/app/services/permission.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage/storage';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -18,10 +20,10 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   user: User;
-
-  constructor(
+  profileUrl: Observable<string>;
+  constructor(private storage: AngularFireStorage,
     private dataStorage: DataStorageService,
-    private permission: PermissionService,
+    public permission: PermissionService,
     private log: LoginService,
     private router: Router) {
      }
@@ -47,7 +49,9 @@ export class NavbarComponent implements OnInit {
     this.permission.setPermission();
   }
   ngOnInit() {
-    this.user = this.log.currentUser;
+    this.user = this.dataStorage.getObjectValue(constant.USER);
+    const ref = this.storage.ref(this.user.iconno);debugger
+    this.profileUrl = ref.getDownloadURL();
     this.permission.setPermission();
     
   }

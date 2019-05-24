@@ -10,7 +10,7 @@ import { Rating } from 'src/app/interfaces/rating';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit  {
 
   iduser: string;
   user: User
@@ -76,7 +76,11 @@ export class UserProfileComponent implements OnInit {
     this.userInfo = [];
     this.getSitesByUser();
   //   this.iduser = +this.activatedRouete.snapshot.params['id'];
-  //   this.user = this.userService.getUser();
+    this.userService.getUserById(this.iduser).subscribe(
+      res => {
+        this.user = res[0];
+      }
+    );
   //   this.followerList = this.storage.getObjectValue(constant.FOLLOWERS);
   //   this.ratingList = this.storage.getObjectValue(constant.RATINGS);
   //   this.siteList = this.storage.getObjectValue(constant.SITES);

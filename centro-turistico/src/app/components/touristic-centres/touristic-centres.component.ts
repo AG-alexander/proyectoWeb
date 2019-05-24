@@ -15,7 +15,7 @@ export class TouristicCentresComponent implements OnInit {
   showedList: TouristicCentre[];
   selected: string;
 
-  constructor(private site: SiteService) {
+  constructor(public site: SiteService) {
     this.value = "";
    }
 

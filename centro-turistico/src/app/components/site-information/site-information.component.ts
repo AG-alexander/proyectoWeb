@@ -27,6 +27,7 @@ export class SiteInformationComponent implements OnInit {
   messageFollower: string;
   message: string;
   review: Review;
+  flag: boolean;
   constructor(
     private siteService: SiteService,
     private reviewsService: ReviewsService,
@@ -46,19 +47,17 @@ export class SiteInformationComponent implements OnInit {
     this.siteService.getTouristicCentreById(this.id).subscribe(
       res => {
         this.touristicCentre = res[0];
-        console.log(this.touristicCentre);
-      }
-    );
-
-    this.reviewsService.getReviewBySite(this.id).subscribe(
-      res => {
-        this.reviews = res;
-      }
-    );
-
-    this.followersService.getSeguidoresById(this.id).subscribe(
-      res => {
-        this.followers = res;
+        this.reviewsService.getReviewBySite(this.id).subscribe(
+          res => {
+            this.reviews = res;
+            this.followersService.getSeguidoresBySite(this.id).subscribe(
+              res => {
+                this.followers = res;
+                this.flag = true;
+              }
+            );
+          }
+        );
       }
     );
 
@@ -100,8 +99,12 @@ export class SiteInformationComponent implements OnInit {
   confirm() {
     if (this.formGroupModal.valid) {
       let review: Review = this.formGroupModal.value as Review;
-  //    review.idSitio = this.id;
-      this.reviewsService.saveReview(review)
+      review.idSitio = this.id;
+      review.idUser = this.user.id;
+      review.img = this.user.iconno;
+      review.blocked = true;
+      review.userName = this.user.userName;
+      this.reviewsService.saveReview(review);debugger
       this.formGroupModal.reset();
   //    this.alert.successInfoAlert("Reseña creada con exito");
       this.modalRef.hide();
@@ -121,14 +124,15 @@ export class SiteInformationComponent implements OnInit {
 
   addFollower() {
     if (this.isFollower) {
-      this.followersService.deleteSeguidores(this.id);
+      let idFollower = this.followers.find(item => item.userId == this.user.id).id;
+      this.followersService.deleteSeguidores(idFollower);
     //  this.followersService.deleteFollower(this.user.idUser, this.id);
       this.isFollower = false;
     } else {
       let follow: followerModel = {
         siteId: this.id,
-        userId: this.user.idUser.toString(),
-        user: this.user.iconno
+        userId: this.user.id,
+        img: this.user.iconno
       }
       this.followersService.saveSeguidores(follow);
    //   this.followersService.addFollower(this.user.idUser, this.id);
