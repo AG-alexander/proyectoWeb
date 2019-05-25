@@ -101,7 +101,7 @@ export class SiteInformationComponent implements OnInit {
       let review: Review = this.formGroupModal.value as Review;
       review.idSitio = this.id;
       review.idUser = this.user.id;
-      review.img = this.user.iconno;
+      review.img = this.user.iconno.url;
       review.blocked = true;
       review.userName = this.user.userName;
       this.reviewsService.saveReview(review);debugger
@@ -132,7 +132,7 @@ export class SiteInformationComponent implements OnInit {
       let follow: followerModel = {
         siteId: this.id,
         userId: this.user.id,
-        img: this.user.iconno
+        img: this.user.iconno.url
       }
       this.followersService.saveSeguidores(follow);
    //   this.followersService.addFollower(this.user.idUser, this.id);

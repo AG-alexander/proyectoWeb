@@ -64,7 +64,7 @@
                             <div class="menu">
                                 <ul>
                                     <li *ngFor="let photo of touristicCentre.photos" (click)="openModal(template, photo)">
-                                        <img src="{{photo}}" class="photoImg" alt="">
+                                        <img src="{{photo.url}}" class="photoImg" alt="">
                                     </li>
                                 </ul>
                             </div>

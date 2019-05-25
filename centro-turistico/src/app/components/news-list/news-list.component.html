@@ -1,7 +1,7 @@
 <carousel>
-    <slide *ngFor="let new of news">
+    <slide *ngFor="let new of news; index as i">
         <div>
-            <img [src]="new.image" alt="first slide" style="display: block; width: 60%; margin-left: auto; margin-right: auto; height: 300px; margin-top: 0">
+            <img [src]="new.image.url" alt="first slide" style="display: block; width: 60%; margin-left: auto; margin-right: auto; height: 300px; margin-top: 0">
         </div>
         <div class="carousel-caption " style="width: 40%;margin-left: auto; margin-right: auto;">
             <h3>{{new.title}}</h3>

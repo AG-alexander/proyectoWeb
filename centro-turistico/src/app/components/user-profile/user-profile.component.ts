@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { User, followerModel, TouristicCentre, userInfo, Review } from 'src/app/interfaces/index';
 import { constant } from 'src/app/constant-data/constant';
 import { Rating } from 'src/app/interfaces/rating';
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage/storage';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,6 +22,7 @@ export class UserProfileComponent implements OnInit  {
   reviewsList: Review[];
   userSites: TouristicCentre;
   userInfo: userInfo[];
+  profileUrl: Observable<string>;
   constructor(
     private userService: UserService,
     private followerService: FollowerService,
@@ -27,7 +30,8 @@ export class UserProfileComponent implements OnInit  {
     private siteService: SiteService,
     private reviewService: ReviewsService, 
     private activatedRouete: ActivatedRoute,
-    private storage: DataStorageService
+    private storage: DataStorageService,
+    private fbStorage: AngularFireStorage,
     ) 
   { }
 
@@ -75,10 +79,13 @@ export class UserProfileComponent implements OnInit  {
     this.iduser = this.activatedRouete.snapshot.params['id'];
     this.userInfo = [];
     this.getSitesByUser();
+    
   //   this.iduser = +this.activatedRouete.snapshot.params['id'];
     this.userService.getUserById(this.iduser).subscribe(
       res => {
         this.user = res[0];
+        // const ref = this.fbStorage.ref(this.user.iconno);
+        // this.profileUrl = ref.getDownloadURL();
       }
     );
   //   this.followerList = this.storage.getObjectValue(constant.FOLLOWERS);

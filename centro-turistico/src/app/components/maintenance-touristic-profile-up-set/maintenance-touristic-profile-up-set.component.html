@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
-      <form [formGroup]="formGroup" (ngSubmit)="saveSitio()">
+      <form [formGroup]="formGroup" (ngSubmit)="save()">
         <div class="form-group">
           <label for="name">Nombre</label>
           <input type="text" class="form-control form-control-sm" formControlName="name" id="name"
@@ -78,7 +78,7 @@
         </button>
       </div>
       <div class="img-container">
-        <img [src]="img" alt="" class="img-size" *ngFor="let img of imgList">
+        <img [src]="img" alt="" class="img-size" *ngFor="let img of imgShowedList">
       </div>
     </div>
   </div>

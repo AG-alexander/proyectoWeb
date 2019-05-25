@@ -1,4 +1,5 @@
 import { Rol } from './rol';
+import { Images } from './imges';
 
 export interface User {
     idUser?: number; // identificador
@@ -6,7 +7,7 @@ export interface User {
     password: string; // contraseña
     email: string; // correo
     descripcion: string; // descripcion
-    iconno: string; // icono
+    iconno: Images; // icono
     string?: Date; // fecha nacimineto
     rol: string; // rol
     id: string;

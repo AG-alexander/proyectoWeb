@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService, AlertService, LoginService } from 'src/app/services';
-import { User } from 'src/app/interfaces/index';
+import { User, Images } from 'src/app/interfaces/index';
 import { Router } from '@angular/router';
 import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-register-user',
@@ -21,6 +23,8 @@ export class RegisterUserComponent implements OnInit {
      private alertService: AlertService,
      private log: LoginService,
      private fbStorage: FirebaseStorageService,
+     private storage: AngularFireStorage,
+     private angularFirestore: AngularFirestore,
      private router: Router) { }
 
   initForm() {
@@ -41,15 +45,22 @@ export class RegisterUserComponent implements OnInit {
     }
   }
   onSubmit(){
-    console.log("affffffffffffffffffffffffffffffffff");
     let user: User;
     user = this.formGroup.value as User;
     user.rol = 'basico';
-    user.iconno = this.imgUser;
+    //user.iconno = this.imgUser;
     this.fbStorage.upload(this.imagePath);
-    console.log(this.fbStorage.task.task.snapshot);
-    user.iconno = this.fbStorage.id;
-    this.log.register(user, user.password);
+    this.fbStorage.task.then(()=>{
+      this.storage.ref(this.fbStorage.id).getDownloadURL().subscribe(res => {
+        let img: Images = {
+          idFireBase: this.angularFirestore.createId(),
+          idStorage: this.fbStorage.id,
+          url: res
+        };
+        user.iconno = img;
+        this.log.register(user, user.password);
+      });
+     });
     //this.router.navigate(['login']);
    // this.alertService.successInfoAlert("Usuario creado correramente");
   }
@@ -60,7 +71,7 @@ export class RegisterUserComponent implements OnInit {
     return this.formGroup.controls;
   }
   ngOnInit() {
-    this.imgUser = "";debugger
+    this.imgUser = "";
     this.initForm();
   }
 

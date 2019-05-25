@@ -8,3 +8,4 @@ export { photos, imageXSite, imageXUser} from './galery';
 export { permXRol, perms, rolXuser, roles } from './perms';
 export { Service } from './service';
 export { Review } from './review';
+export { Images } from './imges';
