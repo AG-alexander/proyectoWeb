@@ -50,9 +50,14 @@ export class LoginService {
         this.dataStorage.setObjectValue(constant.USER, this.currentUser);
         this.router.navigateByUrl('dashboard');
         } else {
+
           let user: User = {
             email: value.user.email,
-            iconno: value.user.photoURL,
+            iconno: {
+              idFireBase: this.angularFirestore.createId(),
+              url: value.user.photoURL,
+              idStorage: null
+            },
             id: this.angularFirestore.createId(),
             descripcion: "",
             rol: "basico",
@@ -87,7 +92,11 @@ export class LoginService {
         } else {
           let user: User = {
             email: value.user.email,
-            iconno: value.user.photoURL,
+            iconno: {
+              idFireBase: this.angularFirestore.createId(),
+              url: value.user.photoURL,
+              idStorage: null
+            },
             id: this.angularFirestore.createId(),
             descripcion: "",
             rol: "basico",

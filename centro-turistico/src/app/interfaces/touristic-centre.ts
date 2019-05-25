@@ -1,11 +1,12 @@
 import { Review } from './review';
+import { Images } from './imges';
 
 export interface TouristicCentre {
     idTouristicCentre: number; // identificador
     name: string; // nombre
     description: string; // descripcion
     schedules: string[]; // horarios
-    photos: string[]; // potos
+    photos: Images[]; // potos
     video: string; // video
     followersList: number[]; // lista de segidores 
     reviews: number[];// 

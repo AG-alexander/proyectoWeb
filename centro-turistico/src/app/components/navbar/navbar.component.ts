@@ -20,7 +20,7 @@ import { AngularFireStorage } from '@angular/fire/storage/storage';
 export class NavbarComponent implements OnInit {
 
   user: User;
-  profileUrl: Observable<string>;
+  //profileUrl: Observable<string>;
   constructor(private storage: AngularFireStorage,
     private dataStorage: DataStorageService,
     public permission: PermissionService,
@@ -50,8 +50,8 @@ export class NavbarComponent implements OnInit {
   }
   ngOnInit() {
     this.user = this.dataStorage.getObjectValue(constant.USER);
-    const ref = this.storage.ref(this.user.iconno);debugger
-    this.profileUrl = ref.getDownloadURL();
+    //const ref = this.storage.ref(this.user.iconno);
+    //this.profileUrl = ref.getDownloadURL();
     this.permission.setPermission();
     
   }
