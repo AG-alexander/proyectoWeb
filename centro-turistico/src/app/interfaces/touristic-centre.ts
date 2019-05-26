@@ -16,7 +16,7 @@ export interface TouristicCentre {
     region: string; // region
     direccion: string; // direccion
     phone: string; // telefono
-    idEditor: number;
+    idEditor: string;
     id?: string; // id de firebase
 }
 

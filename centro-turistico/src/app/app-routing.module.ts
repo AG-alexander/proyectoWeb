@@ -31,7 +31,7 @@ const routes: Routes = [
       { path: 'mainte-news-set', component: MaintenanceNewsUpsetComponent, canActivate: [AuthGuard, AdminGuard ], data: {roles:['duenno', 'admin']} },
       { path: 'mainte-tour-list', component: MaintenanceTouristicProfileListComponent, canActivate: [AdminGuard], data: {roles:['duenno', 'admin']} },
       { path: 'mainte-tour-set', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, AdminGuard ], data: {roles:['duenno', 'admin']} }, 
-      { path: 'mainte-editor', component: MaintenanceEditorsComponent, canActivate: [AuthGuard, AdminGuard ] },
+      { path: 'mainte-editor', component: MaintenanceEditorsComponent, canActivate: [AuthGuard, AdminGuard ], data: {roles:['duenno', 'admin']} },
       { path: 'mainte-tour-up/:id', component: MaintenanceTouristicProfileUpSetComponent, canActivate: [AuthGuard, AdminGuard ], data: {roles:['duenno', 'admin']} },
       { path: '', pathMatch: 'full', redirectTo: 'home' }
 

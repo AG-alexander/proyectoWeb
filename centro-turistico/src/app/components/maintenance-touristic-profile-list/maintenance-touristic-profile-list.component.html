@@ -24,14 +24,14 @@
         <td width="6%">
           <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom"
             (click)="updateTourProfile(tour.id)" placement="auto" popover="Modificar Perfil Turistico"
-            triggers="mouseenter:mouseleave" *ngIf="permission.duenno">
+            triggers="mouseenter:mouseleave" *ngIf="isEditor(tour.idEditor)">
             <i class="fa fa-pencil"></i>
           </button>
         </td>
         <td width="6%">
           <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom"
             (click)="deleteTourProfile(tour.id)" placement="auto" popover="Eliminar Perfil Turistico"
-            triggers="mouseenter:mouseleave" *ngIf="permission.duenno">
+            triggers="mouseenter:mouseleave" *ngIf="isEditor(tour.idEditor)">
             <i class="fa fa-trash"></i>
           </button>
         </td>

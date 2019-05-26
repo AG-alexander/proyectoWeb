@@ -18,8 +18,8 @@
           </td>
           <td width="47%">
             <select name="editors" [(ngModel)]="tour.idEditor" class="form-control">
-              <option value="0">Seleccione un editor</option>
-              <option *ngFor="let editor of editorList" [value]="editor.idUser">{{editor.userName}}</option>
+              <option value="">Seleccione un editor</option>
+              <option *ngFor="let editor of editorList" [value]="editor.id">{{editor.userName}}</option>
             </select>
           </td>
           <td width="6%">

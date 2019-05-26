@@ -93,7 +93,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
       tourProfile.idTouristicCentre = this.tourLoscalStorage.idTouristicCentre;
     } else {
       tourProfile.idTouristicCentre = 0;
-      tourProfile.idEditor = 0;
+      tourProfile.idEditor = "";
     }
     tourProfile.schedules = this.schedulesList;
     tourProfile.photos = this.imgList;
@@ -150,7 +150,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
       tourProfile.idTouristicCentre = this.tourLoscalStorage.idTouristicCentre;
     } else {
       tourProfile.idTouristicCentre = 0;
-      tourProfile.idEditor = 0;
+      tourProfile.idEditor = "";
     }
     tourProfile.schedules = this.schedulesList;
     tourProfile.photos = this.imgList;
