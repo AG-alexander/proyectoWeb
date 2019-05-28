@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import user from '../../assets/data/users.json';
 import { User } from '../interfaces/index';
 import { DataStorageService } from './data-storage.service';
+import { UserService } from './user.service';
 import { constant } from '../constant-data/constant.js';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { auth } from 'firebase';
@@ -23,7 +24,8 @@ export class LoginService {
     private afAuth: AngularFireAuth, 
     private angularFirestore: AngularFirestore,
     private router: Router, 
-    private alertas: AlertService,) { }
+    private alertas: AlertService,
+    private useService: UserService) { }
   getUser(userName: string, password: string): boolean {
     this.users = this.dataStorage.getObjectValue(constant.USERS);
     if (this.users) {
@@ -164,6 +166,6 @@ export class LoginService {
   }
 
   saveUsuario(user: User) { 
-    this.angularFirestore.collection<User>('users').add(user)
+    this.angularFirestore.collection<User>('users').add(user);debugger
   }
 }

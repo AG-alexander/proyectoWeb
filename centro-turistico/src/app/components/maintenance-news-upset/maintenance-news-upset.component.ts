@@ -25,9 +25,9 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
 
   constructor(
     private fB: FormBuilder,
-    private activated: ActivatedRoute, 
+    private activated: ActivatedRoute,
     private newsService: NewsService,
-    private alert: AlertService, 
+    private alert: AlertService,
     private router: Router,
     private fbStorage: FirebaseStorageService,
     private storage: AngularFireStorage,
@@ -57,17 +57,17 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
     this.newsService.getNoticiaById(this.id).subscribe(
       res => {
         this.newsLocalStorage = res[0];
-        this.imageSrc = this.newsLocalStorage.image;
+        this.imageSrc = this.newsLocalStorage.image.url;
         this.ref = this.storage.ref(this.newsLocalStorage.image.idStorage);
-        this.ref.getDownloadURL().subscribe(
-          res => {
-            this.imageSrc = res;
-          }
-        );
+        // this.ref.getDownloadURL().subscribe(
+        //   res => {
+        //     this.imageSrc = res;
+        //   }
+        // );
         this.formGroup.patchValue({
           title: this.newsLocalStorage.title,
           content: this.newsLocalStorage.content,
-         // image: this.imageSrc 
+          // image: this.imageSrc 
         });
       }
     );
@@ -89,7 +89,7 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
     } else {
       news.date = new Date();
     }
-   
+
     this.newsService.saveNew(news);
     this.alert.successInfoAlert('Creado el sitio correctamente');
     this.router.navigate(['dashboard/mainte-news-list']);
@@ -106,28 +106,31 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
   saveNoticia() {
     let news = this.formGroup.value as News;
     if (this.id != undefined) {
-     
+
       news.date = this.newsLocalStorage.date;
       news.id = this.id;
-      this.fbStorage.update(this.imagePath, this.newsLocalStorage.image.idStorage);
+      if (this.imagePath) {
+        this.fbStorage.update(this.imagePath, this.newsLocalStorage.image.idStorage);
+      }else {
+        news.image = this.newsLocalStorage.image;
+      }
     } else {
       news.date = new Date();
       this.fbStorage.upload(this.imagePath);
     }
     news.idNews = 0;
-   
-   this.fbStorage.task.then(()=>{
-    this.storage.ref(this.fbStorage.id).getDownloadURL().subscribe(res => {
-      let img: Images = {
-        idFireBase: this.angularFirestore.createId(),
-        idStorage: this.fbStorage.id,
-        url: res
-      };
-      news.image = img;
-      this.newsService.saveNews(news);
+
+    this.fbStorage.task.then(() => {
+      this.storage.ref(this.fbStorage.id).getDownloadURL().subscribe(res => {
+        let img: Images = {
+          idFireBase: this.id? this.newsLocalStorage.image.idFireBase : this.angularFirestore.createId(),
+          idStorage: this.id? this.newsLocalStorage.image.idStorage : this.fbStorage.id,
+          url: res
+        };
+        news.image = img;
+        this.newsService.saveNews(news);
+      });
     });
-   });
-   
   }
 
   ngOnInit() {
