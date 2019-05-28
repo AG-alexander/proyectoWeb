@@ -45,7 +45,7 @@ export class MaintenanceEditorsComponent implements OnInit {
       userAux.rol = "duenno";
       this.angularFirestore.collection<User>('users')
       .doc(item.idEditor)
-      .set(userAux)
+      .update(userAux)
       .then(
         () => {
           this.siteService.saveTouristicCentreEditor(item, index-1);
