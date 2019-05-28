@@ -1,12 +1,15 @@
 <div class="fallowers-container">
     <h2>Seguidores</h2>
-    <div *ngIf="followers">
-        <table class="table">
+    <div *ngIf="followers" class="img-container">
+        <!-- <table class="table">
             <tbody>
                 <tr *ngFor="let follower of followers">
                     <td> <img [src]="follower.img" alt="" class="img-size"> {{follower.user}}</td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
+        <div *ngFor="let follower of followers">
+            <img [src]="follower.img" alt="" class="img-size">
+        </div>
     </div>
 </div>

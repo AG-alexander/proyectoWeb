@@ -44,12 +44,16 @@ export class MaintenanceEditorsComponent implements OnInit {
       let userAux = this.editorList.find(itemE => itemE.id==item.idEditor);
       userAux.rol = "duenno";
       this.angularFirestore.collection<User>('users')
-      .doc(item.idEditor)
+      .doc(userAux.id)
       .update(userAux)
       .then(
         () => {
           this.siteService.saveTouristicCentreEditor(item, index-1);
           index--;
+        }
+      ).catch(
+        (err) => {
+          console.log(err);
         }
       );
     });

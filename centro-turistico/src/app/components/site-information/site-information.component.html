@@ -16,7 +16,7 @@
             <div class="site">
                 <div class="row">
                     <div class="col-md-4">
-                        <img [src]="touristicCentre.photos[0]" alt="">
+                        <img [src]="touristicCentre.photos[0].url" alt="">
                         <button class="btn btn-primary btn-block" [ngClass]="{'btn-success': isFollower}"
                             (click)="addFollower()" popover="{{message}}" triggers="mouseenter:mouseleave"
                             *ngIf="permission.basico">{{messageFollower}}</button>
@@ -63,7 +63,7 @@
                         <div class="wrapper">
                             <div class="menu">
                                 <ul>
-                                    <li *ngFor="let photo of touristicCentre.photos" (click)="openModal(template, photo)">
+                                    <li *ngFor="let photo of touristicCentre.photos" (click)="openModal(template, photo.url)">
                                         <img src="{{photo.url}}" class="photoImg" alt="">
                                     </li>
                                 </ul>

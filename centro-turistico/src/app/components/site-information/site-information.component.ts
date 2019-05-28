@@ -39,7 +39,7 @@ export class SiteInformationComponent implements OnInit {
     private permission: PermissionService,
     private fB: FormBuilder,
     private alert: AlertService
-  ) {}
+  ) { }
 
   getSite() {
     this.id = this.activatedRoute.snapshot.params['id'];
@@ -53,6 +53,9 @@ export class SiteInformationComponent implements OnInit {
             this.followersService.getSeguidoresBySite(this.id).subscribe(
               res => {
                 this.followers = res;
+                this.isFollower = this.followers.findIndex(item => item.userId == this.user.id) > -1;
+                this.message = this.isFollower ? "Dejar de seguir" : "Comenzar a seguir";
+                this.messageFollower = this.isFollower ? "Siguiendo" : "Seguir";
                 this.flag = true;
               }
             );
@@ -69,10 +72,8 @@ export class SiteInformationComponent implements OnInit {
     this.initForm();
     this.user = this.userService.getUser();
     if (this.user) {
-     // this.isFollower = this.followersService.isFollower(this.user.idUser, this.id);
+      // this.isFollower = this.followersService.isFollower(this.user.idUser, this.id);
     }
-    this.message = this.isFollower? "Dejar de seguir":"Comenzar a seguir";
-    this.messageFollower = this.isFollower? "Siguiendo":"Seguir";
   }
 
   openModal(template: TemplateRef<any>, image: string) {
@@ -104,9 +105,9 @@ export class SiteInformationComponent implements OnInit {
       review.img = this.user.iconno.url;
       review.blocked = true;
       review.userName = this.user.userName;
-      this.reviewsService.saveReview(review);debugger
+      this.reviewsService.saveReview(review); debugger
       this.formGroupModal.reset();
-  //    this.alert.successInfoAlert("Reseña creada con exito");
+      //    this.alert.successInfoAlert("Reseña creada con exito");
       this.modalRef.hide();
       this.modalRef = null;
     }
@@ -116,7 +117,7 @@ export class SiteInformationComponent implements OnInit {
     if (this.formGroupModalAnswer.valid) {
       this.review.dunnoReview = this.formGroupModalAnswer.controls['answer'].value;
       this.reviewsService.saveReview(this.review);
-    //  this.alert.successInfoAlert("Respuesta agregada con exito");
+      //  this.alert.successInfoAlert("Respuesta agregada con exito");
       this.modalRef.hide();
       this.modalRef = null;
     }
@@ -126,7 +127,7 @@ export class SiteInformationComponent implements OnInit {
     if (this.isFollower) {
       let idFollower = this.followers.find(item => item.userId == this.user.id).id;
       this.followersService.deleteSeguidores(idFollower);
-    //  this.followersService.deleteFollower(this.user.idUser, this.id);
+      //  this.followersService.deleteFollower(this.user.idUser, this.id);
       this.isFollower = false;
     } else {
       let follow: followerModel = {
@@ -135,11 +136,11 @@ export class SiteInformationComponent implements OnInit {
         img: this.user.iconno.url
       }
       this.followersService.saveSeguidores(follow);
-   //   this.followersService.addFollower(this.user.idUser, this.id);
-       this.isFollower = true;
+      //   this.followersService.addFollower(this.user.idUser, this.id);
+      this.isFollower = true;
     }
-    this.message = this.isFollower? "Dejar de seguir":"Comenzar a seguir";
-    this.messageFollower = this.isFollower? "Siguiendo":"Seguir";
+    this.message = this.isFollower ? "Dejar de seguir" : "Comenzar a seguir";
+    this.messageFollower = this.isFollower ? "Siguiendo" : "Seguir";
   }
 
   answerReview(template: TemplateRef<any>, $event) {
