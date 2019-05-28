@@ -1,28 +1,30 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2">
-            <img [src]="user.iconno.url" alt="" class="img-size">
+<block-ui>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <img [src]="user.iconno.url" alt="" class="img-size">
+            </div>
+            <div class="col-md-10">
+                <h1>{{user.userName}}</h1>
+                <label for="desciption">Descripción</label>
+                <p>{{user.descripcion}}</p>
+                <label for="email">Correo</label>
+                <p>{{user.email}}</p>
+            </div>
         </div>
-        <div class="col-md-10">
-            <h1>{{user.userName}}</h1>
-            <label for="desciption">Descripción</label>
-            <p>{{user.descripcion}}</p>
-            <label for="email">Correo</label>
-            <p>{{user.email}}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div>
-                <h2>Sitios seguidos</h2>
-                <accordion *ngFor="let data of userInfo">
-                    <accordion-group [heading]="data.nameSite">
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <h2>Sitios seguidos</h2>
+                    <accordion *ngFor="let data of userInfo">
+                        <accordion-group [heading]="data.nameSite">
                             <app-site-rating [rate]="data.ratingSite" [readOnly]="true"></app-site-rating>
                             <h3>Comentarios en el sitio</h3>
                             <p *ngFor="let re of data.reviews_list">{{re.description}}</p>
-                    </accordion-group>
-                </accordion>
+                        </accordion-group>
+                    </accordion>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</block-ui>

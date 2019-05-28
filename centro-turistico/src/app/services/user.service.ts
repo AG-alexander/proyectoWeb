@@ -8,11 +8,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Location } from '@angular/common';
 import { AlertService } from './alert.service';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
+  @BlockUI() blockUI: NgBlockUI;
   users: User[] = user as User[];
   constructor(
     private dataStorage: DataStorageService,
@@ -47,20 +48,28 @@ export class UserService {
 
   saveUser(user: User) {
     if (user.id) {
+      this.alertas.successInfoAlert("Actualización exitosa");
+
       this.angularFirestore.collection<User>('users').doc(user.id).update(user).then(() => {
+        this.blockUI.stop();
         this.alertas.successInfoAlert("Actualización exitosa");
         this.location.back();
       }).catch(() => {
+        this.blockUI.stop();
         this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
         this.location.back();
       });
 
     } else {
+      this.alertas.successInfoAlert("Actualización exitosa");
+
       user.id = this.angularFirestore.createId();
       this.angularFirestore.collection<User>('users').doc(user.id).set(user).then(() => {
+        this.blockUI.stop();
         this.alertas.successInfoAlert("Inserción exitosa");
         this.location.back();
       }).catch(() => {
+        this.blockUI.stop();
         this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
         this.location.back();
       });

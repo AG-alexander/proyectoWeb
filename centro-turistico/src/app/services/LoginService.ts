@@ -9,11 +9,12 @@ import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertService } from './alert.service.js';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-
+  @BlockUI() blockUI: NgBlockUI;
   users: User[] = user;
   currentUser: User;
   userSuscription: Subscription;
@@ -42,15 +43,16 @@ export class LoginService {
   }
 
   async  loginWithFacebook() {
+    this.blockUI.start("Validando datos, por favor espere!!!");
     await this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((value)=> {
       this.userSuscription = this.getUsuarioByEmail(value.user.email).subscribe((usuarios) => {
         if (usuarios[0]) {
-          
+          this.blockUI.stop();
         this.currentUser = usuarios[0];
         this.dataStorage.setObjectValue(constant.USER, this.currentUser);
         this.router.navigateByUrl('dashboard');
         } else {
-
+          this.blockUI.stop();
           let user: User = {
             email: value.user.email,
             iconno: {
@@ -71,25 +73,29 @@ export class LoginService {
           this.router.navigateByUrl('dashboard');
         }
       },
-      err => {},
+      err => {this.blockUI.stop();},
       () => {
        
       });
     }).catch((error) => {
+      this.alertas.errorAlert("contraseña o usuario invalido");
+      this.blockUI.stop();
       console.log(error);
     });
     //this.router.navigate(['admin/list']);
   }
 
   async  loginWithGoogle() {
+    this.blockUI.start("Validando datos, por favor espere!!!");
     await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((value)=> {
       this.userSuscription = this.getUsuarioByEmail(value.user.email).subscribe((usuarios) => {
         if (usuarios[0]) {
-          
+          this.blockUI.stop();
         this.currentUser = usuarios[0];
         this.dataStorage.setObjectValue(constant.USER, this.currentUser);
         this.router.navigateByUrl('dashboard');
         } else {
+          this.blockUI.stop();
           let user: User = {
             email: value.user.email,
             iconno: {
@@ -110,31 +116,39 @@ export class LoginService {
           this.router.navigateByUrl('dashboard');
         }
       },
-      err => {},
+      err => {this.blockUI.stop();},
       () => {
        
       });
     }).catch((error) => {
+      this.blockUI.stop();
       console.log(error);
     });
     //this.router.navigate(['admin/list']);
   }
+
   login(email: string, password: string) {
+    this.blockUI.start("Validando datos, por favor espere!!!");
     let aux = email;
     this.afAuth.auth.signInWithEmailAndPassword(email, password).then((value) => {
+      this.blockUI.stop();
       this.setCurrentUser(value.user.email);
     }).catch((error) => {
+      this.blockUI.stop();
       console.log(error);
+      this.alertas.errorAlert("contraseña o usuario invalido");
     });
   }
 
   setCurrentUser(email: string) {
+    this.blockUI.start("Validando datos, por favor espere!!!");
     this.userSuscription = this.getUsuarioByEmail(email).subscribe((usuarios) => {
+      this.blockUI.stop();
       this.currentUser = usuarios[0];
       this.dataStorage.setObjectValue(constant.USER, this.currentUser);
       this.router.navigateByUrl('dashboard');
     },
-    err => {},
+    err => {this.blockUI.stop();},
     () => {
      
     });
@@ -145,12 +159,15 @@ export class LoginService {
   }
 
   recovery(email: string) {
+    this.blockUI.start("Validando datos, por favor espere!!!");
     this.afAuth.auth.sendPasswordResetEmail(email)
       .then(() => this.alertas.successInfoAlert('Se ha enviado un correo para restaurar su cuenta Excelente'))
       .catch((error) => this.alertas.warningInfoAlert('Se ha presentado el siguiente error: ' + error + 'Atención'))
+      this.blockUI.stop();
   }
 
   register(user: User, password: string) {
+    
     this.afAuth.auth.createUserWithEmailAndPassword(user.email, password).then((result) => {
       user.id = result.user.uid;
       this.saveUsuario(user);

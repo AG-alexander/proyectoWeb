@@ -1,83 +1,76 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-8">
-      <form [formGroup]="formGroup" (ngSubmit)="save()">
-        <div class="form-group">
-          <label for="name">Nombre</label>
-          <input type="text" class="form-control form-control-sm" formControlName="name" id="name"
-            placeholder="Escriba el nombre" [ngClass]="{'is-invalid': fG.name.errors && fG.name.touched}">
-          <div *ngIf="fG.name.errors?.required" class="invalid-feedback">
-            <div class="form-control-feedback text-danger" *ngIf="fG.name.errors?.required">
-              * El nombre es requerido
+<block-ui>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <form [formGroup]="formGroup" (ngSubmit)="save()">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="name" id="name" placeholder="Escriba el nombre" [ngClass]="{'is-invalid': fG.name.errors && fG.name.touched}">
+                        <div *ngIf="fG.name.errors?.required" class="invalid-feedback">
+                            <div class="form-control-feedback text-danger" *ngIf="fG.name.errors?.required">
+                                * El nombre es requerido
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="description" id="description" placeholder="Escriba la descripción" [ngClass]="{'is-invalid': fG.description.errors && fG.description.touched}">
+                        <div *ngIf="fG.description.errors?.required" class="invalid-feedback">
+                            <div class="form-control-feedback text-danger" *ngIf="fG.description.errors?.required">
+                                * La descripción es requerida
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="schedules">Horarios</label>
+                        <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btn-add-schedules" (click)="addSchedule()" placement="auto" popover="Agregar Horario" triggers="mouseenter:mouseleave">
+                <i class="fa fa-plus"></i>
+              </button>
+                        <input type="text" class="form-control form-control-sm" formControlName="schedules" id="schedules" placeholder="Escriba el horario">
+                        <div class="invalid-feedback">
+                            <div class="form-control-feedback text-danger">
+                                * La descripción es requerida
+                            </div>
+                        </div>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr *ngFor="let sche of schedulesList; index as i">
+                                    <td width="94%">
+                                        {{sche}}
+                                    </td>
+                                    <td width="6%">
+                                        <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="deleteSchedule(i)" placement="auto" popover="Eliminar Horario" triggers="mouseenter:mouseleave">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <label for="video">Video</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="video" id="video" placeholder="Escriba el id del video" [ngClass]="{'is-invalid': fG.video.errors && fG.video.touched}">
+                        <div *ngIf="fG.video.errors?.required" class="invalid-feedback">
+                            <div class="form-control-feedback text-danger" *ngIf="fG.video.errors?.required">
+                                * El video es requerido
+                            </div>
+                        </div>
+                        <app-video-player [urlYoutube]="fG.video.value"></app-video-player>
+                    </div>
+                    <button class="btn btn-primary" type="submit" [disabled]="!(Validated)">Guardar</button>
+                </form>
             </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="description">Descripción</label>
-          <input type="text" class="form-control form-control-sm" formControlName="description" id="description"
-            placeholder="Escriba la descripción"
-            [ngClass]="{'is-invalid': fG.description.errors && fG.description.touched}">
-          <div *ngIf="fG.description.errors?.required" class="invalid-feedback">
-            <div class="form-control-feedback text-danger" *ngIf="fG.description.errors?.required">
-              * La descripción es requerida
+            <div class="col-md-4">
+                <div>
+                    <input style="display: none;" type="file" (change)="onFileSelected(fileInput)" #fileInput>
+                    <button type="button" class="btn  icons -sm btn-default blockContent" (click)="fileInput.click()" placement="auto" popover="Buscar Imagen" triggers="mouseenter:mouseleave">
+            <i class="fa fa-file-image-o"></i>
+          </button>
+                </div>
+                <div class="img-container">
+                    <img [src]="img" alt="" class="img-size" *ngFor="let img of imgShowedList">
+                </div>
             </div>
-          </div>
         </div>
-        <div class="form-group">
-          <label for="schedules">Horarios</label>
-            <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btn-add-schedules"
-              (click)="addSchedule()" placement="auto" popover="Agregar Horario" triggers="mouseenter:mouseleave">
-              <i class="fa fa-plus"></i>
-            </button>
-          <input type="text" class="form-control form-control-sm" formControlName="schedules" id="schedules"
-            placeholder="Escriba el horario">
-          <div class="invalid-feedback">
-            <div class="form-control-feedback text-danger">
-              * La descripción es requerida
-            </div>
-          </div>
-          <table class="table table-striped">
-            <tbody>
-              <tr *ngFor="let sche of schedulesList; index as i">
-                <td width="94%">
-                  {{sche}}
-                </td>
-                <td width="6%">
-                  <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom"
-                    (click)="deleteSchedule(i)" placement="auto" popover="Eliminar Horario"
-                    triggers="mouseenter:mouseleave">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="form-group">
-          <label for="video">Video</label>
-          <input type="text" class="form-control form-control-sm" formControlName="video" id="video"
-            placeholder="Escriba el id del video" [ngClass]="{'is-invalid': fG.video.errors && fG.video.touched}">
-          <div *ngIf="fG.video.errors?.required" class="invalid-feedback">
-            <div class="form-control-feedback text-danger" *ngIf="fG.video.errors?.required">
-              * El video es requerido
-            </div>
-          </div>
-          <app-video-player [urlYoutube]="fG.video.value"></app-video-player>
-        </div>
-        <button class="btn btn-primary" type="submit" [disabled]="!(Validated)">Guardar</button>
-      </form>
     </div>
-    <div class="col-md-4">
-      <div>
-        <input style="display: none;" type="file" (change)="onFileSelected(fileInput)" #fileInput>
-        <button type="button" class="btn  icons -sm btn-default blockContent" (click)="fileInput.click()"
-          placement="auto" popover="Buscar Imagen" triggers="mouseenter:mouseleave">
-          <i class="fa fa-file-image-o"></i>
-        </button>
-      </div>
-      <div class="img-container">
-        <img [src]="img" alt="" class="img-size" *ngFor="let img of imgShowedList">
-      </div>
-    </div>
-  </div>
-</div>
+</block-ui>

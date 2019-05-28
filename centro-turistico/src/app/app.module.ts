@@ -49,6 +49,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FirestoreSettingsToken} from '@angular/fire/firestore';
 import { FirebaseStorageService } from './services/firebase-storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { BlockUIModule } from 'ng-block-ui';
 // let config = new AuthServiceConfig([
 //   {
 //     id: GoogleLoginProvider.PROVIDER_ID,
@@ -106,6 +107,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
     TypeaheadModule.forRoot(),
+    BlockUIModule.forRoot(),
     SocialLoginModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

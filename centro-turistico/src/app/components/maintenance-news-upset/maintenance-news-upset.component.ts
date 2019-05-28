@@ -7,6 +7,7 @@ import { FirebaseStorageService } from 'src/app/services/firebase-storage.servic
 import { Observable } from 'rxjs';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-maintenance-news-upset',
@@ -14,7 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./maintenance-news-upset.component.css']
 })
 export class MaintenanceNewsUpsetComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   id: string;
   imageSrc: any;
   imagePath: string;
@@ -54,6 +55,7 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
 
   loadForm() {
     this.initForm();
+    this.blockUI.start("Cargando datos...!!!");
     this.newsService.getNoticiaById(this.id).subscribe(
       res => {
         this.newsLocalStorage = res[0];
@@ -64,10 +66,10 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
             this.imageSrc = res;
           }
         );
+        this.blockUI.stop();
         this.formGroup.patchValue({
           title: this.newsLocalStorage.title,
           content: this.newsLocalStorage.content,
-         // image: this.imageSrc 
         });
       }
     );
@@ -104,6 +106,7 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
   }
 
   saveNoticia() {
+    console.log(0);
     let news = this.formGroup.value as News;
     if (this.id != undefined) {
      
@@ -115,14 +118,16 @@ export class MaintenanceNewsUpsetComponent implements OnInit {
       this.fbStorage.upload(this.imagePath);
     }
     news.idNews = 0;
-   
+    this.blockUI.start("Guardando datos...!!!");
    this.fbStorage.task.then(()=>{
     this.storage.ref(this.fbStorage.id).getDownloadURL().subscribe(res => {
       let img: Images = {
         idFireBase: this.angularFirestore.createId(),
         idStorage: this.fbStorage.id,
         url: res
+       
       };
+      this.blockUI.stop();
       news.image = img;
       this.newsService.saveNews(news);
     });

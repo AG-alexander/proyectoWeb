@@ -3,6 +3,7 @@ import { TouristicCentre, User } from 'src/app/interfaces/index';
 import { SiteService, UserService, AlertService, DataStorageService } from 'src/app/services/index';
 import { constant } from 'src/app/constant-data/constant';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-maintenance-editors',
@@ -10,6 +11,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./maintenance-editors.component.css']
 })
 export class MaintenanceEditorsComponent implements OnInit {
+  @BlockUI() blockUI: NgBlockUI;
   tourList: TouristicCentre[];
   editorList: User[];
   constructor(
@@ -20,25 +22,23 @@ export class MaintenanceEditorsComponent implements OnInit {
     private alertService: AlertService) { }
 
   getSites() {
+    this.blockUI.start("Obteniendo sitios...!!!");
     this.siteService.getTouristicCentre().subscribe(res => {
       this.tourList = res;
+      this.getEditors();
+      this.blockUI.stop();
     });
   }
 
   getEditors() {
+    this.blockUI.start("Obteniendo editores...!!!");
     this.userService.getUsers().subscribe(res => {
       this.editorList = res;
+      this.blockUI.stop();
     });
   }
 
   saveChange() {
-    // this.editorList.forEach((item) => {
-    //   if (this.tourList.findIndex(itemm => itemm.idEditor == item.idUser) > -1) {
-    //     item.rol = "duenno";
-    //   } else {
-    //     item.rol = "basico";
-    //   }
-    // });
     let index = this.tourList.length;
     this.tourList.forEach((item)=> {
       let userAux = this.editorList.find(itemE => itemE.id==item.idEditor);
@@ -57,14 +57,11 @@ export class MaintenanceEditorsComponent implements OnInit {
         }
       );
     });
-    //this.data.setObjectValue(constant.USERS, this.editorList);
-    //this.siteService.saveTourProfiles(this.tourList);
-    //this.alertService.successInfoAlert("Cambios Guardados Correctamente");
   }
 
   ngOnInit() {
     this.getSites();
-    this.getEditors();
+    //this.getEditors();
   }
 
 }

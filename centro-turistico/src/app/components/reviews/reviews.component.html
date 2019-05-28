@@ -1,52 +1,48 @@
-<div class="col-sm-12 col-md-12 col-lg-12 ">
-    <div class="review-container-all">
-        <div class="review-information">
-            <div class="col-sm-1">
-                <div class="logo">
-                    <img [src]="reviewInput.img" alt="" class="img-size">
+<block-ui>
+    <div class="col-sm-12 col-md-12 col-lg-12 ">
+        <div class="review-container-all">
+            <div class="review-information">
+                <div class="col-sm-1">
+                    <div class="logo">
+                        <img [src]="reviewInput.img" alt="" class="img-size">
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="name">
+                        <p>{{reviewInput.userName}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-7" *ngIf="owner">
+                    <div class="logo">
+                        <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena" (click)=" deleteRevi(reviewInput.id)" placement="auto" popover="Eliminar Reseña" triggers="mouseenter:mouseleave">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="logo">
+                        <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena" (click)="answerReview()" placement="auto" popover="Responder comentario" triggers="mouseenter:mouseleave">
+                            <i class="fa fa-envelope-square"></i>
+                        </button>
+                    </div>
+                    <div class="logo">
+                        <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena" (click)="blocked()" placement="auto" popover="Bloquear comentario" triggers="mouseenter:mouseleave">
+                            <i class="fa fa-ban"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-1">
-                <div class="name">
-                    <p>{{reviewInput.userName}}</p>
+            <div class="review-container">
+                <div class="user-review">
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <p *ngIf="reviewInput.blocked">{{reviewInput.description}}</p>
+                        <p *ngIf="!reviewInput.blocked">Comentario Bloqueado</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-7" *ngIf="owner">
-                <div class="logo">
-                    <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
-                        (click)=" deleteRevi(reviewInput.id)" placement="auto" popover="Eliminar Reseña"
-                        triggers="mouseenter:mouseleave">
-                        <i class="fa fa-trash"></i>
-                    </button>
+                <div class="duenno-review col-sm-8 col-md-8 col-lg-8">
+                    <p>{{reviewInput.dunnoReview}}</p>
                 </div>
-                <div class="logo">
-                    <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
-                        (click)="answerReview()" placement="auto" popover="Responder comentario"
-                        triggers="mouseenter:mouseleave">
-                        <i class="fa fa-envelope-square"></i>
-                    </button>
-                </div>
-                <div class="logo">
-                    <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btnResena"
-                        (click)="blocked()" placement="auto" popover="Bloquear comentario"
-                        triggers="mouseenter:mouseleave">
-                        <i class="fa fa-ban"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="review-container">
-            <div class="user-review">
-                <div class="col-sm-4 col-md-4 col-lg-4">
-                </div>
-                <div class="col-sm-8 col-md-8 col-lg-8">
-                    <p *ngIf="reviewInput.blocked">{{reviewInput.description}}</p>
-                    <p *ngIf="!reviewInput.blocked">Comentario Bloqueado</p>
-                </div>
-            </div>
-            <div class="duenno-review col-sm-8 col-md-8 col-lg-8">
-                <p>{{reviewInput.dunnoReview}}</p>
             </div>
         </div>
     </div>
-</div>
+</block-ui>
