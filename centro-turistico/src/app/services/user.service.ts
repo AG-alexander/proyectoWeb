@@ -47,7 +47,7 @@ export class UserService {
 
   saveUser(user: User) {
     if (user.id) {
-      this.angularFirestore.collection<User>('sitios').doc(user.id).update(user).then(() => {
+      this.angularFirestore.collection<User>('users').doc(user.id).update(user).then(() => {
         this.alertas.successInfoAlert("Actualización exitosa");
         this.location.back();
       }).catch(() => {
@@ -57,7 +57,7 @@ export class UserService {
 
     } else {
       user.id = this.angularFirestore.createId();
-      this.angularFirestore.collection<User>('sitios').doc(user.id).set(user).then(() => {
+      this.angularFirestore.collection<User>('users').doc(user.id).set(user).then(() => {
         this.alertas.successInfoAlert("Inserción exitosa");
         this.location.back();
       }).catch(() => {

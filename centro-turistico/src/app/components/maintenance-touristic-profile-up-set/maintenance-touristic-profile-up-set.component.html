@@ -24,13 +24,11 @@
           </div>
         </div>
         <div class="form-group">
-          <div>
-            <label for="schedules">Horarios</label>
+          <label for="schedules">Horarios</label>
             <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btn-add-schedules"
-              (click)="addSchedule()" placement="auto" popover="Eliminar Noticias" triggers="mouseenter:mouseleave">
+              (click)="addSchedule()" placement="auto" popover="Agregar Horario" triggers="mouseenter:mouseleave">
               <i class="fa fa-plus"></i>
             </button>
-          </div>
           <input type="text" class="form-control form-control-sm" formControlName="schedules" id="schedules"
             placeholder="Escriba el horario">
           <div class="invalid-feedback">
@@ -46,7 +44,7 @@
                 </td>
                 <td width="6%">
                   <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom"
-                    (click)="deleteSchedule(i)" placement="auto" popover="Eliminar Noticias"
+                    (click)="deleteSchedule(i)" placement="auto" popover="Eliminar Horario"
                     triggers="mouseenter:mouseleave">
                     <i class="fa fa-trash"></i>
                   </button>
