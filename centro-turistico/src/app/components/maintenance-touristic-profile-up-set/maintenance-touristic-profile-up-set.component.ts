@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 @Component({
   selector: 'app-maintenance-touristic-profile-up-set',
   templateUrl: './maintenance-touristic-profile-up-set.component.html',
@@ -15,7 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 
 export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   id: number;
   imageSrc: any;
   imagePath: string;
@@ -113,7 +113,6 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
 
   deleteSchedule(index: number) {
     this.schedulesList.splice(index, 1);
-    //this._alertService.successInfoAlert("Perfil Turistico eliminado correctamente");
   }
   get fG() {
     return this.formGroup.controls;

@@ -1,67 +1,68 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['home']">Home</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['about-us']">¿Quienes Somos?</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['contact-us']">Contactenos</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['services']">Servicios</a>
-      </li>
-      <li class="nav-item active" *ngIf="permission.admin">
-        <a class="nav-link" [routerLink]="['mainte-news-list']">Mantenimiento Noticias</a>
-      </li>
-      <li class="nav-item active" *ngIf="permission.admin || permission.duenno">
-        <a class="nav-link" [routerLink]="['mainte-tour-list']">Mantenimiento Perfiles Turisticos</a>
-      </li>
-      <li class="nav-item active" *ngIf="permission.admin">
-          <a class="nav-link" [routerLink]="['mainte-editor']">Mantenimiento Editores</a>
-        </li>
-    </ul>
-  </div>
-  <div class="navbar-login">
-      <div *ngIf="user" class="row">
-          <div class="col-sm-2">
-              <button type="submit" class="btn icons btn-link btn-xs justify-content-rigth padd-bottom"  placement="auto" popover="Salir" triggers="mouseenter:mouseleave"  (click)="logout()">
-                  <i class="fa fa-sign-out"></i>
-                </button>
-          </div>
-          <!-- <div class="col-sm-2">
-              <button type="submit" class="btn icons btn-link btn-xs justify-content-rigth padd-bottom"  placement="auto" popover="Recargar data" triggers="mouseenter:mouseleave" (click)="chargeData()">
-                  <i class="fa fa-refresh"></i>
-              </button>
-          </div> -->
-          <div class="col-sm-8">
-              <img [src]="user.iconno.url" alt="" class="img-user-loged img navbar-img-login">
-              <a [routerLink]="['user-profile', user.id]" class="img">{{user.userName}}</a>
-          </div>    
-      </div> 
-      <div *ngIf="!user">
-        <div class="row">
-            <div class="col-sm-2">
-                <button type="submit" class="btn icons btn-link btn-xs justify-content-rigth padd-bottom"  placement="auto" popover="login" triggers="mouseenter:mouseleave" [routerLink]="['../login']">
-                  <i class="fa fa-sign-in "></i>
-              </button>
-            </div>
-            <!-- <div class="col-sm-2">
+<block-ui>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['home']">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['about-us']">¿Quienes Somos?</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['contact-us']">Contactenos</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['services']">Servicios</a>
+                </li>
+                <li class="nav-item active" *ngIf="permission.admin">
+                    <a class="nav-link" [routerLink]="['mainte-news-list']">Mantenimiento Noticias</a>
+                </li>
+                <li class="nav-item active" *ngIf="permission.admin || permission.duenno">
+                    <a class="nav-link" [routerLink]="['mainte-tour-list']">Mantenimiento Perfiles Turisticos</a>
+                </li>
+                <li class="nav-item active" *ngIf="permission.admin">
+                    <a class="nav-link" [routerLink]="['mainte-editor']">Mantenimiento Editores</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-login">
+            <div *ngIf="user" class="row">
+                <div class="col-sm-2">
+                    <button type="submit" class="btn icons btn-link btn-xs justify-content-rigth padd-bottom" placement="auto" popover="Salir" triggers="mouseenter:mouseleave" (click)="logout()">
+                    <i class="fa fa-sign-out"></i>
+                  </button>
+                </div>
+                <!-- <div class="col-sm-2">
                 <button type="submit" class="btn icons btn-link btn-xs justify-content-rigth padd-bottom"  placement="auto" popover="Recargar data" triggers="mouseenter:mouseleave" (click)="chargeData()">
                     <i class="fa fa-refresh"></i>
                 </button>
             </div> -->
-            <div class="col-sm-8">
-                <!-- <img [src]="user.iconno" alt="" class="img-user-loged img navbar-img-login">-->
-                <a  class="img"> No Logeado </a>
-            </div> 
+                <div class="col-sm-8">
+                    <img [src]="user.iconno.url" alt="" class="img-user-loged img navbar-img-login">
+                    <a [routerLink]="['user-profile', user.id]" class="img">{{user.userName}}</a>
+                </div>
+            </div>
+            <div *ngIf="!user">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn icons btn-link btn-xs justify-content-rigth padd-bottom" placement="auto" popover="login" triggers="mouseenter:mouseleave" [routerLink]="['../login']">
+                    <i class="fa fa-sign-in "></i>
+                </button>
+                    </div>
+                    <!-- <div class="col-sm-2">
+                  <button type="submit" class="btn icons btn-link btn-xs justify-content-rigth padd-bottom"  placement="auto" popover="Recargar data" triggers="mouseenter:mouseleave" (click)="chargeData()">
+                      <i class="fa fa-refresh"></i>
+                  </button>
+              </div> -->
+                    <div class="col-sm-8">
+                        <!-- <img [src]="user.iconno" alt="" class="img-user-loged img navbar-img-login">-->
+                        <a class="img"> No Logeado </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
-</nav>
+    </nav>
+</block-ui>
