@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {TouristicCentre} from '../interfaces/index';
+import { TouristicCentre } from '../interfaces/index';
 import { AlertService } from '../services/alert.service';
 import { DataStorageService } from './data-storage.service.js';
 import { constant } from 'src/app/constant-data/constant';
@@ -18,10 +18,10 @@ export class SiteService {
     private alertas: AlertService,
     private location: Location) {
     this.showedSites = [];
-   }
+  }
 
   getSite(name: string) {
-    let tempList = this.dataStorage.getObjectValue(constant.SITES) as TouristicCentre [];
+    let tempList = this.dataStorage.getObjectValue(constant.SITES) as TouristicCentre[];
     if (!name) {
       this.showedSites = tempList;
     }
@@ -52,7 +52,7 @@ export class SiteService {
       let list: TouristicCentre[];
       let aux: TouristicCentre[];
       list = this.dataStorage.getObjectValue(constant.SITES);
-      aux = list.filter(item => item.idEditor == id);
+     // aux = list.filter(item => item.idEditor == id);
       return aux;
     }
     return null;
@@ -63,21 +63,21 @@ export class SiteService {
       let list: TouristicCentre[];
       let aux: number;
       list = this.dataStorage.getObjectValue(constant.SITES);
-      aux = list.findIndex(item => item.idTouristicCentre == id && item.idEditor == idEditor);
+     // aux = list.findIndex(item => item.idTouristicCentre == id && item.idEditor == idEditor);
       return aux > -1;
     }
     return false;
   }
 
-  getSites(): TouristicCentre [] {
-    return this.dataStorage.getObjectValue(constant.SITES) as TouristicCentre [];
+  getSites(): TouristicCentre[] {
+    return this.dataStorage.getObjectValue(constant.SITES) as TouristicCentre[];
   }
 
   saveTourProfile(tour: TouristicCentre) {
     let index: number = -1;
     let tourList = this.dataStorage.getObjectValue(constant.SITES) as TouristicCentre[];
     let lastid = this.dataStorage.getObjectValue(constant.IDTOUR) as number;
-    tourList.forEach((item, indexList)=>{
+    tourList.forEach((item, indexList) => {
       if (item.idTouristicCentre == tour.idTouristicCentre) {
         index = indexList;
       }
@@ -110,34 +110,53 @@ export class SiteService {
     return this.angularFirestore.collection<TouristicCentre>('sitios').valueChanges();
   }
 
+  getTouristicCentreByEdidtor(id: string): Observable<TouristicCentre[]> {
+    return this.angularFirestore.collection<TouristicCentre>('sitios', ref => ref.where('idEditor', '==', id)).valueChanges();
+  }
+
   getTouristicCentreById(id: string): Observable<TouristicCentre[]> {
     return this.angularFirestore.collection<TouristicCentre>('sitios', ref => ref.where('id', '==', id)).valueChanges();
   }
 
   deleteTouristicCentre(id: string) {
-    this.angularFirestore.collection<TouristicCentre>('sitios').doc(id).delete().then(()=>{
+    this.angularFirestore.collection<TouristicCentre>('sitios').doc(id).delete().then(() => {
       this.alertas.successInfoAlert("Eliminado correctamente");
-    }).catch(()=>{
+    }).catch(() => {
       this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo eliminar el registro");
     });
   }
 
+  saveTouristicCentreEditor(TouristicCentre: TouristicCentre, index: number) {
+    if (TouristicCentre.id) {
+      this.angularFirestore.collection<TouristicCentre>('sitios').doc(TouristicCentre.id).update(TouristicCentre).then(() => {
+        if (index == 0) {
+          this.alertas.successInfoAlert("Actualización exitosa");
+          this.location.back();
+        }
+      }).catch(() => {
+        this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
+        //this.location.back();
+      });
+
+    }
+  }
+
   saveTouristicCentre(TouristicCentre: TouristicCentre) {
     if (TouristicCentre.id) {
-      this.angularFirestore.collection<TouristicCentre>('sitios').doc(TouristicCentre.id).update(TouristicCentre).then(()=>{
+      this.angularFirestore.collection<TouristicCentre>('sitios').doc(TouristicCentre.id).update(TouristicCentre).then(() => {
         this.alertas.successInfoAlert("Actualización exitosa");
         this.location.back();
-      }).catch(()=>{
+      }).catch(() => {
         this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
         this.location.back();
       });
-     
+
     } else {
       TouristicCentre.id = this.angularFirestore.createId();
-      this.angularFirestore.collection<TouristicCentre>('sitios').doc(TouristicCentre.id).set(TouristicCentre).then(()=>{
+      this.angularFirestore.collection<TouristicCentre>('sitios').doc(TouristicCentre.id).set(TouristicCentre).then(() => {
         this.alertas.successInfoAlert("Inserción exitosa");
         this.location.back();
-      }).catch(()=>{
+      }).catch(() => {
         this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
         this.location.back();
       });

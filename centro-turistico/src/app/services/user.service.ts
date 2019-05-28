@@ -6,6 +6,8 @@ import { constant } from '../constant-data/constant.js';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Location } from '@angular/common';
+import { AlertService } from './alert.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,9 @@ export class UserService {
   constructor(
     private dataStorage: DataStorageService,
     public angularFirestore: AngularFirestore,
-    public afAuth: AngularFireAuth) { }
+    public afAuth: AngularFireAuth,
+    private alertas: AlertService,
+    private location: Location) { }
 
   getUser(): User {
     return this.dataStorage.getObjectValue(constant.USER);
@@ -35,6 +39,32 @@ export class UserService {
 
   getUserById(id: string): Observable<User[]> {
     return this.angularFirestore.collection<User>('users', ref => ref.where('id', '==', id)).valueChanges();
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.angularFirestore.collection<User>('users').valueChanges();
+  }
+
+  saveUser(user: User) {
+    if (user.id) {
+      this.angularFirestore.collection<User>('sitios').doc(user.id).update(user).then(() => {
+        this.alertas.successInfoAlert("Actualización exitosa");
+        this.location.back();
+      }).catch(() => {
+        this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
+        this.location.back();
+      });
+
+    } else {
+      user.id = this.angularFirestore.createId();
+      this.angularFirestore.collection<User>('sitios').doc(user.id).set(user).then(() => {
+        this.alertas.successInfoAlert("Inserción exitosa");
+        this.location.back();
+      }).catch(() => {
+        this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
+        this.location.back();
+      });
+    }
   }
 
 }

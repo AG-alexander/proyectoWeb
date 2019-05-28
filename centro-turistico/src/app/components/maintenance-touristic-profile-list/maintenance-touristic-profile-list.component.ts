@@ -22,7 +22,11 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
 
   getSites() {
     if (this.permission.duenno){
-      this.tourList = this.siteService.getSiteByEditor(this.user.idUser);
+      this.siteService.getTouristicCentreByEdidtor(this.user.id).subscribe(
+        res => {
+          this.tourList = res;
+        }
+      );
     }else {
       if (this.permission.admin) {
         this.siteService.getTouristicCentre().subscribe(
@@ -32,7 +36,10 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
         );
       }
     }
-    
+  }
+
+  isEditor(id: string) {
+    return id == this.user.id;
   }
 
   addTourProfile() {

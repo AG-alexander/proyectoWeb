@@ -16,7 +16,11 @@ export class DataStorageService {
   }
   getObjectValue = (key: string) => {
     if (window.localStorage) {
-      const DATA = JSON.parse(localStorage.getItem(key));
+      let exist = localStorage.getItem(key);
+      if (exist == "undefined") {
+        return null;
+      }
+      const DATA = JSON.parse(exist);
       if (DATA) {
         return DATA;
       } else {

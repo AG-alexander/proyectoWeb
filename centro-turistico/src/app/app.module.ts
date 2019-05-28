@@ -48,6 +48,7 @@ import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/stor
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FirestoreSettingsToken} from '@angular/fire/firestore';
 import { FirebaseStorageService } from './services/firebase-storage.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
 // let config = new AuthServiceConfig([
 //   {
 //     id: GoogleLoginProvider.PROVIDER_ID,
@@ -109,7 +110,8 @@ import { FirebaseStorageService } from './services/firebase-storage.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule, 
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), 
   ],
   providers: [
     LoginService,
