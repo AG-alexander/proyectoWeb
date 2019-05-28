@@ -1,43 +1,44 @@
-<div class="container-fluid container-all">
-    <form [formGroup]="formGroup" (ngSubmit)="saveNews()">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="title">Título</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="title" id="title" placeholder="Escriba el título" [ngClass]="{'is-invalid': fG.title.errors && fG.title.touched}">
-                    <div *ngIf="fG.title.errors?.required" class="invalid-feedback">
-                        <div class="form-control-feedback text-danger" *ngIf="fG.title.errors?.required">
-                            * El título es requerido
+<block-ui>
+    <div class="container-fluid container-all">
+        <form [formGroup]="formGroup" (ngSubmit)="saveNews()">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="title">Título</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="title" id="title" placeholder="Escriba el título" [ngClass]="{'is-invalid': fG.title.errors && fG.title.touched}">
+                        <div *ngIf="fG.title.errors?.required" class="invalid-feedback">
+                            <div class="form-control-feedback text-danger" *ngIf="fG.title.errors?.required">
+                                * El título es requerido
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="content">Contenido</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="content" id="content" placeholder="Escriba el contenido" [ngClass]="{'is-invalid': fG.content.errors && fG.content.touched}">
-                    <div *ngIf="fG.content.errors?.required" class="invalid-feedback">
-                        <div class="form-control-feedback text-danger" *ngIf="fG.content.errors?.required">
-                            * El contenido es requerido
+                    <div class="form-group">
+                        <label for="content">Contenido</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="content" id="content" placeholder="Escriba el contenido" [ngClass]="{'is-invalid': fG.content.errors && fG.content.touched}">
+                        <div *ngIf="fG.content.errors?.required" class="invalid-feedback">
+                            <div class="form-control-feedback text-danger" *ngIf="fG.content.errors?.required">
+                                * El contenido es requerido
+                            </div>
                         </div>
                     </div>
+                    <div>
+                        <input style="display: none;" type="file" (change)="onFileSelected(fileInput)" formControlName="image" #fileInput>
+                        <button type="button" class="btn  icons -sm btn-default blockContent" (click)="fileInput.click()" placement="auto" popover="Buscar Imagen" triggers="mouseenter:mouseleave">
+                            <i class="fa fa-file-image-o"></i>
+                        </button>
+                        <button type="button" class="btn icons btn-link btn-xs justify-content-rigth padd-bottom" (click)="saveNoticia()" placement="auto" popover="Guardar" triggers="mouseenter:mouseleave">
+                            <i class="fa fa-save"></i>
+                        </button>
+                    </div>
                 </div>
-                <div>
-                    <input style="display: none;" type="file" (change)="onFileSelected(fileInput)" formControlName="image" #fileInput>
-                    <button type="button" class="btn  icons -sm btn-default blockContent" (click)="fileInput.click()" placement="auto" popover="Buscar Imagen" triggers="mouseenter:mouseleave">
-                        <i class="fa fa-file-image-o"></i>
-                    </button>
-                    <button type="button" class="btn icons btn-link btn-xs justify-content-rigth padd-bottom" (click)="saveNoticia()" placement="auto" popover="Guardar" triggers="mouseenter:mouseleave">
-                        <i class="fa fa-save"></i>
-                    </button>
+                <div class="col-md-4">
+                    <img [src]="imageSrc" alt="" *ngIf="imageSrc" class="img-costume centro">
+                </div>
+                <div class="col-md-1">
+
                 </div>
             </div>
-            <div class="col-md-4">
-                <img [src]="imageSrc" alt="" *ngIf="imageSrc" class="img-costume centro">
-            </div>
-            <div class="col-md-1">
-
-            </div>
-        </div>
-    </form>
-
-</div>
+        </form>
+    </div>
+</block-ui>

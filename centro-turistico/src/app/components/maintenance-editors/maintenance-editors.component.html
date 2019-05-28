@@ -1,32 +1,33 @@
-<div class="container-all">
-  <div class="container-table">
-    <table class="table table-striped">
-      <thead>
-        <th width="47%">Perfil Turístico</th>
-        <th width="47%">Editor</th>
-        <th width="6%">
-          <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="saveChange()"
-            placement="auto" popover="Guardar" triggers="mouseenter:mouseleave">
-            <i class="fa fa-save"></i>
-          </button>
-        </th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let tour of tourList">
-          <td width="47%">
-            {{tour.name}}
-          </td>
-          <td width="47%">
-            <select name="editors" [(ngModel)]="tour.idEditor" class="form-control">
-              <option value="">Seleccione un editor</option>
-              <option *ngFor="let editor of editorList" [value]="editor.id">{{editor.userName}}</option>
-            </select>
-          </td>
-          <td width="6%">
-            
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<block-ui>
+    <div class="container-all">
+        <div class="container-table">
+            <table class="table table-striped">
+                <thead>
+                    <th width="47%">Perfil Turístico</th>
+                    <th width="47%">Editor</th>
+                    <th width="6%">
+                        <button type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="saveChange()" placement="auto" popover="Guardar" triggers="mouseenter:mouseleave">
+              <i class="fa fa-save"></i>
+            </button>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tour of tourList">
+                        <td width="47%">
+                            {{tour.name}}
+                        </td>
+                        <td width="47%">
+                            <select name="editors" [(ngModel)]="tour.idEditor" class="form-control">
+                <option value="">Seleccione un editor</option>
+                <option *ngFor="let editor of editorList" [value]="editor.id">{{editor.userName}}</option>
+              </select>
+                        </td>
+                        <td width="6%">
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</block-ui>

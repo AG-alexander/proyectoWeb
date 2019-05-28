@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 @Component({
   selector: 'app-maintenance-touristic-profile-up-set',
   templateUrl: './maintenance-touristic-profile-up-set.component.html',
@@ -15,7 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 
 export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   id: number;
   imageSrc: any;
   imagePath: string;
@@ -113,7 +113,6 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
 
   deleteSchedule(index: number) {
     this.schedulesList.splice(index, 1);
-    //this._alertService.successInfoAlert("Perfil Turistico eliminado correctamente");
   }
   get fG() {
     return this.formGroup.controls;
@@ -126,10 +125,12 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   }
   saveImage(index: number) {
     if (index >= 0) {
+      this.blockUI.start("Guardando datos....");
       this.fbStorage.upload(this.imgList[index].url);
       this.fbStorage.task.then(() => {
         this.fbStorage.ref.getDownloadURL().subscribe(
           res => {
+            this.blockUI.stop();
             this.imgList[index].idStorage = this.fbStorage.id;
             this.imgList[index].url = res;
             this.imgList[index].idFireBase = this.angularFirestore.createId();
@@ -144,7 +145,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   save() {
     this.saveImage(this.imgList.length-1);
   }
-  saveSitio() {debugger
+  saveSitio() {
     let tourProfile = this.formGroup.value as TouristicCentre;
     if (this.id != undefined) {
       tourProfile.idTouristicCentre = this.tourLoscalStorage.idTouristicCentre;

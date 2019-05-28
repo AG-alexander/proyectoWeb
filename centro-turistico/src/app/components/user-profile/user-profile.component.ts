@@ -6,14 +6,16 @@ import { constant } from 'src/app/constant-data/constant';
 import { Rating } from 'src/app/interfaces/rating';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage/storage';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit  {
-
+export class UserProfileComponent implements OnInit {
+  @BlockUI() blockUI: NgBlockUI;
   iduser: string;
   user: User
   followerList: followerModel[];
@@ -28,25 +30,34 @@ export class UserProfileComponent implements OnInit  {
     private followerService: FollowerService,
     private ratingService: RatingService,
     private siteService: SiteService,
-    private reviewService: ReviewsService, 
+    private reviewService: ReviewsService,
     private activatedRouete: ActivatedRoute,
     private storage: DataStorageService,
     private fbStorage: AngularFireStorage,
-    ) 
-  { }
+  ) { }
 
   getSitesByUser() {
+    this.blockUI.start("Obteniendo datos");
     this.followerService.getSitiosByUsuario(this.iduser).subscribe(
       res => {
+        this.blockUI.stop();
         this.followerList = res;
+        this.blockUI.start("Obteniendo datos");
         this.followerList.forEach(element => {
-          this.siteService.getTouristicCentreById(element.id).subscribe(
+          this.siteService.getTouristicCentreById(element.siteId).subscribe(
             res => {
+              this.blockUI.stop();
               this.siteList = res;
               this.getInfomation();
+            }, err => {
+              this.blockUI.stop();
             }
-          );          
+          );
         });
+        this.blockUI.stop();
+      },
+      err => {
+        this.blockUI.stop();
       }
     );
   }
@@ -55,7 +66,7 @@ export class UserProfileComponent implements OnInit  {
     return this.ratingService.getRatingBySite(id);
   }
 
-  getReviewsBySite(id: string): Review []{
+  getReviewsBySite(id: string): Review[] {
     this.reviewService.getReviewBySite(id).subscribe(
       res => {
         return res;
@@ -66,61 +77,59 @@ export class UserProfileComponent implements OnInit  {
 
   getInfomation() {
     this.siteList.forEach(element => {
-      let userInfoAux: userInfo = {
-        nameSite: element.name,
-        ratingSite: this.getRatingBySite(element.id),
-        reviewsList: this.getReviewsBySite(element.id)
-      }
-      this.userInfo.push(userInfoAux);
+      this.getUserInfo(element.name, element.id)
+      // let userInfoAux: userInfo = {
+      //   nameSite: element.name,
+      //   ratingSite: this.getRatingBySite(element.id),
+      //   reviewsList: this.getReviewsBySite(element.id)
+      // }
+      // this.userInfo.push(userInfoAux);
     });
+  }
+
+  getUserInfo(name: string, id: string) {
+    let userInfoAux: userInfo = {
+      nameSite: name,
+      ratingSite: 0,
+      reviewsList: []
+    }
+    this.getRatingBySite(id).subscribe(
+      res => {
+        if (res.length == 0) {
+          userInfoAux.ratingSite = 0;
+        }
+        let rat = 0;
+        res.forEach(element => {
+          rat += element.value;
+        });
+        userInfoAux.ratingSite = rat / res.length;
+
+        this.reviewService.getReviewBySite(id).subscribe(
+          res => {
+            userInfoAux.reviewsList = res.filter(item => item.idUser == this.user.id);debugger
+            this.userInfo.push(userInfoAux);
+          }
+        );
+      }
+    );
   }
 
   ngOnInit() {
     this.iduser = this.activatedRouete.snapshot.params['id'];
     this.userInfo = [];
-    this.getSitesByUser();
-    
-  //   this.iduser = +this.activatedRouete.snapshot.params['id'];
+
+
+    this.blockUI.start("Obteniendo datos");
     this.userService.getUserById(this.iduser).subscribe(
       res => {
+        this.blockUI.stop();
         this.user = res[0];
-        // const ref = this.fbStorage.ref(this.user.iconno);
-        // this.profileUrl = ref.getDownloadURL();
+        this.getSitesByUser();
       }
     );
-  //   this.followerList = this.storage.getObjectValue(constant.FOLLOWERS);
-  //   this.ratingList = this.storage.getObjectValue(constant.RATINGS);
-  //   this.siteList = this.storage.getObjectValue(constant.SITES);
-  //   this.reviewsList = this.storage.getObjectValue(constant.REVIEWS);
-  //   let temoUserInfo: userInfo;
-  //   this.userInfo = [];
-    
-  //   let tempFollower = this.followerList.filter(item => item.userId == this.user.idUser);
-  //   let sitesFollow: TouristicCentre[] = [];
-  //   tempFollower.forEach((item) => {
-  //     sitesFollow.push(this.siteList.find(items => items.idTouristicCentre == item.siteId));
-  //   });
-  //   let ratFollow: Rating[] = [];
-
-  //   this.ratingList.forEach((item) =>{
-  //     if (item.idUser == this.iduser) {
-  //       ratFollow.push(item);
-  //     }
-  //   });
-
-  //   let tempReviews: Review[];
-  //   tempReviews = this.reviewsList.filter(item => item.idUser == this.user.idUser);
-  //  sitesFollow.forEach((item)=>{
-  //    let temp: userInfo = {
-  //      nameSite: item.name,
-  //      ratingSite: this.getRating(ratFollow.find(itemm => itemm.idTouristicCentre == item.idTouristicCentre)),
-  //      reviewsList: tempReviews.filter(itemm => itemm.idSitio == item.idTouristicCentre)
-  //    }
-  //    this.userInfo.push(temp);
-  //  });
   }
   getRating(r: Rating): number {
-    return r!=null? r.rating: 0;
+    return r != null ? r.rating : 0;
   }
 
 }

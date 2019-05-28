@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { TouristicCentre } from '../../interfaces/index';
 import { SiteService } from '../../services/index';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 @Component({
   selector: 'app-touristic-centres',
   templateUrl: './touristic-centres.component.html',
   styleUrls: ['./touristic-centres.component.css']
 })
 export class TouristicCentresComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   value: string;
   currentPage = 1;
   page: number;
   showedList: TouristicCentre[];
+  list: TouristicCentre[];
   selected: string;
 
   constructor(public site: SiteService) {
@@ -20,39 +22,39 @@ export class TouristicCentresComponent implements OnInit {
    }
 
   searchSites() {
-    this.site.getSite(this.selected);
-    this.showedList = this.site.showedSites;
+    this.showedList = [];
+    if (this.selected) {
+      this.list.forEach(item => {
+        if (item.name.includes(this.selected)) {
+          this.showedList.push(item);
+        }
+      });
+    } else {
+      this.showedList = this.list;
+    }
     
   }
   
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.showedList = this.site.showedSites.slice(startItem,endItem);
+    this.showedList = this.list.slice(startItem,endItem);
   }
   ngOnInit() {
+    this.showedList = [];
+    this.list = [];
+    this.blockUI.start("Cargando datos...!!!");
     this.site.getTouristicCentre().subscribe(
       res => {
-        this.showedList = res;
-        this.showedList = this.showedList.slice(0,3);
+        this.blockUI.stop();
+        this.list = res;
+        this.showedList = this.list.slice(0,3);
       }, 
       err => {
+        this.blockUI.stop();
         this.showedList = [];
       }
     );
-  //   this.site.getSite(this.value);
-  //  if(this.site.showedSites != null) {
-  //   this.showedList = this.site.showedSites.slice(0,3);
-  //  } else {
-  //   this.site.showedSites = [];
-  //    this.showedList = [];
-  //  }
-    // this.showedList.forEach( x =>{
-      
-    //   this.typebyhead.push(x.name);
-    //   })
-    //this._site._dataStorage.setObjectValue('sites',this._site.sites);
-    //console.log(this._site.getObjectValue('sites'));
   }
 
 }

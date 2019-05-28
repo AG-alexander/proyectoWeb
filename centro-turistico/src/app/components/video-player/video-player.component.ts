@@ -13,10 +13,6 @@ export class VideoPlayerComponent implements OnInit {
   constructor(private videoService: EmbedVideoService) { }
 
   ngOnInit() {
-    // this.iframe_html = this.videoService.embed_youtube(this.youtubeUrl, {
-    //   query: { portrait: 0, color: '333' },
-    //   attr: { width: 400, height: 350 }
-    // });
   }
 
 }

@@ -12,6 +12,7 @@ import { PermissionService } from 'src/app/services/permission.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage/storage';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -20,7 +21,6 @@ import { AngularFireStorage } from '@angular/fire/storage/storage';
 export class NavbarComponent implements OnInit {
 
   user: User;
-  //profileUrl: Observable<string>;
   constructor(private storage: AngularFireStorage,
     private dataStorage: DataStorageService,
     public permission: PermissionService,
@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit {
     private router: Router) {
      }
   chargeData(){
-    //this.dataStorage.setObjectValue(this.constant.NEWS, NEWS);
     this.dataStorage.setObjectValue(constant.RATINGS, RATINGS);
     this.dataStorage.setObjectValue(constant.REVIEWS, REVIEWS);
     this.dataStorage.setObjectValue(constant.SITES, SITES);
@@ -50,10 +49,7 @@ export class NavbarComponent implements OnInit {
   }
   ngOnInit() {
     this.user = this.dataStorage.getObjectValue(constant.USER);
-    //const ref = this.storage.ref(this.user.iconno);
-    //this.profileUrl = ref.getDownloadURL();
     this.permission.setPermission();
-    
   }
 
 }

@@ -1,6 +1,6 @@
 <carousel>
     <slide *ngFor="let new of news; index as i">
-        <div>
+        <div *ngIf="new.image.url">
             <img [src]="new.image.url" alt="first slide" style="display: block; width: 60%; margin-left: auto; margin-right: auto; height: 300px; margin-top: 0">
         </div>
         <div class="carousel-caption " style="width: 40%;margin-left: auto; margin-right: auto;">

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask  } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Images } from '../interfaces/index';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseStorageService {
-
+  @BlockUI() blockUI: NgBlockUI;
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
   id: string;
@@ -25,6 +26,7 @@ export class FirebaseStorageService {
     this.task = this.ref.put(event[0]);
   }
   uploadList(item: Images) { 
+    this.blockUI.start("Guardando cambios");
     let ref: AngularFireStorageReference;
     let task: AngularFireUploadTask;
     item.idStorage = this.angularFirestore.createId();
@@ -33,6 +35,7 @@ export class FirebaseStorageService {
     task.then(()=>{
       ref.getDownloadURL().subscribe(
         res => {
+        this.blockUI.stop();
           item.url = res;
         }
       );

@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertService } from './alert.service';
 import { Location } from '@angular/common';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
-
+  @BlockUI() blockUI: NgBlockUI;
   constructor(
     private dataStorage: DataStorageService, 
     public angularFirestore: AngularFirestore, 
@@ -62,29 +63,44 @@ export class NewsService {
   }
 
   deleteNoticias(id: string) {
+    this.blockUI.start("Guardando cambios");
     this.angularFirestore.collection<News>('noticias').doc(id).delete().then(()=>{
       this.alertas.successInfoAlert("Eliminado correctamente");
+      this.blockUI.stop();
     }).catch(()=>{
+      this.blockUI.stop();
       this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo eliminar el registro");
     });
   }
 
   saveNews(news: News) {
     if (news.id) {
+    this.blockUI.start("Guardando cambios");
+
       this.angularFirestore.collection<News>('noticias').doc(news.id).update(news).then(()=>{
+      this.blockUI.stop();
+
         this.alertas.successInfoAlert("Actualización exitosa");
         this.location.back();
       }).catch(()=>{
+      this.blockUI.stop();
+
         this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
         this.location.back();
       });
      
     } else {
       news.id = this.angularFirestore.createId();
+    this.blockUI.start("Guardando cambios");
+
       this.angularFirestore.collection<News>('noticias').doc(news.id).set(news).then(()=>{
+      this.blockUI.stop();
+
         this.alertas.successInfoAlert("Inserción exitosa");
         this.location.back();
       }).catch(()=>{
+      this.blockUI.stop();
+
         this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
         this.location.back();
       });

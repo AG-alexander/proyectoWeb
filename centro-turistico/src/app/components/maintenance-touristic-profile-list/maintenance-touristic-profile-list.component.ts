@@ -3,6 +3,7 @@ import { SiteService, UserService } from 'src/app/services/index';
 import { TouristicCentre, User } from 'src/app/interfaces/index';
 import { Router } from '@angular/router';
 import { PermissionService } from 'src/app/services/permission.service';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-maintenance-touristic-profile-list',
@@ -10,7 +11,7 @@ import { PermissionService } from 'src/app/services/permission.service';
   styleUrls: ['./maintenance-touristic-profile-list.component.css']
 })
 export class MaintenanceTouristicProfileListComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   tourList: TouristicCentre[];
   user: User;
   constructor(
@@ -22,15 +23,19 @@ export class MaintenanceTouristicProfileListComponent implements OnInit {
 
   getSites() {
     if (this.permission.duenno){
+      this.blockUI.start("Obteniendo datos...!!!");
       this.siteService.getTouristicCentreByEdidtor(this.user.id).subscribe(
         res => {
           this.tourList = res;
+          this.blockUI.stop();
         }
       );
     }else {
       if (this.permission.admin) {
+      this.blockUI.start("Obteniendo datos...!!!");
         this.siteService.getTouristicCentre().subscribe(
           res => {
+            this.blockUI.stop();
             this.tourList = res;
           }
         );

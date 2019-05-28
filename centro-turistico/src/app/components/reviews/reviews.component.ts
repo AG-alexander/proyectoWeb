@@ -10,15 +10,15 @@ import { PermissionService, ReviewsService, AlertService } from 'src/app/service
 export class ReviewsComponent implements OnInit {
 
   admin: boolean;
-  owner: boolean;
   base: boolean;
   block: boolean;
+  @Input() owner: boolean;
   @Input() reviewInput: Review;
   @Output() addReviewAnswer = new EventEmitter<Review>();
   constructor(private perm: PermissionService, private review: ReviewsService, private sAlert: AlertService) {}
 
   ngOnInit() {
-     this.owner = this.perm.duenno;
+     //this.owner = this.perm.duenno;
      this.block = this.reviewInput.blocked;
   }
 

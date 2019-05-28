@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { bloomAdd } from '@angular/core/src/render3/di';
 
 @Component({
   selector: 'app-register-user',
@@ -13,7 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   formGroup: FormGroup;
   imgUser: string;
   imagePath: string;
@@ -48,10 +50,11 @@ export class RegisterUserComponent implements OnInit {
     let user: User;
     user = this.formGroup.value as User;
     user.rol = 'basico';
-    //user.iconno = this.imgUser;
     this.fbStorage.upload(this.imagePath);
+    this.blockUI.start(" Registrando usuario...!!!");
     this.fbStorage.task.then(()=>{
       this.storage.ref(this.fbStorage.id).getDownloadURL().subscribe(res => {
+        this.blockUI.stop();
         let img: Images = {
           idFireBase: this.angularFirestore.createId(),
           idStorage: this.fbStorage.id,
@@ -61,8 +64,6 @@ export class RegisterUserComponent implements OnInit {
         this.log.register(user, user.password);
       });
      });
-    //this.router.navigate(['login']);
-   // this.alertService.successInfoAlert("Usuario creado correramente");
   }
   get Valided() {
     return this.formGroup.invalid || this.imgUser == "";

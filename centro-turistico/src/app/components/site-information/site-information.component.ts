@@ -5,13 +5,14 @@ import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { PermissionService } from 'src/app/services/permission.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 @Component({
   selector: 'app-site-information',
   templateUrl: './site-information.component.html',
   styleUrls: ['./site-information.component.css']
 })
 export class SiteInformationComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   // COMPONENTS ATRIBUTES 
   private touristicCentre: TouristicCentre;
   private reviews: Review[];
@@ -43,7 +44,7 @@ export class SiteInformationComponent implements OnInit {
 
   getSite() {
     this.id = this.activatedRoute.snapshot.params['id'];
-
+    this.blockUI.start("Obteniendo datos...!!!");
     this.siteService.getTouristicCentreById(this.id).subscribe(
       res => {
         this.touristicCentre = res[0];
@@ -52,19 +53,36 @@ export class SiteInformationComponent implements OnInit {
             this.reviews = res;
             this.followersService.getSeguidoresBySite(this.id).subscribe(
               res => {
+                this.blockUI.stop();
                 this.followers = res;
-                this.isFollower = this.followers.findIndex(item => item.userId == this.user.id) > -1;
-                this.message = this.isFollower ? "Dejar de seguir" : "Comenzar a seguir";
-                this.messageFollower = this.isFollower ? "Siguiendo" : "Seguir";
+                if (this.user) {
+                  this.isFollower = this.followers.findIndex(item => item.userId == this.user.id) > -1;
+                  this.message = this.isFollower ? "Dejar de seguir" : "Comenzar a seguir";
+                  this.messageFollower = this.isFollower ? "Siguiendo" : "Seguir";
+                }
                 this.flag = true;
               }
+
             );
+            // this.blockUI.stop();
           }
         );
+        //this.blockUI.stop();
       }
     );
-
-    this.maxStars = this.ratingService.getRatingBySite(this.id);
+    //this.blockUI.stop();
+    this.ratingService.getRatingBySite(this.id).subscribe(
+      res => {
+        if (res.length == 0) {
+          this.maxStars = 0;
+        }
+        let rat = 0;
+        res.forEach(element => {
+          rat += element.value;
+        });
+        this.maxStars = rat/res.length;
+      }
+    );
   }
 
   ngOnInit() {
@@ -72,7 +90,6 @@ export class SiteInformationComponent implements OnInit {
     this.initForm();
     this.user = this.userService.getUser();
     if (this.user) {
-      // this.isFollower = this.followersService.isFollower(this.user.idUser, this.id);
     }
   }
 
@@ -107,7 +124,6 @@ export class SiteInformationComponent implements OnInit {
       review.userName = this.user.userName;
       this.reviewsService.saveReview(review); debugger
       this.formGroupModal.reset();
-      //    this.alert.successInfoAlert("Reseña creada con exito");
       this.modalRef.hide();
       this.modalRef = null;
     }
@@ -117,7 +133,6 @@ export class SiteInformationComponent implements OnInit {
     if (this.formGroupModalAnswer.valid) {
       this.review.dunnoReview = this.formGroupModalAnswer.controls['answer'].value;
       this.reviewsService.saveReview(this.review);
-      //  this.alert.successInfoAlert("Respuesta agregada con exito");
       this.modalRef.hide();
       this.modalRef = null;
     }
@@ -127,7 +142,6 @@ export class SiteInformationComponent implements OnInit {
     if (this.isFollower) {
       let idFollower = this.followers.find(item => item.userId == this.user.id).id;
       this.followersService.deleteSeguidores(idFollower);
-      //  this.followersService.deleteFollower(this.user.idUser, this.id);
       this.isFollower = false;
     } else {
       let follow: followerModel = {
@@ -136,7 +150,6 @@ export class SiteInformationComponent implements OnInit {
         img: this.user.iconno.url
       }
       this.followersService.saveSeguidores(follow);
-      //   this.followersService.addFollower(this.user.idUser, this.id);
       this.isFollower = true;
     }
     this.message = this.isFollower ? "Dejar de seguir" : "Comenzar a seguir";
@@ -154,6 +167,18 @@ export class SiteInformationComponent implements OnInit {
 
   get FGA() {
     return this.formGroupModalAnswer.controls;
+  }
+
+  get isUsuario() {
+    return this.user ? true : false;
+  }
+
+  get isEditor() {
+    if (this.user) {
+      return this.user.id == this.touristicCentre.idEditor;
+    } else {
+      return false;
+    }
   }
 
 
