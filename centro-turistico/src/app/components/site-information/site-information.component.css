@@ -55,7 +55,8 @@ img {
 
 .top-head {
     background-color: black;
-    height: 50px;
+    min-height: 50px;
+    max-height: 200px;
     color: rgb(219, 217, 217);
 }
 
@@ -127,4 +128,12 @@ img {
     float: left;
     list-style-type: none;
     padding: 10px;
+}
+
+.margin {
+    padding-left: 10px;
+}
+
+.paddig-top {
+    padding-top: 5px;
 }

@@ -2,6 +2,11 @@
     width: 175px;
     height: 190px;
 }
+
 .container-fluid {
     height: 80vh;
+}
+
+.margin {
+    padding-left: 15px;
 }
