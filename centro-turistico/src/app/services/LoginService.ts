@@ -62,7 +62,7 @@ export class LoginService {
               url: value.user.photoURL,
               idStorage: null
             },
-            id: this.angularFirestore.createId(),
+           // id: this.angularFirestore.createId(),
             descripcion: "",
             rol: "basico",
             userName: value.user.displayName,
@@ -105,7 +105,7 @@ export class LoginService {
               url: value.user.photoURL,
               idStorage: null
             },
-            id: this.angularFirestore.createId(),
+            //id: this.angularFirestore.createId(),
             descripcion: "",
             rol: "basico",
             userName: value.user.displayName,

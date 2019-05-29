@@ -10,7 +10,7 @@ export interface User {
     iconno: Images; // icono
     string?: Date; // fecha nacimineto
     rol: string; // rol
-    id: string;
+    id?: string;
 }
 
 export interface EditorxSitio {
