@@ -30,21 +30,8 @@ export class RatingService {
     return this.angularFirestore.collection<ratingXSite>('rating', ref => ref.where('id', '==', id)).valueChanges();
   }
 
-  getRatingBySite(id: string): number {
-     this.angularFirestore.collection<ratingXSite>('rating', ref => ref.where('idTouristicCentre', '==', id)).valueChanges()
-    .subscribe(
-      res => {
-        if (res.length == 0) {
-          return 0;
-        }
-        let rat = 0;
-        res.forEach(element => {
-          rat += element.value;
-        });
-        return rat/res.length;
-      }
-    );
-    return 0;
+  getRatingBySite(id: string) {
+     return this.angularFirestore.collection<ratingXSite>('rating', ref => ref.where('idTouristicCentre', '==', id)).valueChanges();
   }
 
   deleteRating(id: string) {

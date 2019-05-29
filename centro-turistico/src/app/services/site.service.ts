@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TouristicCentre } from '../interfaces/index';
+import { TouristicCentre, User } from '../interfaces/index';
 import { AlertService } from '../services/alert.service';
 import { DataStorageService } from './data-storage.service.js';
 import { constant } from 'src/app/constant-data/constant';
@@ -128,16 +128,32 @@ export class SiteService {
     });
   }
 
-  saveTouristicCentreEditor(TouristicCentre: TouristicCentre, index: number) {
-    
+  saveTouristicCentreEditor(TouristicCentre: TouristicCentre, index: number, editorViejo: User, isEditor: boolean, editorNuevo: User) {
     if (TouristicCentre.id) {
       this.blockUI.start("Guardar datos");
       this.angularFirestore.collection<TouristicCentre>('sitios').doc(TouristicCentre.id).update(TouristicCentre).then(() => {
-        if (index == 0) {
-          this.alertas.successInfoAlert("Actualización exitosa");
-          this.location.back();
+        if (!isEditor) {
+          editorViejo.rol = "basico";
+          this.angularFirestore.collection<TouristicCentre>('users').doc(editorViejo.id).update(editorViejo).then(() => {
+            editorNuevo.rol = "dueno";
+            this.angularFirestore.collection<TouristicCentre>('users').doc(editorNuevo.id).update(editorNuevo).then(() => {
+              if (index == 0) {
+                //this.blockUI.stop();
+                this.alertas.successInfoAlert("Actualización exitosa");
+                this.location.back();
+              }
+            });
+          });
+        } else {
+          editorNuevo.rol = "dueno";
+          this.angularFirestore.collection<TouristicCentre>('users').doc(editorNuevo.id).update(editorNuevo).then(() => {
+            if (index == 0) {
+              //this.blockUI.stop();
+              this.alertas.successInfoAlert("Actualización exitosa");
+              this.location.back();
+            }
+          });
         }
-        this.blockUI.stop();
       }).catch(() => {
         this.blockUI.stop();
         this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");

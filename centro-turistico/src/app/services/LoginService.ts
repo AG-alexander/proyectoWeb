@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import user from '../../assets/data/users.json';
 import { User } from '../interfaces/index';
 import { DataStorageService } from './data-storage.service';
+import { UserService } from './user.service';
 import { constant } from '../constant-data/constant.js';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { auth } from 'firebase';
@@ -24,7 +25,8 @@ export class LoginService {
     private afAuth: AngularFireAuth, 
     private angularFirestore: AngularFirestore,
     private router: Router, 
-    private alertas: AlertService,) { }
+    private alertas: AlertService,
+    private useService: UserService) { }
   getUser(userName: string, password: string): boolean {
     this.users = this.dataStorage.getObjectValue(constant.USERS);
     if (this.users) {
@@ -60,14 +62,14 @@ export class LoginService {
               url: value.user.photoURL,
               idStorage: null
             },
-            id: this.angularFirestore.createId(),
+           // id: this.angularFirestore.createId(),
             descripcion: "",
             rol: "basico",
             userName: value.user.displayName,
             idUser: 0,
             password: ""
           }
-          this.saveUsuario(user);
+          this.useService.saveUser(user);
           this.currentUser = user;
           this.dataStorage.setObjectValue(constant.USER, this.currentUser);
           this.router.navigateByUrl('dashboard');
@@ -103,14 +105,14 @@ export class LoginService {
               url: value.user.photoURL,
               idStorage: null
             },
-            id: this.angularFirestore.createId(),
+            //id: this.angularFirestore.createId(),
             descripcion: "",
             rol: "basico",
             userName: value.user.displayName,
             idUser: 0,
             password: ""
           }
-          this.saveUsuario(user);
+          this.useService.saveUser(user);
           this.currentUser = user;
           this.dataStorage.setObjectValue(constant.USER, this.currentUser);
           this.router.navigateByUrl('dashboard');
@@ -169,11 +171,11 @@ export class LoginService {
   register(user: User, password: string) {
     
     this.afAuth.auth.createUserWithEmailAndPassword(user.email, password).then((result) => {
-      user.id = result.user.uid;
-      this.saveUsuario(user);
-      this.alertas.successInfoAlert('El usuario fue registrado correctamente, Bienvenido! Excelente');
-      this.router.navigate(['login']);
-      this.login(user.email, password);
+      //user.id = this.angularFirestore.createId();
+      this.useService.saveUser(user);
+      //this.alertas.successInfoAlert('El usuario fue registrado correctamente, Bienvenido! Excelente');
+     // this.router.navigate(['login']);
+      //this.login(user.email, password);
     }).catch((error) => {
       this.alertas.warningInfoAlert('No se ha podido registrar el usuario por:' + error+ 'Registro de usuarios');
 
@@ -181,6 +183,6 @@ export class LoginService {
   }
 
   saveUsuario(user: User) { 
-    this.angularFirestore.collection<User>('users').add(user)
+    this.angularFirestore.collection<User>('users').add(user);
   }
 }

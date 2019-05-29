@@ -28,7 +28,7 @@
 
     <div class="row">
         <div class="col-md-4 offset-md-5">
-            <pagination [totalItems]="site.showedSites.length" [itemsPerPage]="3" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" [pageBtnClass]=""></pagination>
+            <pagination [totalItems]="list.length" [itemsPerPage]="3" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" [pageBtnClass]=""></pagination>
         </div>
     </div>
 </block-ui>

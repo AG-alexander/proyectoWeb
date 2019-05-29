@@ -53,23 +53,36 @@ export class SiteInformationComponent implements OnInit {
             this.reviews = res;
             this.followersService.getSeguidoresBySite(this.id).subscribe(
               res => {
-
+                this.blockUI.stop();
                 this.followers = res;
-                this.isFollower = this.followers.findIndex(item => item.userId == this.user.id) > -1;
-                this.message = this.isFollower ? "Dejar de seguir" : "Comenzar a seguir";
-                this.messageFollower = this.isFollower ? "Siguiendo" : "Seguir";
+                if (this.user) {
+                  this.isFollower = this.followers.findIndex(item => item.userId == this.user.id) > -1;
+                  this.message = this.isFollower ? "Dejar de seguir" : "Comenzar a seguir";
+                  this.messageFollower = this.isFollower ? "Siguiendo" : "Seguir";
+                }
                 this.flag = true;
               }
-              
+
             );
-            this.blockUI.stop();
+            // this.blockUI.stop();
           }
         );
-        this.blockUI.stop();
+        //this.blockUI.stop();
       }
     );
-    this.blockUI.stop();
-    this.maxStars = this.ratingService.getRatingBySite(this.id);
+    //this.blockUI.stop();
+    this.ratingService.getRatingBySite(this.id).subscribe(
+      res => {
+        if (res.length == 0) {
+          this.maxStars = 0;
+        }
+        let rat = 0;
+        res.forEach(element => {
+          rat += element.value;
+        });
+        this.maxStars = rat/res.length;
+      }
+    );
   }
 
   ngOnInit() {
@@ -154,6 +167,18 @@ export class SiteInformationComponent implements OnInit {
 
   get FGA() {
     return this.formGroupModalAnswer.controls;
+  }
+
+  get isUsuario() {
+    return this.user ? true : false;
+  }
+
+  get isEditor() {
+    if (this.user) {
+      return this.user.id == this.touristicCentre.idEditor;
+    } else {
+      return false;
+    }
   }
 
 

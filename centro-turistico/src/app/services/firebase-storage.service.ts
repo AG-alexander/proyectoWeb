@@ -42,7 +42,8 @@ export class FirebaseStorageService {
     });
   }
   update(event: any, id: string) {
-    this.ref = this.afStorage.ref(this.id);
+    this.id = id;
+    this.ref = this.afStorage.ref(id);
     this.task = this.ref.put(event[0]);
   }
 

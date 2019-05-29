@@ -36,6 +36,7 @@ export class MaintenanceNewsListComponent implements OnInit {
     this.blockUI.start("Obteniendo datos");
     this.newsService.getNoticias().subscribe(
       res => {
+        this.blockUI.stop();
         this.newsList = res;
         console.log(res);
       }

@@ -1,10 +1,10 @@
 <block-ui>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2" *ngIf="user">
                 <img [src]="user.iconno.url" alt="" class="img-size">
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10" *ngIf="user">
                 <h1>{{user.userName}}</h1>
                 <label for="desciption">Descripción</label>
                 <p>{{user.descripcion}}</p>
@@ -20,7 +20,7 @@
                         <accordion-group [heading]="data.nameSite">
                             <app-site-rating [rate]="data.ratingSite" [readOnly]="true"></app-site-rating>
                             <h3>Comentarios en el sitio</h3>
-                            <p *ngFor="let re of data.reviews_list">{{re.description}}</p>
+                            <p *ngFor="let re of data.reviewsList">{{re.description}}</p>
                         </accordion-group>
                     </accordion>
                 </div>

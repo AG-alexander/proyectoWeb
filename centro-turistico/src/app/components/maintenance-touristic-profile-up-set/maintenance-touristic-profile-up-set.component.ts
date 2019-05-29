@@ -125,10 +125,12 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   }
   saveImage(index: number) {
     if (index >= 0) {
+      this.blockUI.start("Guardando datos....");
       this.fbStorage.upload(this.imgList[index].url);
       this.fbStorage.task.then(() => {
         this.fbStorage.ref.getDownloadURL().subscribe(
           res => {
+            this.blockUI.stop();
             this.imgList[index].idStorage = this.fbStorage.id;
             this.imgList[index].url = res;
             this.imgList[index].idFireBase = this.angularFirestore.createId();
@@ -143,7 +145,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   save() {
     this.saveImage(this.imgList.length-1);
   }
-  saveSitio() {debugger
+  saveSitio() {
     let tourProfile = this.formGroup.value as TouristicCentre;
     if (this.id != undefined) {
       tourProfile.idTouristicCentre = this.tourLoscalStorage.idTouristicCentre;
