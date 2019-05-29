@@ -1,10 +1,10 @@
 <block-ui>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2" *ngIf="user">
+            <div class="col-md-3" *ngIf="user">
                 <img [src]="user.iconno.url" alt="" class="img-size">
             </div>
-            <div class="col-md-10" *ngIf="user">
+            <div class="col-md-9 margin" *ngIf="user">
                 <h1>{{user.userName}}</h1>
                 <label for="desciption">Descripción</label>
                 <p>{{user.descripcion}}</p>
