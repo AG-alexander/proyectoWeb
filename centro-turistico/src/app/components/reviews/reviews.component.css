@@ -44,3 +44,7 @@
     text-decoration: line-through;
     text-decoration-style: double;
 }
+
+.padd-left{
+    padding-left: 20px;
+}

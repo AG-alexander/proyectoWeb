@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { SiteService, FollowerService, ReviewsService, RatingService, AlertService, UserService } from '../../services/index';
-import { TouristicCentre, followerModel, Review, User } from '../../interfaces/index';
+import { TouristicCentre, followerModel, Review, User, ratingXSite } from '../../interfaces/index';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { PermissionService } from 'src/app/services/permission.service';
@@ -29,6 +29,7 @@ export class SiteInformationComponent implements OnInit {
   message: string;
   review: Review;
   flag: boolean;
+  rating: ratingXSite;
   constructor(
     private siteService: SiteService,
     private reviewsService: ReviewsService,
@@ -53,12 +54,29 @@ export class SiteInformationComponent implements OnInit {
             this.reviews = res;
             this.followersService.getSeguidoresBySite(this.id).subscribe(
               res => {
-                this.blockUI.stop();
+
                 this.followers = res;
+
                 if (this.user) {
+                  this.ratingService.getRatingByUsuario(this.user.id).subscribe(
+                    res => {
+                      this.rating = res[0];
+                      if (this.rating == null) {
+                        this.rating = {
+                          id: undefined,
+                          siteId: this.id,
+                          userId: this.user.id,
+                          value: 0
+                        }
+                      }
+                      this.blockUI.stop();
+                    }
+                  );
                   this.isFollower = this.followers.findIndex(item => item.userId == this.user.id) > -1;
                   this.message = this.isFollower ? "Dejar de seguir" : "Comenzar a seguir";
                   this.messageFollower = this.isFollower ? "Siguiendo" : "Seguir";
+                } else {
+                  this.blockUI.stop();
                 }
                 this.flag = true;
               }
@@ -73,14 +91,17 @@ export class SiteInformationComponent implements OnInit {
     //this.blockUI.stop();
     this.ratingService.getRatingBySite(this.id).subscribe(
       res => {
+        console.log(0);
         if (res.length == 0) {
           this.maxStars = 0;
         }
-        let rat = 0;
-        res.forEach(element => {
-          rat += element.value;
-        });
-        this.maxStars = rat/res.length;
+        else {
+          let rat = 0;
+          res.forEach(element => {
+            rat += element.value;
+          });
+          this.maxStars = rat / res.length;
+        }
       }
     );
   }
@@ -122,7 +143,7 @@ export class SiteInformationComponent implements OnInit {
       review.img = this.user.iconno.url;
       review.blocked = true;
       review.userName = this.user.userName;
-      this.reviewsService.saveReview(review); debugger
+      this.reviewsService.saveReview(review); 
       this.formGroupModal.reset();
       this.modalRef.hide();
       this.modalRef = null;

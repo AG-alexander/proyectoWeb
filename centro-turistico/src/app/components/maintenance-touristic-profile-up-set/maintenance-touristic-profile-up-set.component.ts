@@ -16,7 +16,7 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-  id: number;
+  id: string;
   imageSrc: any;
   imagePath: string;
   imgShowedList: string[];
@@ -42,7 +42,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(event.files[0]);
     reader.onload = (event) => {
-     this.imgShowedList.push(reader.result.toString());
+      this.imgShowedList.push(reader.result.toString());
     }
     this.imagePath = event.files;
     this.imgList.push({
@@ -51,7 +51,7 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
       url: this.imagePath
     });
   }
-  
+
   initForm() {
     this.imgList = [];
     this.imgShowedList = [];
@@ -66,25 +66,28 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
 
   loadForm() {
     this.imgShowedList = [];
-    this.tourLoscalStorage = this.siteService.getSiteById(this.id);
-    this.imgList = this.tourLoscalStorage.photos;
-    this.imgList.forEach(item=>{
-      this.imgShowedList.push(item.url);
-    });
-    this.schedulesList = this.tourLoscalStorage.schedules;
-    this.formGroup = this.FB.group({
-      name: [this.tourLoscalStorage.name, Validators.required],
-      description: [this.tourLoscalStorage.description, Validators.required],
-      schedules: [''],
-      video: [this.tourLoscalStorage.video, Validators.required],
-    });
+    this.siteService.getTouristicCentreById(this.id).subscribe(
+      res => {
+        this.tourLoscalStorage = res[0];
+        this.imgList = this.tourLoscalStorage.photos;
+        this.imgList.forEach(item => {
+          this.imgShowedList.push(item.url);
+        });
+        this.schedulesList = this.tourLoscalStorage.schedules;
+        this.formGroup.patchValue({
+          name: this.tourLoscalStorage.name,
+          description: this.tourLoscalStorage.description,
+          schedules: [''],
+          video: this.tourLoscalStorage.video,
+        });
+      }
+    );
   }
   initPage() {
     this.id = this.activated.snapshot.params['id'];
+    this.initForm();
     if (this.id != undefined) {
       this.loadForm();
-    } else {
-      this.initForm();
     }
   }
   saveTourProfile() {
@@ -126,14 +129,18 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
   saveImage(index: number) {
     if (index >= 0) {
       this.blockUI.start("Guardando datos....");
-      this.fbStorage.upload(this.imgList[index].url);
+      if (!this.imgList[index].idFireBase) {
+        this.fbStorage.upload(this.imgList[index].url);
+      }
       this.fbStorage.task.then(() => {
         this.fbStorage.ref.getDownloadURL().subscribe(
           res => {
             this.blockUI.stop();
-            this.imgList[index].idStorage = this.fbStorage.id;
-            this.imgList[index].url = res;
-            this.imgList[index].idFireBase = this.angularFirestore.createId();
+            if (!this.imgList[index].idFireBase) {
+              this.imgList[index].idStorage = this.fbStorage.id;
+              this.imgList[index].url = res;
+              this.imgList[index].idFireBase = this.angularFirestore.createId();
+            }
             this.saveImage(index - 1);
           }
         );
@@ -143,11 +150,12 @@ export class MaintenanceTouristicProfileUpSetComponent implements OnInit {
     }
   }
   save() {
-    this.saveImage(this.imgList.length-1);
+    this.saveImage(this.imgList.length - 1);
   }
   saveSitio() {
     let tourProfile = this.formGroup.value as TouristicCentre;
     if (this.id != undefined) {
+      tourProfile.id = this.tourLoscalStorage.id;
       tourProfile.idTouristicCentre = this.tourLoscalStorage.idTouristicCentre;
     } else {
       tourProfile.idTouristicCentre = 0;

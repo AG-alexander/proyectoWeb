@@ -19,6 +19,7 @@ export class SiteService {
     private alertas: AlertService,
     private location: Location) {
     this.showedSites = [];
+    console.log(4);
   }
 
   getSite(name: string) {
@@ -135,7 +136,7 @@ export class SiteService {
         if (!isEditor) {
           editorViejo.rol = "basico";
           this.angularFirestore.collection<TouristicCentre>('users').doc(editorViejo.id).update(editorViejo).then(() => {
-            editorNuevo.rol = "dueno";
+            editorNuevo.rol = "duenno";
             this.angularFirestore.collection<TouristicCentre>('users').doc(editorNuevo.id).update(editorNuevo).then(() => {
               if (index == 0) {
                 //this.blockUI.stop();
@@ -145,7 +146,7 @@ export class SiteService {
             });
           });
         } else {
-          editorNuevo.rol = "dueno";
+          editorNuevo.rol = "duenno";
           this.angularFirestore.collection<TouristicCentre>('users').doc(editorNuevo.id).update(editorNuevo).then(() => {
             if (index == 0) {
               //this.blockUI.stop();

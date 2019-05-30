@@ -23,9 +23,11 @@
                     </div>
                     <div class="form-group">
                         <label for="schedules">Horarios</label>
-                        <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btn-add-schedules" (click)="addSchedule()" placement="auto" popover="Agregar Horario" triggers="mouseenter:mouseleave">
-                <i class="fa fa-plus"></i>
-              </button>
+                        <div>
+                                <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom btn-add-schedules" (click)="addSchedule()" placement="left" popover="Agregar Horario" triggers="mouseenter:mouseleave">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                        </div>
                         <input type="text" class="form-control form-control-sm" formControlName="schedules" id="schedules" placeholder="Escriba el horario">
                         <div class="invalid-feedback">
                             <div class="form-control-feedback text-danger">
@@ -39,7 +41,7 @@
                                         {{sche}}
                                     </td>
                                     <td width="6%">
-                                        <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="deleteSchedule(i)" placement="auto" popover="Eliminar Horario" triggers="mouseenter:mouseleave">
+                                        <button type="button" type="button" class="btn btn-link btn-xs justify-content-rigth padd-bottom" (click)="deleteSchedule(i)" placement="left" popover="Eliminar Horario" triggers="mouseenter:mouseleave">
                       <i class="fa fa-trash"></i>
                     </button>
                                     </td>

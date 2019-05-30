@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit {
   userSites: TouristicCentre;
   userInfo: userInfo[];
   profileUrl: Observable<string>;
+  tamanno: number;
   constructor(
     private userService: UserService,
     private followerService: FollowerService,
@@ -37,16 +38,16 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   getSitesByUser() {
-    this.blockUI.start("Obteniendo datos");
+    //this.blockUI.start("Obteniendo datos");
     this.followerService.getSitiosByUsuario(this.iduser).subscribe(
       res => {
-        this.blockUI.stop();
+        //this.blockUI.stop();
         this.followerList = res;
-        this.blockUI.start("Obteniendo datos");
+        //this.blockUI.start("Obteniendo datos");
         this.followerList.forEach(element => {
           this.siteService.getTouristicCentreById(element.siteId).subscribe(
             res => {
-              this.blockUI.stop();
+              //this.blockUI.stop();
               this.siteList = res;
               this.getInfomation();
             }, err => {
@@ -54,7 +55,7 @@ export class UserProfileComponent implements OnInit {
             }
           );
         });
-        this.blockUI.stop();
+        //this.blockUI.stop();
       },
       err => {
         this.blockUI.stop();
@@ -76,6 +77,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   getInfomation() {
+    //this.blockUI.start("Obteniendo datos");
+    this.tamanno = this.siteList.length;
     this.siteList.forEach(element => {
       this.getUserInfo(element.name, element.id)
       // let userInfoAux: userInfo = {
@@ -88,6 +91,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUserInfo(name: string, id: string) {
+    
     let userInfoAux: userInfo = {
       nameSite: name,
       ratingSite: 0,
@@ -95,6 +99,7 @@ export class UserProfileComponent implements OnInit {
     }
     this.getRatingBySite(id).subscribe(
       res => {
+        //this.blockUI.stop();
         if (res.length == 0) {
           userInfoAux.ratingSite = 0;
         }
@@ -103,10 +108,14 @@ export class UserProfileComponent implements OnInit {
           rat += element.value;
         });
         userInfoAux.ratingSite = rat / res.length;
-
+        //this.blockUI.start("Obteniendo datos");
         this.reviewService.getReviewBySite(id).subscribe(
           res => {
-            userInfoAux.reviewsList = res.filter(item => item.idUser == this.user.id);debugger
+            this.tamanno--;
+            if(this.tamanno == 0) {
+              this.blockUI.stop();
+            }
+            userInfoAux.reviewsList = res.filter(item => item.idUser == this.user.id);
             this.userInfo.push(userInfoAux);
           }
         );
@@ -122,7 +131,7 @@ export class UserProfileComponent implements OnInit {
     this.blockUI.start("Obteniendo datos");
     this.userService.getUserById(this.iduser).subscribe(
       res => {
-        this.blockUI.stop();
+        //this.blockUI.stop();
         this.user = res[0];
         this.getSitesByUser();
       }
