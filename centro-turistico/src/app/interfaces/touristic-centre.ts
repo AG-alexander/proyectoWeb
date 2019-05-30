@@ -24,8 +24,8 @@ export interface TouristicCentre {
 export interface followerXSite
 {
     id?: string;
-    siteId: string;
-    userId: string;
+    siteId?: string;
+    userId?: string;
 }
 
 export interface ratingXSite extends followerXSite{

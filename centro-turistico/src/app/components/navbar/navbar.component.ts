@@ -50,6 +50,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.user = this.dataStorage.getObjectValue(constant.USER);
     this.permission.setPermission();
+    console.log(0);
   }
 
 }
